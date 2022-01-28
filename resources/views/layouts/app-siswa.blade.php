@@ -17,7 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('vendors/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/summernote/summernote.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
     @yield('css')
     @toastr_css
 
@@ -32,15 +32,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/print-this.js') }}"></script>
     <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
+
+    <style>
+        .logo-app{
+            height:75px;
+        }
+
+        .content-wrapper{
+            background: #ffb236 !important;
+        }
+    </style>
 </head>
 
-<body class="hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav" >
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background: #e43205; font-colour:white" >
             <div class="container">
-                <a href="/" class="h5"><img src="{{ asset('images/kino.png') }}" alt="Rumah Private Kino" width="150px"></a>
+                <a href="/" class="h5">
+                    <img src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino" class="logo-app" >
+                    <img src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino" class="logo-app" >
+                    <img src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino" class="logo-app" >
+                </a>
 
                 {{-- <a href="../../index3.html" class="navbar-brand">
                     <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
@@ -49,9 +63,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </a> --}}
 
                 <!-- Right navbar links -->
-                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto"  >
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark" href="#" role="button"
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
                         </a>
@@ -105,7 +119,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer text-white" style="background: #e43205;">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
                 Rumah Private Kino

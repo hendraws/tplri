@@ -20,6 +20,12 @@
             object-fit: cover;
             height: 80px;
         }
+        @media (max-width:641px){
+            .cover {
+                object-fit: cover;
+                height: 40px;
+            }
+        }
 
 /*
         #slideBg{

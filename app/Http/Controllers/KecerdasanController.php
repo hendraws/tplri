@@ -175,6 +175,8 @@ class KecerdasanController extends Controller
      */
     public function destroy(Kecerdasan $kecerdasan)
     {
-        //
+        $kecerdasan->delete();
+    	$result['code'] = '200';
+    	return response()->json($result);
     }
 }

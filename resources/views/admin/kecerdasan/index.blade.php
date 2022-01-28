@@ -63,7 +63,7 @@
                 e.preventDefault();
                 var tag = $(this);
                 var id = $(this).data('id');
-                var url = '{{ action('KelasController@destroy', ':id') }}';
+                var url = '{{ action('KecerdasanController@destroy', ':id') }}';
                 url = url.replace(':id', id);
                 Swal.fire({
                     title: 'Apakah Anda Yakin ?',
@@ -72,7 +72,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Iya, Hapus!'
                 }).then((result) => {
                     if (result.value == true) {
                         $.ajax({
@@ -84,13 +84,13 @@
                             success: function(data) {
                                 if (data.code == '200') {
                                     Swal.fire(
-                                        'Deleted!',
-                                        'Your file has been deleted.',
+                                        'Terhapus!',
+                                        'Data Sudah Terhapus.',
                                         'success'
                                     );
                                     setTimeout(function() {
                                         window.location =
-                                            "{{ action('KelasController@index') }}";
+                                            "{{ action('KecerdasanController@index') }}";
                                     }, 1500);
 
                                 }
@@ -137,7 +137,7 @@
                             @endforeach
                             <td class="text-center">
                                 <a href="" class="btn btn-xs btn-warning">Edit</a>
-                                <a href="" class="btn btn-xs btn-danger">Hapus</a>
+                                <button class="btn btn-xs btn-danger hapus" type="button" data-id="{{ $data->id }}">Hapus</button>
                             </td>
                         </tr>
                     @endforeach
