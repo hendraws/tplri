@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class UjianSiswa extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [ 'user_id', 'ujian_id', 'kecerdasan', 'kepribadian', 'kecermatan', 'status_ujian',      ];
+
+    public function getSiswa()
+    {
+        return $this->belongsTo(User::class, 'user_id','id');
+    }
+
+    public function jawabanBenarKecerdasan()
+    {
+        return $this->hasMany(UjianSiswaJawaban::class, 'ujian_siswa_id','id')->where('benar', 1);
+    }
+    public function jawabanBenarKecermatan()
+    {
+        return $this->hasMany(UjianSiswaJawabanKecermatan::class, 'ujian_siswa_id','id')->where('benar', 1);
+    }
+
+    public function getNilai()
+    {
+        return $this->belongsTo(UjianNilai::class, 'id', 'ujian_siswa_id');
+    }
+}
