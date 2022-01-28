@@ -40,14 +40,6 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="quote" class="col-sm-2 col-form-label">Quote</label>
-                <div class="col-md-10">
-                    <input id="quote" type="text" class="form-control @error('quote') is-invalid @enderror" name="motto"
-                        value="{{ $user->motto }}" required autocomplete="off">
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label for="nama_program" class="col-sm-2 col-form-label">Program Akademik</label>
                 <div class="col-md-10">
                     <select class="form-control select" name="program_id" id="programAkademik">
@@ -58,32 +50,6 @@
                         @endforeach
 
                     </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="nama_program" class="col-sm-2 col-form-label">Kelas</label>
-                <div class="col-md-10">
-                    <select class="form-control select" name="kelas_id" id="kelas">
-                        @if(!empty($user->kelas_id))
-                        <option readonly selected value="">Pilih Kelas</option>
-                        @foreach ($kelas as $key => $val)
-                        <option value="{{ $key }}" {{ $user->kelas_id == $key ? 'selected' : '' }}>{{ $val }}</option>
-                        @endforeach
-                        @endif
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="judul" class="col-sm-2 col-form-label">Foto</label>
-                <div class="col-md-10">
-                    <img id="frame" src="{{ empty($user->foto) ?  asset('images/profile.png') :  Storage::url($user->foto) }}" width="200" height="200"
-                        class="img-thumbnail" />
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="foto" onchange="preview()"
-                            accept="image/*">
-                        <label class="custom-file-label" for="customFile">Pilih Foto</label>
-                    </div>
-                    <small class="form-text text-muted">* Ukuran Maksimal Foto 500Kb</small>
                 </div>
             </div>
             <div class="modal-footer">

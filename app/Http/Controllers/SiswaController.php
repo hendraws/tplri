@@ -19,11 +19,8 @@ class SiswaController extends Controller
             "tempat_lahir" => 'required',
             "tanggal_lahir" => 'required',
             "alamat" => 'required',
-            "motto" => 'required',
             "telepon" => 'required',
             "program_id" => 'required',
-            "kelas_id" => 'required',
-            'foto' => 'mimes:jpeg,jpg,png|max:1024',
         ]);
 
 
@@ -31,17 +28,17 @@ class SiswaController extends Controller
         try {
             $user = auth()->user();
 
-            if($request->has('foto')){
+            // if($request->has('foto')){
 
-                if(!empty($user->foto)){
-                    Storage::delete($user->foto);
-                }
+            //     if(!empty($user->foto)){
+            //         Storage::delete($user->foto);
+            //     }
 
-                $extension = $request->file('foto')->extension();
-                $imgName = 'images/'.date('dmhHis').'-'.$user->name.'.'.$extension;
-                $path = Storage::putFileAs('public', $request->file('foto'), $imgName);
-                $inputSiswa['foto'] = $path;
-            }
+            //     $extension = $request->file('foto')->extension();
+            //     $imgName = 'images/'.date('dmhHis').'-'.$user->name.'.'.$extension;
+            //     $path = Storage::putFileAs('public', $request->file('foto'), $imgName);
+            //     $inputSiswa['foto'] = $path;
+            // }
 
             $user->update($inputSiswa);
 

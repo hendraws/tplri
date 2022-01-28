@@ -61,7 +61,7 @@
                         <!-- /.col -->
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Mulai Ujian</button>
-                            <button type="submit" class="btn btn-secondary btn-block">Kembali</button>
+                            <a href="/" class="btn btn-secondary btn-block">Kembali</a>
                         </div>
                         <!-- /.col -->
                     </div>
