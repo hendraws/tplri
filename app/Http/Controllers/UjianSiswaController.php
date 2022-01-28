@@ -103,6 +103,7 @@ class UjianSiswaController extends Controller
 
     public function ujianSiswa(Request $request)
     {
+
         // $request->session()->put('key', 'value');
         // $request->session()->forget('key');
         // $request->session()->put('ujian', auth()->user()->id );
@@ -126,7 +127,7 @@ class UjianSiswaController extends Controller
             ]);
         // }
 
-        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'));
+        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'))->with('ujian_siswa_id', $ujianSiswa->id);
         // return view('siswa.ruang_ujian.index', compact('pengaturanUjian', 'cekUjian'));
         // $request->session()->put('ujian_id', $pengaturanUjian->id);
         // $request->session()->put('ujian_user_id', auth()->user()->id);

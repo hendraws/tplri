@@ -47,6 +47,13 @@
             display: none;
         }
 
+        @media (max-width:641px){
+            .cover {
+                object-fit: cover;
+                height: 50px;
+            }
+        }
+
     </style>
 </head>
 
@@ -148,8 +155,8 @@
         var soalId, jawabanBenar;
         let soalSekarang = [];
         let hitungJawaban = 0;
-        const PengaturanJumlahKolom = 2;
-        const PengaturanJumlahSoal = 10;
+        const PengaturanJumlahKolom = 10;
+        const PengaturanJumlahSoal = 50;
         let semuaSoal = <?= json_encode($ujian->getSoalKecermatan) ?>;
 
         $.ajaxSetup({
@@ -173,6 +180,13 @@
                 timeUp: timeisUp,
             });
             sesiTimer();
+
+            window.addEventListener('beforeunload', function(e) {
+                // Cancel the event
+                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+                // Chrome requires returnValue to be set
+                e.returnValue = '';
+            });
         });
 
         function sesiTimer() {
@@ -234,7 +248,7 @@
                         console.log(data);
                         $('input:radio').prop('checked', false);
                         acakSoal(soal);
-                        console.log('ht:'+hitungJawaban+' -asd- '+PengaturanJumlahSoal);
+                        console.log('ht:' + hitungJawaban + ' -asd- ' + PengaturanJumlahSoal);
                         hitungJawaban++;
                         if (hitungJawaban == PengaturanJumlahSoal) {
                             resetSoal(soalKe);
