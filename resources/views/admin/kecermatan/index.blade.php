@@ -19,6 +19,7 @@
             });
 
             $('.table').DataTable({
+                "aaSorting": []
                 // responsive: {
                 //     details: {
                 //         type: 'column'
@@ -36,7 +37,7 @@
                 e.preventDefault();
                 var tag = $(this);
                 var id = $(this).data('id');
-                var url = '{{ action('KelasController@destroy', ':id') }}';
+                var url = '{{ action('KecermatanController@destroy', ':id') }}';
                 url = url.replace(':id', id);
                 Swal.fire({
                     title: 'Apakah Anda Yakin ?',
@@ -63,7 +64,7 @@
                                     );
                                     setTimeout(function() {
                                         window.location =
-                                            "{{ action('KelasController@index') }}";
+                                            "{{ action('KecermatanController@index') }}";
                                     }, 1500);
 
                                 }
@@ -107,8 +108,8 @@
                         <td>{{ html_entity_decode($data->soal_d) }}</td>
                         <td>{{ html_entity_decode($data->soal_e) }}</td>
                         <td>
-                            <a href="" class="btn btn-sm btn-warning">Edit</a>
-                            <a href="" class="btn btn-sm btn-danger">Hapus</a>
+                            <a href="{{ action('KecermatanController@edit', $data) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <button class="btn btn-sm btn-danger hapus" type="button" data-id="{{ $data->id }}">Hapus</button>
                         </td>
                     </tr>
                     @endforeach

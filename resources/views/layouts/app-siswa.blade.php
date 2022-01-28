@@ -56,12 +56,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <img src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino" class="logo-app" >
                 </a>
 
-                {{-- <a href="../../index3.html" class="navbar-brand">
-                    <img src="../../dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
-                        class="brand-image img-circle elevation-3" style="opacity: .8">
-                    <span class="brand-text font-weight-light">AdminLTE 3</span>
-                </a> --}}
-
                 <!-- Right navbar links -->
                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto"  >
                     <li class="nav-item dropdown">

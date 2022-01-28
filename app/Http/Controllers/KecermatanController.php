@@ -17,7 +17,7 @@ class KecermatanController extends Controller
      */
     public function index()
     {
-        $kecermatan = Kecermatan::get();
+        $kecermatan = Kecermatan::orderBy('id','desc' )->get();
         return view('admin.kecermatan.index', compact('kecermatan'));
     }
 
@@ -82,7 +82,8 @@ class KecermatanController extends Controller
      */
     public function edit(Kecermatan $kecermatan)
     {
-        //
+        dd($kecermatan);
+        return view('admin.kecermatan.edit', compact('kecermatan'));
     }
 
     /**
@@ -105,7 +106,10 @@ class KecermatanController extends Controller
      */
     public function destroy(Kecermatan $kecermatan)
     {
-        //
+
+        $kecermatan->delete();
+    	$result['code'] = '200';
+    	return response()->json($result);
     }
 
 
