@@ -224,9 +224,9 @@
 
             console.log('jawab : ' + statusJawaban + ' , hitungJawaban : ' + hitungJawaban);
 
-            setTimeout(function() {
-                simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
-            }, 300);
+            simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
+            // setTimeout(function() {
+            // }, 300);
 
         })
 
@@ -249,7 +249,9 @@
                     if (data.code == '200') {
                         console.log(data);
                         acakSoal(soal);
-                        $('input:radio').prop('checked', false);
+                        setTimeout(function() {
+                            $('input:radio').prop('checked', false);
+                        }, 200);
                         console.log('ht:' + hitungJawaban + ' -asd- ' + PengaturanJumlahSoal);
                         hitungJawaban++;
                         if (hitungJawaban == PengaturanJumlahSoal) {
