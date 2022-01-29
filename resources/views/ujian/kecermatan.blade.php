@@ -226,7 +226,7 @@
 
             setTimeout(function() {
                 simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
-            }, 200);
+            }, 250);
 
         })
 
