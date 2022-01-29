@@ -181,12 +181,12 @@
             });
             sesiTimer();
 
-            window.addEventListener('beforeunload', function(e) {
-                // Cancel the event
-                e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-                // Chrome requires returnValue to be set
-                e.returnValue = '';
-            });
+            // window.addEventListener('beforeunload', function(e) {
+            //     // Cancel the event
+            //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+            //     // Chrome requires returnValue to be set
+            //     e.returnValue = '';
+            // });
         });
 
         function sesiTimer() {
@@ -224,7 +224,9 @@
 
             console.log('jawab : ' + statusJawaban + ' , hitungJawaban : ' + hitungJawaban);
 
-            simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
+            setTimeout(function() {
+                simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
+            }, 200);
 
         })
 
