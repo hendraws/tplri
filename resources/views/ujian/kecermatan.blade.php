@@ -47,7 +47,7 @@
             display: none;
         }
 
-        @media (max-width:641px){
+        @media (max-width:641px) {
             .cover {
                 object-fit: cover;
                 height: 50px;
@@ -214,19 +214,21 @@
             e.preventDefault();
 
             var jawaban = $(this).find('input:radio').prop('checked', true);
-            var jb = $('#jb').val();
-            if (jawaban.val() == jb) {
-                var statusJawaban = 1;
-            } else {
-                var statusJawaban = 0;
+            if ($(".pilih").is(":checked")) {
+
+                var jb = $('#jb').val();
+                if (jawaban.val() == jb) {
+                    var statusJawaban = 1;
+                } else {
+                    var statusJawaban = 0;
+                }
+                console.log('stat' + statusJawaban);
+
+                console.log('jawab : ' + statusJawaban + ' , hitungJawaban : ' + hitungJawaban);
+
+                simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
+                setTimeout(function() {}, 300);
             }
-            console.log('stat' + statusJawaban);
-
-            console.log('jawab : ' + statusJawaban + ' , hitungJawaban : ' + hitungJawaban);
-
-            simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
-            // setTimeout(function() {
-            // }, 300);
 
         })
 
