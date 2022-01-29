@@ -76,11 +76,12 @@ class SiswaController extends Controller
         return view('siswa.profile.edit_profile', compact('programAkademik', 'user','kelas'));
     }
 
-    public function riwayatUjian(Request $request)
+    public function riwayatUjian()
     {
         $data = UjianSiswa::where('user_id',auth()->user()->id)
                 ->where('kecermatan',1)
                 ->get();
+
         return view('siswa.riwayat_ujian', compact('data'));
     }
 }
