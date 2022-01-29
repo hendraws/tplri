@@ -263,7 +263,7 @@
                         setTimeout(function() {
                             acakSoal(soal);
                             $('input:radio').prop('checked', false);
-                        }, 300);
+                        }, 100);
                         console.log('ht:' + hitungJawaban + ' -asd- ' + PengaturanJumlahSoal);
                         hitungJawaban++;
                         if (hitungJawaban == PengaturanJumlahSoal) {
