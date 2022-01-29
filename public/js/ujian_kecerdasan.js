@@ -44,6 +44,16 @@ $('.simpan').click(function () {
     };
 
     simpanJawaban(ujianSiswaId, noSoal,jawaban,jb);
+
+    if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
+        $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');
+    }
+});
+// klik tombol simpan & lanjutkan ke lokalstorage
+$('.lanjutkan').click(function () {
+    var urutan = $(this).data('urutan');
+    let urutanSelanjutnya = urutan + 1;
+    urutanTerkahir = urutanSelanjutnya;
     $('#list-' + urutan).hide();
     if ($('#list-' + urutanSelanjutnya).length) {
         $('#list-' + urutanSelanjutnya).show();
@@ -51,14 +61,6 @@ $('.simpan').click(function () {
         urutanTerkahir = 1;
         $('#list-' + 1).show();
     }
-    if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
-        $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-primary w-100 p-1 nomor-urutan');
-    }else{
-        $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-secondary w-100 p-1 nomor-urutan');
-    }
-    setProgressBar();
-
-
 });
 
 // fungsi timercount down
@@ -66,9 +68,9 @@ $(function () {
     $("#timer").countdowntimer({
         minutes: waktuBerjalan,
         size: "lg",
-        borderColor: "#ffffff",
-        backgroundColor: "#ffffff",
-        fontColor: "#FA0909",
+        borderColor: "#e43205",
+        backgroundColor: "#e43205",
+        fontColor: "#f6e8c6",
         timeUp: timeisUp,
     });
 });

@@ -28,7 +28,6 @@
 </head>
 
 <body class="hold-transition login-page" style="background-color: #ffb236;">
-
     <div class="container ">
         <h1 class="text-center">Test Psikologi Polri Rumah Private Kino</h1>
         <div class="row mt-5">
@@ -39,11 +38,11 @@
                         <form method="POST" action="{{ action('UjianSiswaController@ujianKecerdasan') }}">
                             @csrf
                             <h5 class=" text-center">Test Kecerdasan</h5>
-                            <input type="hidden" name="ujian_id" value="{{ $cekUjian->ujian_id }}">
-                            <input type="hidden" name="ujian_siswa_id" value="{{ $cekUjian->id }}">
-                            @if($cekUjian->kecerdasan == 0)
+                            <input type="hidden" name="ujian_id" value="{{ $ujianSiswa->ujian_id }}">
+                            <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
+                            @if($ujianSiswa->kecerdasan == 0)
                             <button type="submit" class="btn btn-primary col-12 mt-4" onclick="return confirm('Mulai Test kecerdasan ?')">Mulai Test</button>
-                            @elseIf($cekUjian->kecerdasan == 1)
+                            @elseIf($ujianSiswa->kecerdasan == 1)
                             <button class="btn btn-success col-12 mt-4" disabled>Selesai Test</button>
                             @endif
                         </form>
@@ -57,15 +56,15 @@
                         <form method="POST" action="{{ action('UjianSiswaController@ujianKecermatan') }}">
                             @csrf
                         <h5 class="text-center">Test Kecermatan</h5>
-                        <input type="hidden" name="ujian_id" value="{{ $cekUjian->ujian_id }}">
-                        <input type="hidden" name="ujian_siswa_id" value="{{ $cekUjian->id }}">
+                        <input type="hidden" name="ujian_id" value="{{ $ujianSiswa->ujian_id }}">
+                        <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
                         {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk
                             of the card's content.</p> --}}
-                        @if($cekUjian->kecermatan == 0 && $cekUjian->kecerdasan == 0)
+                        @if($ujianSiswa->kecermatan == 0 && $ujianSiswa->kecerdasan == 0)
                         <button class="btn btn-secondary col-12 mt-4" disabled>Test Belum Tersedia</button>
-                        @elseIf($cekUjian->kecerdasan == 1 && $cekUjian->kecermatan == 0)
+                        @elseIf($ujianSiswa->kecerdasan == 1 && $ujianSiswa->kecermatan == 0)
                         <button type="submit"   class="btn btn-primary col-12 mt-4" onclick="return confirm('Mulai Ujian?')">Mulai Test</button>
-                        @elseIf($cekUjian->kecermatan == 1 &&  $cekUjian->kecerdasan == 1)
+                        @elseIf($ujianSiswa->kecermatan == 1 &&  $ujianSiswa->kecerdasan == 1)
                         <button class="btn btn-success col-12 mt-4" disabled>Selesai Test</button>
                         @endif
 
@@ -80,9 +79,9 @@
                         <h5 class="text-center">Test Kepribadian</h5>
                         {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk
                             of the card's content.</p> --}}
-                        @If($cekUjian->kecermatan == 1 &&  $cekUjian->kecerdasan == 1 && $cekUjian->kepribadian  == 0 )
+                        @If($ujianSiswa->kecermatan == 1 &&  $ujianSiswa->kecerdasan == 1 && $ujianSiswa->kepribadian  == 0 )
                         <button type="submit"   class="btn btn-primary col-12 mt-4" onclick="return confirm('Mulai Ujian?')">Mulai Test</button>
-                        @elseif($cekUjian->kepribadian  == 0)
+                        @elseif($ujianSiswa->kepribadian  == 0)
                         <button class="btn btn-secondary col-12 mt-4" disabled>Test Belum Tersedia</button>
                         @endif
                     </div>

@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap-4/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/countdowntimer/jquery.countdownTimer.css') }}">
     <style>
+        body {
+            background: #f6e8c6;
+        }
+
         .bagianTitle {
             min-height: 15vh;
         }
@@ -25,13 +29,36 @@
             width: 400px !important;
         }
 
+        .cover {
+            object-fit: cover;
+            height: 100px;
+        }
+
     </style>
 </head>
 
 <body>
     <div class="container-fluid" style="min-height:100vh;">
+        <div class="row p-3" style="background: #e43205;">
+            <div class="col-9 align-self-center">
+                <img class="cover mx-2" src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino">
+                <img class="cover mx-2" src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino">
+                <img class="cover mx-2" src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino">
+            </div>
+            <div class="col-2 align-self-center text-center">
+                <div id="countdowntimer"><span id="timer"><span></div>
+                <button type="button" id="selesiTest" class="btn btn-warning">Selesai
+                    Test</button>
+                <form action="{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}" id="selesaiUjianForm"
+                    method="POST">
+                    @csrf
+                    <input type="hidden" name="ujianSiswaId" value="{{ $ujianSiswa->id }}">
+                    <input type="hidden" name="status" value="selesai_test">
+                </form>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-12 border bagianTitle">
+            {{-- <div class="col-md-12 border bagianTitle">
                 <div class="row py-2" style="height:100%">
                     <div class="col-md-3 align-self-center">
                         <div class="row align-self-center">
@@ -85,13 +112,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-md-3 border bagianBody">
                 <div class="row p-2">
                     @for ($i = 1; $i <= count($ujian->getSoalKecerdasan); $i++)
                         <div class="col-md-3 col-3">
-                            <a href="javascript:void(0)" class="badge badge-secondary w-100 p-1 nomor-urutan"
+                            <a href="javascript:void(0)" class="badge badge-danger w-100 p-1 nomor-urutan"
                                 data-no="{{ $i }}">No.
                                 {{ $i }}</a>
                         </div>
