@@ -273,7 +273,7 @@ class UjianSiswaController extends Controller
             $cekUjian->update([
                 'kecermatan' => 1
             ]);
-
+            
             $pengaturanUjian = Ujian::find($cekUjian->ujian_id);
 
             return redirect(action('UjianSiswaController@hasilUjian', $cekUjian->id));

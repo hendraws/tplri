@@ -29,4 +29,9 @@ class UjianSiswa extends Model
     {
         return $this->belongsTo(UjianNilai::class, 'id', 'ujian_siswa_id');
     }
+
+    public function getUjian()
+    {
+        return $this->belongsTo(Ujian::class, 'ujian_id', 'id');
+    }
 }

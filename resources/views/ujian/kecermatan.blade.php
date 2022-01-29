@@ -57,6 +57,12 @@
             }
         }
 
+        input[type="radio"] {
+            -ms-transform: scale(1.5); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+            transform: scale(1.5);
+        }
+
     </style>
 </head>
 
@@ -213,11 +219,12 @@
             acakSoal(soal);
         }
 
-        $(document).on('click', 'td.soal', function(e) {
-            e.preventDefault();
+        $(document).on('change', '.pilih', function(e) {
+            // e.preventDefault();
 
-            var jawaban = $(this).find('input:radio').prop('checked', true);
+            // var jawaban = $(this).find('input:radio').prop('checked', true);
             if ($(".pilih").is(":checked")) {
+                var jawaban = $(this);
 
                 var jb = $('#jb').val();
                 if (jawaban.val() == jb) {
@@ -253,8 +260,8 @@
                 success: function(data) {
                     if (data.code == '200') {
                         console.log(data);
-                        acakSoal(soal);
                         setTimeout(function() {
+                            acakSoal(soal);
                             $('input:radio').prop('checked', false);
                         }, 300);
                         console.log('ht:' + hitungJawaban + ' -asd- ' + PengaturanJumlahSoal);

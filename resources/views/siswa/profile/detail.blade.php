@@ -44,7 +44,7 @@
                 <a href="{{ action('UjianSiswaController@ruangUjian') }}" class="btn btn-sm btn-warning col-5">
                     <i class="fas fa-chalkboard-teacher mr-2"></i></i> Ujian
                 </a>
-                <a href="{{ url("under-contruction") }}" class="btn btn-sm btn-primary col-5">
+                <a href="{{ action('SiswaController@riwayatUjian') }}" class="btn btn-sm btn-primary col-5">
                     <i class="far fa-file-alt mr-2"></i> Riwayat Ujian
                 </a>
             </div>

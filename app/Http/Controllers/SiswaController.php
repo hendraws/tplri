@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
 use App\Models\ProgramAkademik;
+use App\Models\UjianSiswa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use File;
@@ -73,5 +74,13 @@ class SiswaController extends Controller
         $programAkademik = ProgramAkademik::pluck('nama_program', 'id');
         $kelas = Kelas::where('program_akademik_id', $user->program_id)->pluck('nama_kelas','id');
         return view('siswa.profile.edit_profile', compact('programAkademik', 'user','kelas'));
+    }
+
+    public function riwayatUjian(Request $request)
+    {
+        $data = UjianSiswa::where('user_id',auth()->user()->id)
+                ->where('kecermatan',1)
+                ->get();
+        return view('siswa.riwayat_ujian', compact('data'));
     }
 }
