@@ -43,6 +43,9 @@
         }
 
 
+        .soal{
+            padding:0;
+        }
         .none {
             display: none;
         }
@@ -227,7 +230,7 @@
                 console.log('jawab : ' + statusJawaban + ' , hitungJawaban : ' + hitungJawaban);
 
                 simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
-                setTimeout(function() {}, 300);
+                // setTimeout(function() {}, 300);
             }
 
         })
@@ -253,7 +256,7 @@
                         acakSoal(soal);
                         setTimeout(function() {
                             $('input:radio').prop('checked', false);
-                        }, 200);
+                        }, 300);
                         console.log('ht:' + hitungJawaban + ' -asd- ' + PengaturanJumlahSoal);
                         hitungJawaban++;
                         if (hitungJawaban == PengaturanJumlahSoal) {
@@ -316,11 +319,11 @@
                 <td style="width: 20%">e</td>
             </tr>
             <tr class="text-center" style="font-size:20px">
-                <td style="width: 20%">` + $("<div/>").html(semuaSoal[index]["soal_a"]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(semuaSoal[index]["soal_b"]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(semuaSoal[index]["soal_c"]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(semuaSoal[index]["soal_d"]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(semuaSoal[index]["soal_e"]).text() + `</td>
+                <td style="width: 20%;">` + $("<div/>").html(semuaSoal[index]["soal_a"]).text() + `</td>
+                <td style="width: 20%;">` + $("<div/>").html(semuaSoal[index]["soal_b"]).text() + `</td>
+                <td style="width: 20%;">` + $("<div/>").html(semuaSoal[index]["soal_c"]).text() + `</td>
+                <td style="width: 20%;">` + $("<div/>").html(semuaSoal[index]["soal_d"]).text() + `</td>
+                <td style="width: 20%;">` + $("<div/>").html(semuaSoal[index]["soal_e"]).text() + `</td>
             </tr>
             `);
 
@@ -342,7 +345,7 @@
 
             $('#PilihanJawaban').html(`
             <tr class="">
-                <td style="width: 20%" class="soal">
+                <td style="width: 20%;" class="soal">
                     <div class="form-check">
                         <input class="form-check-input pilih" type="radio" name="pilihan[]" id="pilihan-a" value="` +
                 soal[0] + `">
@@ -351,7 +354,7 @@
                         </label>
                     </div>
                 </td>
-                <td style="width: 20%" class="soal">
+                <td style="width: 20%;" class="soal">
                     <div class="form-check">
                         <input class="form-check-input pilih" type="radio" name="pilihan[]" id="pilihan-b" value="` +
                 soal[1] + `">
@@ -360,7 +363,7 @@
                         </label>
                     </div>
                 </td>
-                <td style="width: 20%" class="soal">
+                <td style="width: 20%;" class="soal">
                     <div class="form-check">
                         <input class="form-check-input pilih" type="radio" name="pilihan[]" id="pilihan-c" value="` +
                 soal[2] + `">
@@ -369,7 +372,7 @@
                         </label>
                     </div>
                 </td>
-                <td style="width: 20%" class="soal">
+                <td style="width: 20%;" class="soal">
                     <div class="form-check">
                         <input class="form-check-input pilih" type="radio" name="pilihan[]" id="pilihan-d" value="` +
                 soal[3] + `">
@@ -378,7 +381,7 @@
                         </label>
                     </div>
                 </td>
-                <td style="width: 20%" class="soal">
+                <td style="width: 20%;" class="soal">
                     <div class="form-check">
                         <input class="form-check-input pilih" type="radio" name="pilihan[]" id="pilihan-e" value="` +
                 soal[4] + `">
