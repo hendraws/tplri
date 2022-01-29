@@ -226,7 +226,7 @@
 
             setTimeout(function() {
                 simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
-            }, 250);
+            }, 300);
 
         })
 
@@ -248,8 +248,8 @@
                 success: function(data) {
                     if (data.code == '200') {
                         console.log(data);
-                        $('input:radio').prop('checked', false);
                         acakSoal(soal);
+                        $('input:radio').prop('checked', false);
                         console.log('ht:' + hitungJawaban + ' -asd- ' + PengaturanJumlahSoal);
                         hitungJawaban++;
                         if (hitungJawaban == PengaturanJumlahSoal) {
