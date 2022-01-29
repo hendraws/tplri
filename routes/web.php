@@ -56,7 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/edit-profile/update', 'SiswaController@updateProfile');
         Route::get('/edit-profile', 'SiswaController@editProfile');
         Route::get('/ruang-ujian', 'UjianSiswaController@ruangUjian');
-        Route::get('/riwayat-ujian', 'SiswaController@riwayatUjian');
         Route::post('/ujian', 'UjianSiswaController@mulaiUjian');
         Route::post('/ujian/ujian-siswa', 'UjianSiswaController@ujianSiswa');
         Route::post('/ujian/ujian-siswa/store-ujian', 'UjianSiswaController@simpanJawabanKecerdasan');
@@ -64,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/ujian/ujian-kecerdasan', 'UjianSiswaController@ujianKecerdasan');
         Route::post('/ujian/ujian-kecermatan', 'UjianSiswaController@ujianKecermatan');
         Route::get('/hasil-Ujian/{nilai}', 'UjianSiswaController@hasilUjian');
+        Route::get('/riwayat-test-psikologi', 'SiswaController@riwayatUjian');
     });
 });
 
