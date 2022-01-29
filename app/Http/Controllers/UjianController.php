@@ -122,8 +122,9 @@ class UjianController extends Controller
      * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Ujian $ujian)
+    public function edit(Request $request, Ujian $pengaturan_ujian)
     {
+
         if ($request->ajax()) {
             if ($request->has('program_akademik_id')) {
                 $kelas = Kelas::where('program_akademik_id', $request->program_akademik_id)->pluck('nama_kelas', 'id');
@@ -131,7 +132,7 @@ class UjianController extends Controller
             }
         }
         $programAkademik = ProgramAkademik::pluck('nama_program', 'id');
-        return view('admin.ujian.edit', compact('programAkademik', 'ujian'));
+        return view('admin.ujian.edit', compact('programAkademik', 'pengaturan_ujian'));
     }
 
     /**
@@ -141,23 +142,19 @@ class UjianController extends Controller
      * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ujian $ujian)
+    public function update(Request $request, Ujian $pengaturan_ujian)
     {
 
         $inputUjian = $request->validate([
             'judul' => 'required|string|max:255',
-            'program_akademik_id' => 'required',
-            'kelas_id' => 'required',
-            'durasi' => 'required',
-            'waktu_mulai' => 'required',
-            'waktu_selesai' => 'required',
+            'token' => 'required|string|max:255',
         ]);
 
         DB::beginTransaction();
         try {
 
             $inputUjian['updated_by'] = auth()->user()->id;
-            $ujian->update($inputUjian);
+            $pengaturan_ujian->update($inputUjian);
         } catch (\Exception $e) {
             DB::rollback();
             toastr()->error($e->getMessage(), 'Error');

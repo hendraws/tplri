@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kelas;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
 use App\Models\ProgramAkademik;
 
@@ -48,5 +49,12 @@ class HomeController extends Controller
         }
 
         return redirect()->action([HomeController::class, 'index']);
+    }
+
+    public function token()
+    {
+        $data = Ujian::where('is_active', 1)->get();
+
+        return view('token', compact('data'));
     }
 }

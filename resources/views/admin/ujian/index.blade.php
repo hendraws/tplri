@@ -115,11 +115,9 @@ Tambah Pengguna
                                         </a>
                                     </td>
                                     <td class="text-center">
-
                                         <a class="btn btn-xs btn-primary"
                                             href="{{ action('UjianController@show', $item) }}" data-toggle="tooltip"
                                             data-placement="top" title="Detail" data-id="{{ $item->id }}">Detail</a>
-
                                         <a class="btn btn-xs btn-warning"
                                             href="{{ action('UjianController@edit', $item) }}" data-toggle="tooltip"
                                             data-placement="top" title="Edit" data-id="{{ $item->id }}">Edit</a>

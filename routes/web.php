@@ -66,7 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/riwayat-test-psikologi', 'UjianSiswaController@riwayatUjian');
     });
 });
-
+Route::get('token', 'HomeController@token');
 Route::view('under-contruction', 'maintance');
 Route::get('reboot', function () {
     Artisan::call('view:clear');
