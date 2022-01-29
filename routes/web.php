@@ -63,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/ujian/ujian-kecerdasan', 'UjianSiswaController@ujianKecerdasan');
         Route::post('/ujian/ujian-kecermatan', 'UjianSiswaController@ujianKecermatan');
         Route::get('/hasil-Ujian/{nilai}', 'UjianSiswaController@hasilUjian');
-        Route::get('/riwayat-test-psikologi', 'SiswaController@riwayatUjian');
+        Route::get('/riwayat-test-psikologi', 'UjianSiswaController@riwayatUjian');
     });
 });
 

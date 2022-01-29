@@ -273,7 +273,7 @@ class UjianSiswaController extends Controller
             $cekUjian->update([
                 'kecermatan' => 1
             ]);
-            
+
             $pengaturanUjian = Ujian::find($cekUjian->ujian_id);
 
             return redirect(action('UjianSiswaController@hasilUjian', $cekUjian->id));
@@ -315,6 +315,15 @@ class UjianSiswaController extends Controller
 
         return view('ujian.hasil-ujian', compact('data'));
 
+    }
+
+    public function riwayatUjian()
+    {
+        $data = UjianSiswa::where('user_id',auth()->user()->id)
+                ->where('kecermatan',1)
+                ->get();
+
+        return view('siswa.riwayat_ujian', compact('data'));
     }
 }
 
