@@ -307,4 +307,34 @@ class UjianController extends Controller
         $result['code'] = '200';
         return response()->json($result);
     }
+
+    public function generate($id)
+    {
+        DB::beginTransaction();
+        try {
+            $ujian = Ujian::find($id);
+
+            do {
+                $token = strtoupper(Str::random(6));
+            } while (Ujian::where('token', $token)->exists());
+
+            $ujian->update([
+                'token' => $token
+            ]);
+
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            toastr()->warning($e->getMessage(), '?');
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            toastr()->warning($e->getMessage(), '?');
+            return back();
+        }
+
+        DB::commit();
+        toastr()->success('Data telah diubah', 'Berhasil');
+        return back();
+    }
 }

@@ -22,6 +22,11 @@
                 <th scope="row">{{ $loop->index + 1 }}</th>
                 <td>{{ $item->judul }}</td>
                 <td>{{ $item->token }}</td>
+                <td>
+                    <a class="btn btn-xs btn-info"
+                    href="{{ action('UjianController@generate', $item->id) }}" data-toggle="tooltip"
+                    data-placement="top" title="Generate" data-id="{{ $item->id }}">Generate</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

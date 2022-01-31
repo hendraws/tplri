@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/pengaturan-ujian/{kategori}/{ujian}/tambah-soal', 'UjianController@tambahSoal');
         Route::post('/pengaturan-ujian/simpan-soal', 'UjianController@simpanSoal');
         Route::post('/pengaturan-ujian/hapus-soal', 'UjianController@hapusSoal');
+        Route::get('/pengaturan-ujian/generate-token/{id}', 'UjianController@generate');
         Route::resource('/matapelajaran-ujian', 'UjianMataPelajaranController');
         Route::resource('/matapelajaran-ujian-soal', 'UjianSoalController');
         Route::resource('/banksoal/kecerdasan', 'KecerdasanController');
