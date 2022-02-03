@@ -93,6 +93,7 @@
                         <th scope="col">C</th>
                         <th scope="col">D</th>
                         <th scope="col">E</th>
+                        <th scope="col">Kategori</th>
                         <th scope="col">action</th>
                     </tr>
                 </thead>
@@ -105,6 +106,7 @@
                             <td>{{ html_entity_decode($value->soal_c) }}</td>
                             <td>{{ html_entity_decode($value->soal_d) }}</td>
                             <td>{{ html_entity_decode($value->soal_e) }}</td>
+                            <td>{{ html_entity_decode($value->kategori) }}</td>
                             <td>
                                 <a href="javascript:void(0)" class="btn btn-xs btn-primary pilih-soal"
                                     data-id="{{ $value->id }}">Pilih Soal</a>

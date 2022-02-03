@@ -95,6 +95,7 @@
                         <th scope="col">C</th>
                         <th scope="col">D</th>
                         <th scope="col">E</th>
+                        <th scope="col">Kategori</th>
                         <th scope="col">action</th>
                     </tr>
                 </thead>
@@ -107,6 +108,7 @@
                         <td>{{ html_entity_decode($data->soal_c) }}</td>
                         <td>{{ html_entity_decode($data->soal_d) }}</td>
                         <td>{{ html_entity_decode($data->soal_e) }}</td>
+                        <td>{{ html_entity_decode($data->kategori) }}</td>
                         <td>
                             <a href="{{ action('KecermatanController@edit', $data) }}" class="btn btn-sm btn-warning">Edit</a>
                             <button class="btn btn-sm btn-danger hapus" type="button" data-id="{{ $data->id }}">Hapus</button>
