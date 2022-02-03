@@ -21,6 +21,7 @@ class KecerdasanImport implements ToModel, WithHeadingRow
             'soal_c' => $row['c'],
             'soal_d' => $row['d'],
             'soal_e' => $row['e'],
+            'kategori' => $row['kategori'],
         ]);
     }
 }

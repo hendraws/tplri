@@ -9,5 +9,5 @@ class Kecermatan extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'soal_a', 'soal_b', 'soal_c', 'soal_d', 'soal_e', 'created_by', 'edited_by', ];
+    protected $fillable = [ 'soal_a', 'soal_b', 'soal_c', 'soal_d', 'soal_e', 'created_by', 'edited_by','kategori' ];
 }
