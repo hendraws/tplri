@@ -318,7 +318,7 @@
 
 
             $('#soalKecerdasan').html(`
-            <tr class="text-center">
+            <tr class="text-center" style="font-weight: bold;">
                 <td style="width: 20%">a</td>
                 <td style="width: 20%">b</td>
                 <td style="width: 20%">c</td>
