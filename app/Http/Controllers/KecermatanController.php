@@ -18,6 +18,7 @@ class KecermatanController extends Controller
     public function index()
     {
         $kecermatan = Kecermatan::orderBy('id','desc' )->get();
+        // $kecermatan = Kecermatan::orderBy(DB::raw('RAND()'))->get();
         return view('admin.kecermatan.index', compact('kecermatan'));
     }
 

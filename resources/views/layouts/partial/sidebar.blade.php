@@ -10,6 +10,7 @@
                 </p>
             </a>
         </li>
+        @role('super-admin')
         <li class="nav-item">
             <a href="{{ action('UserController@index') }}" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
@@ -18,6 +19,7 @@
                 </p>
             </a>
         </li>
+        @endrole
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file"></i>
@@ -64,6 +66,7 @@
                 </li>
             </ul>
         </li>
+        @role('super-admin')
         <li class="nav-item">
             <a href="{{ action('UjianController@index') }}" class="nav-link">
                 <i class="fas fa-cog nav-icon"></i>
@@ -109,7 +112,7 @@
                 </li> --}}
             </ul>
         </li>
-
+        @endrole
         {{-- <li class="nav-item menu-open">
             <a href="#" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
