@@ -57,19 +57,53 @@
                 })
             }) //tutup
 
+            $(document).on('click', '.aktifkan', function(e) {
+                e.preventDefault();
+                var tag = $(this);
+                var url = $(this).data('url');
+                var status = $(this).data('status');
+                Swal.fire({
+                    title: 'Apakah Anda Yakin Ubah Status?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Iya, Yakin!'
+                }).then((result) => {
+                    if (result.value == true) {
+                        $.ajax({
+                            type: 'PUT',
+                            url: url,
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                "is_active": status,
+                            },
+                            success: function(data) {
+                                if (data.code == '200') {
+                                    Swal.fire(
+                                        'Berhasil!',
+                                        'Data Sudah Di Perbarui.',
+                                        'success'
+                                    );
+                                    setTimeout(function() {
+                                        window.location =
+                                            "{{ action('UjianController@index') }}";
+                                    }, 1500);
+
+                                }
+                            }
+                        });
+
+                    }
+                })
+            }) //tutup
+
         });
     </script>
 @endsection
 @section('button-title')
     <a class="btn btn-sm btn-primary ml-2 float-right" href="{{ action('UjianController@create') }}" data-toggle="tooltip"
         data-placement="top" title="Tambah">Buat Ujian Baru</a>
-    {{-- <button class="btn btn-primary float-right btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample"
-aria-expanded="false" aria-controls="collapseExample">
-Tambah Pengguna
-</button> --}}
-    {{-- <button class="btn btn-success float-right btn-sm mx-2" type="button" id="btnExport">
-	Export Xlsx
-</button> --}}
 @endsection
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm table-responsive">
@@ -106,11 +140,13 @@ Tambah Pengguna
                                             <i class="fas fa-eye"></i> kecermatan
                                         </a>
                                         <a class="btn btn-app bg-success">
-                                            <span class="badge bg-purple">{{ $item->getSoalKepribadianSatu->count() }}</span>
+                                            <span
+                                                class="badge bg-purple">{{ $item->getSoalKepribadianSatu->count() }}</span>
                                             <i class="fas fa-child"></i> Kepribadian Sesi 1
                                         </a>
                                         <a class="btn btn-app bg-success">
-                                            <span class="badge bg-purple">{{ $item->getSoalKepribadianDua->count() }}</span>
+                                            <span
+                                                class="badge bg-purple">{{ $item->getSoalKepribadianDua->count() }}</span>
                                             <i class="fas fa-child"></i> kepribadian Sesi 2
                                         </a>
                                     </td>
@@ -122,8 +158,20 @@ Tambah Pengguna
                                             href="{{ action('UjianController@edit', $item) }}" data-toggle="tooltip"
                                             data-placement="top" title="Edit" data-id="{{ $item->id }}">Edit</a>
                                         <a class="btn btn-xs btn-info"
-                                            href="{{ action('UjianController@generate', $item->id) }}" data-toggle="tooltip"
-                                            data-placement="top" title="Generate" data-id="{{ $item->id }}">Generate</a>
+                                            href="{{ action('UjianController@generate', $item->id) }}"
+                                            data-toggle="tooltip" data-placement="top" title="Generate"
+                                            data-id="{{ $item->id }}">Generate</a>
+                                        @if ($item->is_active == '0')
+                                            <a href="Javascript:void(0)" class="btn btn-xs btn-primary aktifkan bg-purple color-palette"
+                                                data-url="{{ action('UjianController@is_active', $item) }}"
+                                                data-status="{{ $item->is_active }}"
+                                                >Aktifkan</a>
+                                        @else
+                                            <a href="Javascript:void(0)" class="btn btn-xs btn-info aktifkan bg-purple color-palette"
+                                                data-url="{{ action('UjianController@is_active', $item) }}"
+                                                data-status="{{ $item->is_active }}" >Non
+                                                Akfitkan</a>
+                                        @endif
                                         <a href="Javascript:void(0)" class="btn btn-xs btn-danger hapus"
                                             data-url="{{ action('UjianController@destroy', $item) }}">Hapus</a>
 

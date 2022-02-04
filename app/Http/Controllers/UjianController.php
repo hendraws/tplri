@@ -337,4 +337,16 @@ class UjianController extends Controller
         toastr()->success('Data telah diubah', 'Berhasil');
         return back();
     }
+
+    public function is_active(Request $request, $id){
+
+        $status = $request->is_active == '1' ? 0 : 1;
+
+        $ujian = Ujian::where('id',$id)->update([
+            'is_active' => $status,
+            'updated_by' => auth()->user()->id,
+        ]);
+        $result['code'] = '200';
+        return response()->json($result);
+    }
 }

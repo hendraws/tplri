@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/soal', 'SoalController');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
         Route::resource('/pengaturan-ujian', 'UjianController');
+        Route::PUT('/pengaturan-ujian/{id}/is-aktive', 'UjianController@is_active');
         Route::get('/pengaturan-ujian-soal/{kategori}', 'UjianController@soalUjian');
         Route::get('/pengaturan-ujian/{kategori}/{ujian}/tambah-soal', 'UjianController@tambahSoal');
         Route::post('/pengaturan-ujian/simpan-soal', 'UjianController@simpanSoal');
