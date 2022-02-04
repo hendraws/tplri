@@ -36,7 +36,7 @@
                 e.preventDefault();
                 var tag = $(this);
                 var id = $(this).data('id');
-                var url = '{{ action('KelasController@destroy', ':id') }}';
+                var url = '{{ action('KepribadianController@destroy_sesi2', ':id') }}';
                 url = url.replace(':id', id);
                 Swal.fire({
                     title: 'Apakah Anda Yakin ?',
@@ -63,7 +63,7 @@
                                     );
                                     setTimeout(function() {
                                         window.location =
-                                            "{{ action('KelasController@index') }}";
+                                            "{{ action('KepribadianController@sesi2') }}";
                                     }, 1500);
 
                                 }
@@ -107,7 +107,8 @@
                             @endforeach
                             <td class="text-center">
                                 <a href="" class="btn btn-xs btn-warning">Edit</a>
-                                <a href="" class="btn btn-xs btn-danger">Hapus</a>
+                                <button class="btn btn-xs btn-danger hapus" type="button"
+                                    data-id="{{ $data->id }}">Hapus</button>
                             </td>
                         </tr>
                     @endforeach

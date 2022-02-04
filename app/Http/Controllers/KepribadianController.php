@@ -176,4 +176,22 @@ class KepribadianController extends Controller
         return redirect(action('KepribadianController@sesi2'));
         dd($request);
     }
+
+    public function destroy_sesi1($id)
+    {
+
+        $data = Kepribadian::where('id',$id)->first();
+        $data->delete();
+    	$result['code'] = '200';
+    	return response()->json($result);
+    }
+
+    public function destroy_sesi2($id)
+    {
+
+        $data = Kepribadian::where('id',$id)->first();
+        $data->delete();
+    	$result['code'] = '200';
+    	return response()->json($result);
+    }
 }

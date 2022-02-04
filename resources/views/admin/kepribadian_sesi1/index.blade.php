@@ -36,7 +36,7 @@
                 e.preventDefault();
                 var tag = $(this);
                 var id = $(this).data('id');
-                var url = '{{ action('KelasController@destroy', ':id') }}';
+                var url = '{{ action('KepribadianController@destroy_sesi1', ':id') }}';
                 url = url.replace(':id', id);
                 Swal.fire({
                     title: 'Apakah Anda Yakin ?',
@@ -63,7 +63,7 @@
                                     );
                                     setTimeout(function() {
                                         window.location =
-                                            "{{ action('KelasController@index') }}";
+                                            "{{ action('KepribadianController@sesi1') }}";
                                     }, 1500);
 
                                 }
@@ -78,7 +78,8 @@
     </script>
 @endsection
 @section('button-title')
-    <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('KepribadianController@create_sesi1') }}" data-toggle="tooltip" data-placement="top" title="Tambah">Tambah
+    <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('KepribadianController@create_sesi1') }}"
+        data-toggle="tooltip" data-placement="top" title="Tambah">Tambah
         Soal Kepribadian</a>
 
 @endsection
@@ -99,18 +100,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($kepribadian as $data)
-                    <tr>
-                      <th>{{ $loop->index + 1  }}</th>
-                      <td>{!! $data->pertanyaan !!}</td>
-                      @foreach ($data->getPilihan as $pilihan)
-                          <td class="{{  $pilihan->id == $data->jawaban_id ? 'bg-success' : '' }}"> {!! $pilihan->jawaban !!}</td>
-                      @endforeach
-                      <td class="text-center">
-                          <a href="" class="btn btn-xs btn-warning">Edit</a>
-                          <a href="" class="btn btn-xs btn-danger">Hapus</a>
-                      </td>
-                    </tr>
+                    @foreach ($kepribadian as $data)
+                        <tr>
+                            <th>{{ $loop->index + 1 }}</th>
+                            <td>{!! $data->pertanyaan !!}</td>
+                            @foreach ($data->getPilihan as $pilihan)
+                                <td class="{{ $pilihan->id == $data->jawaban_id ? 'bg-success' : '' }}">
+                                    {!! $pilihan->jawaban !!}</td>
+                            @endforeach
+                            <td class="text-center">
+                                <a href="" class="btn btn-xs btn-warning">Edit</a>
+                                <button class="btn btn-xs btn-danger hapus" type="button"
+                                    data-id="{{ $data->id }}">Hapus</button>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
