@@ -42,7 +42,7 @@ class UjianController extends Controller
             return abort(404);
         }
 
-        $data = Ujian::get();
+        $data = Ujian::orderBy('created_at', 'desc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 

@@ -15,7 +15,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('.table').DataTable();
+            $('.table').DataTable({
+                "order": []
+            });
 
             $(document).on('click', '.hapus', function(e) {
                 e.preventDefault();
