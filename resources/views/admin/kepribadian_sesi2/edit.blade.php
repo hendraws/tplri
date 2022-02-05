@@ -1,5 +1,5 @@
 @extends('layouts.app-admin')
-@section('title', 'Tambah Soal Kepribadian Sesi 2')
+@section('title', 'Edit Soal Kepribadian Sesi 2')
 @section('css')
     <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -16,14 +16,14 @@
 @endsection
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm table-responsive">
-        <form method="POST" action="{{ action('KepribadianController@store_sesi2') }}" enctype='multipart/form-data'>
+        <form method="POST" action="{{ action('KepribadianController@update_sesi2', $kepribadian) }}" enctype='multipart/form-data'>
             @csrf
+            @method('PUT')
             <div class="card-body">
                 <div class="form-group row">
                     <label for="nama_program" class="col-sm-2 col-form-label">Pertanyaan</label>
                     <div class="col-md-12">
-                        <textarea class="form-control" id="pertanyaan" rows="3"
-                            name="pertanyaan"></textarea>
+                        <textarea class="form-control" id="pertanyaan" rows="3" name="pertanyaan">{{ $kepribadian->pertanyaan }}</textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

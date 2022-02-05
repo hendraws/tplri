@@ -210,15 +210,11 @@ class KepribadianController extends Controller
     {
         DB::beginTransaction();
         try {
-
             $input['pertanyaan'] = $request->pertanyaan;
             $input['sesi'] = 2;
-            $input['jawaban_id'] = $request->jawaban_benar;
             $input['created_by'] = auth()->user()->id;
             $soal =  Kepribadian::create($input);
 
-
-            // $mapel['created_by'] = auth()->user()->id;
         } catch (\Exception $e) {
             DB::rollback();
             dd($e->getMessage());
@@ -236,6 +232,38 @@ class KepribadianController extends Controller
         toastr()->success('Data telah ditambahkan', 'Berhasil');
         return redirect(action('KepribadianController@sesi2'));
         dd($request);
+    }
+
+    public function edit_sesi2(Kepribadian $kepribadian)
+    {
+        return view('admin.kepribadian_sesi2.edit', compact('kepribadian'));
+    }
+
+    public function update_sesi2(Request $request, Kepribadian $kepribadian)
+    {
+        DB::beginTransaction();
+        try {
+            $input['pertanyaan'] = $request->pertanyaan;
+            $input['updated_by'] = auth()->user()->id;
+
+            $kepribadian->update($input);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah ditambahkan', 'Berhasil');
+        return redirect(action('KepribadianController@sesi2'));
     }
 
     public function destroy_sesi2($id)

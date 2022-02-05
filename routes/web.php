@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/banksoal/kepribadian/sesi-2', 'KepribadianController@sesi2');
         Route::get('/banksoal/kepribadian/sesi-2/create', 'KepribadianController@create_sesi2');
         Route::post('/banksoal/kepribadian/sesi-2/store', 'KepribadianController@store_sesi2');
+        Route::get('/banksoal/kepribadian/sesi-1/{kepribadian}/edit', 'KepribadianController@edit_sesi2');
+        Route::put('/banksoal/kepribadian/sesi-1/{kepribadian}/update', 'KepribadianController@update_sesi2');
         Route::delete('/banksoal/kepribadian/sesi-2/{id}/destroy', 'KepribadianController@destroy_sesi2');
 
         Route::get('/list-ujian', 'UjianNilaiController@index');

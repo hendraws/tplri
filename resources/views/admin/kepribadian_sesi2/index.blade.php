@@ -19,17 +19,7 @@
             });
 
             $('.table').DataTable({
-                responsive: {
-                    details: {
-                        type: 'column'
-                    }
-                },
-                columnDefs: [{
-                    className: 'dtr-control',
-                    orderable: false,
-                    targets: 0
-                }],
-                order: [1, 'asc']
+
             });
 
             $(document).on('click', '.hapus', function(e) {
@@ -91,8 +81,6 @@
                     <tr class="text-center">
                         <th scope="col">No</th>
                         <th scope="col">soal</th>
-                        <th scope="col">A</th>
-                        <th scope="col">B</th>
                         <th scope="col">action</th>
                     </tr>
                 </thead>
@@ -101,12 +89,8 @@
                         <tr>
                             <th>{{ $loop->index + 1 }}</th>
                             <td>{!! $data->pertanyaan !!}</td>
-                            @foreach ($data->getPilihan as $pilihan)
-                                <td class="{{ $pilihan->id == $data->jawaban_id ? 'bg-success' : '' }}">
-                                    {!! $pilihan->jawaban !!}</td>
-                            @endforeach
                             <td class="text-center">
-                                <a href="" class="btn btn-xs btn-warning">Edit</a>
+                                <a href="{{ action('KepribadianController@edit_sesi2', $data) }}" class="btn btn-xs btn-warning">Edit</a>
                                 <button class="btn btn-xs btn-danger hapus" type="button"
                                     data-id="{{ $data->id }}">Hapus</button>
                             </td>
