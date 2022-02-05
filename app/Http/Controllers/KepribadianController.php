@@ -100,21 +100,24 @@ class KepribadianController extends Controller
 
     public function store_sesi1(Request $request)
     {
-
-
-
         DB::beginTransaction();
         try {
 
-
             $input['pertanyaan'] = $request->pertanyaan;
+            $input['jenis'] = $request->jenis_soal;
             $input['sesi'] = 1;
-            $input['jawaban_id'] = $request->jawaban_benar;
             $input['created_by'] = auth()->user()->id;
             $soal =  Kepribadian::create($input);
 
-
-            // $mapel['created_by'] = auth()->user()->id;
+            foreach ($request->jawaban as $key => $value) {
+                KepribadianPilihanJawaban::create([
+                    'sesi' => 1,
+                    'kepribadian_id' => $soal->id,
+                    'pilihan' => $key,
+                    'jawaban' => $value['jawaban'],
+                    'bobot' => $value['bobot'],
+                ]);
+            }
         } catch (\Exception $e) {
             DB::rollback();
             dd($e->getMessage());
@@ -133,6 +136,64 @@ class KepribadianController extends Controller
         return redirect(action('KepribadianController@sesi1'));
         dd($request);
     }
+
+    public function edit_sesi1(Kepribadian $kepribadian)
+    {
+        return view('admin.kepribadian_sesi1.edit', compact('kepribadian'));
+    }
+
+    public function update_sesi1(Request $request, Kepribadian $kepribadian)
+    {
+        DB::beginTransaction();
+        try {
+
+            $input['pertanyaan'] = $request->pertanyaan;
+            $input['jenis'] = $request->jenis_soal;
+            $input['sesi'] = 1;
+            $input['updated_by'] = auth()->user()->id;
+
+            $kepribadian->update($input);
+
+            foreach ($request->jawaban as $key => $value) {
+
+                KepribadianPilihanJawaban::where('kepribadian_id', $kepribadian->id)
+                ->where('pilihan', $key)
+                ->update([
+                    'jawaban' => $value['jawaban'],
+                    'bobot' => $value['bobot'],
+                ]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah ditambahkan', 'Berhasil');
+        return redirect(action('KepribadianController@sesi1'));
+        dd($request);
+    }
+
+
+    public function destroy_sesi1($id)
+    {
+        $data = Kepribadian::where('id',$id)->first();
+        $data->delete();
+        KepribadianPilihanJawaban::where('kepribadian_id',$id)->delete();
+    	$result['code'] = '200';
+    	return response()->json($result);
+    }
+
+
+    // -------------------------------------------------------------------------------------------------------------
 
     public function sesi2()
     {
@@ -175,15 +236,6 @@ class KepribadianController extends Controller
         toastr()->success('Data telah ditambahkan', 'Berhasil');
         return redirect(action('KepribadianController@sesi2'));
         dd($request);
-    }
-
-    public function destroy_sesi1($id)
-    {
-
-        $data = Kepribadian::where('id',$id)->first();
-        $data->delete();
-    	$result['code'] = '200';
-    	return response()->json($result);
     }
 
     public function destroy_sesi2($id)

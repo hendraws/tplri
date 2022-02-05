@@ -19,17 +19,7 @@
             });
 
             $('.table').DataTable({
-                responsive: {
-                    details: {
-                        type: 'column'
-                    }
-                },
-                columnDefs: [{
-                    className: 'dtr-control',
-                    orderable: false,
-                    targets: 0
-                }],
-                order: [1, 'asc']
+                "aaSorting": []
             });
 
             $(document).on('click', '.hapus', function(e) {
@@ -86,37 +76,43 @@
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm">
         <div id="showTable" class="card-body">
-            <table class="table table-bordered display nowrap table-sm" width="100%">
-                <thead>
-                    <tr class="text-center">
-                        <th scope="col">No</th>
-                        <th scope="col">soal</th>
-                        <th scope="col">A</th>
-                        <th scope="col">B</th>
-                        <th scope="col">C</th>
-                        <th scope="col">D</th>
-                        <th scope="col">E</th>
-                        <th scope="col">action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($kepribadian as $data)
-                        <tr>
-                            <th>{{ $loop->index + 1 }}</th>
-                            <td>{!! $data->pertanyaan !!}</td>
-                            @foreach ($data->getPilihan as $pilihan)
-                                <td class="{{ $pilihan->id == $data->jawaban_id ? 'bg-success' : '' }}">
-                                    {!! $pilihan->jawaban !!}</td>
-                            @endforeach
-                            <td class="text-center">
-                                <a href="" class="btn btn-xs btn-warning">Edit</a>
-                                <button class="btn btn-xs btn-danger hapus" type="button"
-                                    data-id="{{ $data->id }}">Hapus</button>
-                            </td>
+            <div class="table-responsive">
+
+                <table class="table table-bordered display nowrap table-sm" width="100%">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">No</th>
+                            <th scope="col">soal</th>
+                            <th scope="col">Jenis Soal</th>
+                            <th scope="col">A</th>
+                            <th scope="col">B</th>
+                            <th scope="col">C</th>
+                            <th scope="col">D</th>
+                            <th scope="col">E</th>
+                            <th scope="col">action</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($kepribadian as $data)
+                            <tr>
+                                <th>{{ $loop->index + 1 }}</th>
+                                <td>{!! $data->pertanyaan !!}</td>
+                                <td> {{ $data->jenis }}</td>
+                                @foreach ($data->getPilihan as $pilihan)
+                                    <td class="{{ $pilihan->id == $data->jawaban_id ? 'bg-success' : '' }}">
+                                        {!! $pilihan->jawaban !!} ({{ $pilihan->bobot }})</td>
+                                @endforeach
+                                <td class="text-center">
+                                    <a href="{{ action('KepribadianController@edit_sesi1', $data) }}"
+                                        class="btn btn-xs btn-warning">Edit</a>
+                                    <button class="btn btn-xs btn-danger hapus" type="button"
+                                        data-id="{{ $data->id }}">Hapus</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 

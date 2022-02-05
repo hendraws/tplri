@@ -14,9 +14,17 @@
             $('.text-editor').summernote({
                 height: 100,
                 maximumImageFileSize: 512000, // 500 KB
-                callbacks:{
-                    onImageUploadError: function(msg){
-                        Swal.fire({title: msg + ' (max: 500kb)', icon: 'warning', toast: true, position: 'top-end', showConfirmButton: false, timer: 5000, timerProgressBar: true,});
+                callbacks: {
+                    onImageUploadError: function(msg) {
+                        Swal.fire({
+                            title: msg + ' (max: 500kb)',
+                            icon: 'warning',
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 5000,
+                            timerProgressBar: true,
+                        });
                     }
                 }
             });
@@ -33,33 +41,58 @@
                 <div class="form-group row">
                     <label for="nama_program" class="col-sm-2 col-form-label">Pertanyaan</label>
                     <div class="col-md-12">
-                        <textarea class="form-control" id="pertanyaan" rows="3"
-                            name="pertanyaan"></textarea>
+                        <textarea class="form-control" id="pertanyaan" rows="3" name="pertanyaan"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="jenis_soal" class="col-sm-2 col-form-label ">Jenis Soal</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" id="jenis_soal" name="jenis_soal">
+                            <option value="Positif">Positif</option>
+                            <option value="Negatif">Negatif</option>
+                          </select>
                     </div>
                 </div>
                 <div class="row">
-                    <h5>Jawaban Benar</h5>
-                    <div class="col-12 align-self-center h5 ">
+                    <div class="col-md-12">
+                        <h5>Jawaban</h5>
+                    </div>
+                    <div class="col-12 align-self-center">
                         <div class="col-md-12">
-                            <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="A" value="1">
-                                <label class="form-check-label" for="A">A. Sangat Tidak Setuju</label>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-1 col-form-label text-right">a.</label>
+                                <div class="col-sm-10 row">
+                                    <input required type="text" class="form-control col-5" placeholder="jawaban" name="jawaban[a][jawaban]">
+                                    <input required type="number" class="form-control col-5" placeholder="bobot"  min="1" max="5" name="jawaban[a][bobot]">
+                                </div>
                             </div>
-                            <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="B" value="2">
-                                <label class="form-check-label" for="B">B. Tidak Setuju</label>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-1 col-form-label text-right">b.</label>
+                                <div class="col-sm-10 row">
+                                    <input required type="text" class="form-control col-5" placeholder="jawaban" name="jawaban[b][jawaban]">
+                                    <input required type="number" class="form-control col-5" placeholder="bobot"  min="1" max="5" name="jawaban[b][bobot]">
+                                </div>
                             </div>
-                            <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="C" value="3">
-                                <label class="form-check-label" for="C">C. Netral</label>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-1 col-form-label text-right">c.</label>
+                                <div class="col-sm-10 row">
+                                    <input required type="text" class="form-control col-5" placeholder="jawaban" name="jawaban[c][jawaban]">
+                                    <input required type="number" class="form-control col-5" placeholder="bobot"  min="1" max="5" name="jawaban[c][bobot]">
+                                </div>
                             </div>
-                            <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="D" value="4">
-                                <label class="form-check-label" for="D">D. Setuju</label>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-1 col-form-label text-right">d.</label>
+                                <div class="col-sm-10 row">
+                                    <input required type="text" class="form-control col-5" placeholder="jawaban" name="jawaban[d][jawaban]">
+                                    <input required type="number" class="form-control col-5" placeholder="bobot"  min="1" max="5" name="jawaban[d][bobot]">
+                                </div>
                             </div>
-                            <div class="form-check form-check">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="E" value="5">
-                                <label class="form-check-label" for="E">E. Sangat Setuju</label>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-1 col-form-label text-right">e.</label>
+                                <div class="col-sm-10 row">
+                                    <input required type="text" class="form-control col-5" placeholder="jawaban" name="jawaban[e][jawaban]">
+                                    <input required type="number" class="form-control col-5" placeholder="bobot"  min="1" max="5" name="jawaban[e][bobot]">
+                                </div>
                             </div>
                         </div>
                     </div>

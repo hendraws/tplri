@@ -9,5 +9,5 @@ class KepribadianPilihanJawaban extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'sesi', 'pilihan', 'jawaban', ];
+    protected $fillable = [ 'sesi', 'pilihan', 'jawaban', 'kepribadian_id', 'bobot',];
 }

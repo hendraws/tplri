@@ -9,11 +9,11 @@ class Kepribadian extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'pertanyaan','sesi','jawaban_id','created_by','edited_by',];
+    protected $fillable = [ 'pertanyaan','sesi','jenis','jawaban_id','created_by','edited_by',];
 
     public function getPilihan()
     {
-        return $this->hasMany(KepribadianPilihanJawaban::class, 'sesi','sesi');
+        return $this->hasMany(KepribadianPilihanJawaban::class, 'kepribadian_id','id');
     }
 
     public function getJawaban()

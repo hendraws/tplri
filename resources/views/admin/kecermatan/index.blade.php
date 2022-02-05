@@ -79,8 +79,7 @@
     </script>
 @endsection
 @section('button-title')
-    <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('KecermatanController@create') }}" data-toggle="tooltip" data-placement="top" title="Tambah">Tambah
-        Soal Kecermatan</a>
+    <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('KecermatanController@create') }}" data-toggle="tooltip" data-placement="top" title="Tambah">Tambah Soal Kecermatan</a>
 
 @endsection
 @section('content')

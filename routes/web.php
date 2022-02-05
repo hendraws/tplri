@@ -24,13 +24,17 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => ['role:super-admin|administrator']], function () {
         Route::get('/dashboard', 'HomeController@index')->name('home');
+
         Route::resource('/manajemen-pengguna', 'UserController');
         Route::PUT('/manajemen-pengguna/{manajemen_pengguna}/aktifkan-akun', 'UserController@aktifkanAkun');
+
         Route::resource('/master/program-akademik', 'ProgramAkademikController');
         Route::resource('/master/kelas', 'KelasController');
         Route::resource('/master/matapelajaran', 'MataPelajaranController');
+
         Route::resource('/soal', 'SoalController');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
+
         Route::resource('/pengaturan-ujian', 'UjianController');
         Route::PUT('/pengaturan-ujian/{id}/is-aktive', 'UjianController@is_active');
         Route::get('/pengaturan-ujian-soal/{kategori}', 'UjianController@soalUjian');
@@ -38,19 +42,27 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/pengaturan-ujian/simpan-soal', 'UjianController@simpanSoal');
         Route::post('/pengaturan-ujian/hapus-soal', 'UjianController@hapusSoal');
         Route::get('/pengaturan-ujian/generate-token/{id}', 'UjianController@generate');
+
         Route::resource('/matapelajaran-ujian', 'UjianMataPelajaranController');
         Route::resource('/matapelajaran-ujian-soal', 'UjianSoalController');
+
         Route::resource('/banksoal/kecerdasan', 'KecerdasanController');
         Route::resource('/banksoal/kecermatan', 'KecermatanController');
+
         Route::get('/banksoal/kepribadian/sesi-1', 'KepribadianController@sesi1');
         Route::get('/banksoal/kepribadian/sesi-1/create', 'KepribadianController@create_sesi1');
         Route::post('/banksoal/kepribadian/sesi-1/store', 'KepribadianController@store_sesi1');
+        Route::get('/banksoal/kepribadian/sesi-1/{kepribadian}/edit', 'KepribadianController@edit_sesi1');
+        Route::put('/banksoal/kepribadian/sesi-1/{kepribadian}/update', 'KepribadianController@update_sesi1');
         Route::delete('/banksoal/kepribadian/sesi-1/{id}/destroy', 'KepribadianController@destroy_sesi1');
+
         Route::get('/banksoal/kepribadian/sesi-2', 'KepribadianController@sesi2');
         Route::get('/banksoal/kepribadian/sesi-2/create', 'KepribadianController@create_sesi2');
         Route::post('/banksoal/kepribadian/sesi-2/store', 'KepribadianController@store_sesi2');
         Route::delete('/banksoal/kepribadian/sesi-2/{id}/destroy', 'KepribadianController@destroy_sesi2');
+
         Route::get('/list-ujian', 'UjianNilaiController@index');
+
         Route::get('/import-soal', 'KecermatanController@import');
         Route::post('/import-soal/save', 'KecermatanController@saveImport');
 
