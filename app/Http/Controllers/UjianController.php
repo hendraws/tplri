@@ -179,9 +179,10 @@ class UjianController extends Controller
      * @param  \App\Models\Ujian  $ujian
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ujian $ujian)
+    public function destroy(Ujian $pengaturan_ujian)
     {
-        $ujian->delete();
+
+        $pengaturan_ujian->delete();
         $result['code'] = '200';
         return response()->json($result);
     }
