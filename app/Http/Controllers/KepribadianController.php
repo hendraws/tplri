@@ -212,6 +212,7 @@ class KepribadianController extends Controller
         try {
             $input['pertanyaan'] = $request->pertanyaan;
             $input['sesi'] = 2;
+            $input['jawaban_id'] = $request->jawaban_benar;
             $input['created_by'] = auth()->user()->id;
             $soal =  Kepribadian::create($input);
 
@@ -245,7 +246,7 @@ class KepribadianController extends Controller
         try {
             $input['pertanyaan'] = $request->pertanyaan;
             $input['updated_by'] = auth()->user()->id;
-
+            $input['jawaban_id'] = $request->jawaban_benar;
             $kepribadian->update($input);
 
         } catch (\Exception $e) {

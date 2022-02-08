@@ -20,4 +20,9 @@ class Kepribadian extends Model
     {
         return $this->belongsTo(KepribadianPilihanJawaban::class, 'jawaban_id','id');
     }
+
+    public function getPilihanSesi2()
+    {
+        return $this->hasMany(KepribadianPilihanJawaban::class, 'sesi','sesi');
+    }
 }

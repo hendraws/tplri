@@ -26,6 +26,22 @@
                             name="pertanyaan"></textarea>
                     </div>
                 </div>
+                <div class="row">
+                    <h5>Jawaban Benar</h5>
+                    <div class="col-12 align-self-center h5 ">
+                        <div class="col-md-12">
+                            <div class="form-check form-check">
+                                <input class="form-check-input" type="radio" name="jawaban_benar" id="A" value="6">
+                                <label class="form-check-label" for="A">A. Iya</label>
+                            </div>
+                            <div class="form-check form-check">
+                                <input class="form-check-input" type="radio" name="jawaban_benar" id="B" value="7">
+                                <label class="form-check-label" for="B">B. Tidak</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="modal-footer">
                     <button class="btn btn-brand btn-square btn-primary col">Simpan</button>
                 </div>
