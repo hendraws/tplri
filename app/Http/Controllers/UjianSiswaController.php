@@ -127,8 +127,8 @@ class UjianSiswaController extends Controller
             ]);
         // }
 
-        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'))->with('ujian_siswa_id', $ujianSiswa->id);
-        // return view('siswa.ruang_ujian.index', compact('pengaturanUjian', 'cekUjian'));
+        // return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'))->with('ujian_siswa_id', $ujianSiswa->id);
+        return view('siswa.ruang_ujian.index', compact('ujianSiswa', 'ujian'));
         // $request->session()->put('ujian_id', $pengaturanUjian->id);
         // $request->session()->put('ujian_user_id', auth()->user()->id);
         // $request->session()->put('ujian_siswa', $cekUjian->id);
@@ -147,20 +147,20 @@ class UjianSiswaController extends Controller
     public function simpanJawabanKecerdasan(Request $request)
     {
         if($request->has('status')){
-            $cekUjian =  UjianSiswa::find($request->ujianSiswaId);
+            $ujianSiswa =  UjianSiswa::find($request->ujianSiswaId);
 
             UjianNilai::updateOrCreate(
-            ['ujian_siswa_id'=> $cekUjian->id],
-            ['kecerdasan'=> $cekUjian->jawabanBenarKecerdasan->count()]);
+            ['ujian_siswa_id'=> $ujianSiswa->id],
+            ['kecerdasan'=> $ujianSiswa->jawabanBenarKecerdasan->count()]);
 
 
-            $cekUjian->update([
+            $ujianSiswa->update([
                 'kecerdasan' => 1
             ]);
 
-            $pengaturanUjian = Ujian::find($cekUjian->ujian_id);
+            $ujian = Ujian::find($ujianSiswa->ujian_id);
 
-            return view('siswa.ruang_ujian.index', compact('pengaturanUjian', 'cekUjian'));
+            return view('siswa.ruang_ujian.index', compact('ujian', 'ujianSiswa'));
         }
 
         if ($request->ajax()) {

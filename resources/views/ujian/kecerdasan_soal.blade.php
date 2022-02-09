@@ -20,6 +20,7 @@
             <div class="col-12" >
 
                 <a href="javascript:void(0)" class="btn btn-primary simpan" data-ujian="{{ $ujian->id }}" data-soal="{{ $listSoal->id }}" data-urutan="{{ $loop->index + 1 }}" data-jb="{{ $listSoal->jawaban_id }}" >Simpan</a>
+                <a href="javascript:void(0)" class="btn btn-primary lanjutkan" data-ujian="{{ $ujian->id }}" data-soal="{{ $listSoal->id }}" data-urutan="{{ $loop->index + 1 }}" data-jb="{{ $listSoal->jawaban_id }}" >Lanjutkan</a>
                 {{-- <a href="javascript:void(0)" class="btn btn-warning ragu" data-ujian="{{ $ujian->id }}" data-soal="{{ $listSoal->id }}" data-urutan="{{ $loop->index + 1 }}"  data-jb="{{ $listSoal->jawaban_id }}" >Ragu</a>
                 <a href="javascript:void(0)" class="btn btn-secondary kosongkan" data-ujian="{{ $ujian->id }}" data-soal="{{ $listSoal->id }}" data-urutan="{{ $loop->index + 1 }}" >Kosongkan Pilihan</a> --}}
             </div>
