@@ -61,4 +61,11 @@
         </div>
         <!-- ./col -->
     </div>
+    <div class="row">
+        <div class="col-5">
+            <div class="card card-body">
+
+            </div>
+        </div>
+    </div>
 @endsection
