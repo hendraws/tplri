@@ -19,44 +19,7 @@
             });
 
             $('.table').DataTable({
-                // responsive: {
-                //     details: {
-                //         type: 'column'
-                //     }
-                // },
-                // columnDefs: [{
-                //     className: 'dtr-control',
-                //     orderable: false,
-                //     targets: 0
-                // }],
-                bAutoWidth: false,
-                aoColumns: [{
-                        sWidth: '15%'
-                    },
-                    {
-                        sWidth: '15%'
-                    },
-                    {
-                        sWidth: '15%'
-                    },
-                    {
-                        sWidth: '15%'
-                    },
-                    {
-                        sWidth: '15%'
-                    },
-                    {
-                        sWidth: '15%'
-                    },
-                    {
-                        sWidth: '10%'
-                    },
-                    {
-                        sWidth: '10%'
-                    }
-                ],
-
-                // order: [1, 'asc']
+                "order": [],
             });
 
             $(document).on('click', '.hapus', function(e) {
@@ -72,7 +35,7 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Iya, Hapus!'
+                    confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
                     if (result.value == true) {
                         $.ajax({
@@ -84,8 +47,8 @@
                             success: function(data) {
                                 if (data.code == '200') {
                                     Swal.fire(
-                                        'Terhapus!',
-                                        'Data Sudah Terhapus.',
+                                        'Deleted!',
+                                        'Your file has been deleted.',
                                         'success'
                                     );
                                     setTimeout(function() {
@@ -117,7 +80,8 @@
                 <thead>
                     <tr class="text-center">
                         <th scope="col">No</th>
-                        <th scope="col">soal</th>
+                        <th scope="col">Kategori</th>
+                        <th scope="col">Soal</th>
                         <th scope="col">A</th>
                         <th scope="col">B</th>
                         <th scope="col">C</th>
@@ -130,14 +94,16 @@
                     @foreach ($kecerdasan as $data)
                         <tr>
                             <th>{{ $loop->index + 1 }}</th>
+                            <td>{{ $data->getKategori->option  }}</td>
                             <td>{!! $data->pertanyaan !!}</td>
                             @foreach ($data->getPilihan as $pilihan)
                                 <td class="{{ $pilihan->benar == 'Y' ? 'bg-success' : '' }}"> {!! $pilihan->jawaban !!}
                                 </td>
                             @endforeach
                             <td class="text-center">
-                                <a href="" class="btn btn-xs btn-warning">Edit</a>
-                                <button class="btn btn-xs btn-danger hapus" type="button" data-id="{{ $data->id }}">Hapus</button>
+                                <a href="{{ action('KecerdasanController@edit', $data) }}" class="btn btn-xs btn-warning">Edit</a>
+                                <button class="btn btn-xs btn-danger hapus" type="button"
+                                data-id="{{ $data->id }}">Hapus</button>
                             </td>
                         </tr>
                     @endforeach
