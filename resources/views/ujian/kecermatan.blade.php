@@ -217,6 +217,7 @@
             tampilSimbol(soalKe);
             console.log("reset:" + soal);
             acakSoal(soal);
+            hitungJawaban = 0;
         }
 
         $(document).on('change', '.pilih', function(e) {
@@ -269,7 +270,7 @@
                         if (hitungJawaban == PengaturanJumlahSoal) {
                             resetSoal(soalKe);
                             soalKe++;
-                            hitungJawaban = 0;
+                            // hitungJawaban = 0;
                         }
                     } else {
                         console.log('gagal');
