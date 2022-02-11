@@ -94,7 +94,7 @@
                     @foreach ($kecerdasan as $data)
                         <tr>
                             <th>{{ $loop->index + 1 }}</th>
-                            <td>{{ $data->getKategori->option  }}</td>
+                            <td>{{ optional($data->getKategori)->option  }}</td>
                             <td>{!! $data->pertanyaan !!}</td>
                             @foreach ($data->getPilihan as $pilihan)
                                 <td class="{{ $pilihan->benar == 'Y' ? 'bg-success' : '' }}"> {!! $pilihan->jawaban !!}
