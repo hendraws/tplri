@@ -45,8 +45,18 @@
                 </div>
             </div>
             <div class="card-body">
-              <h5>Hasil Test Kecermatan</h5>
-              <h1 class="border text-center p-3">{{ round(optional($data->getNilai)->kecermatan) }}</h1>
+              <h5>Nilai Test Psikologi</h5>
+              <h1 class="border text-center p-3">
+                  {{ floor(optional($data->getNilai)->nilai_akhir) }}
+              </h1>
+
+              <h4 class="border text-center p-3">
+                  @if(floor(optional($data->getNilai)->nilai_akhir) >= 58)
+                  Memenuhi Syarat
+                  @else
+                  Tidak Memenuhi Syarat
+                  @endif
+              </h4>
               <a href="/" class="btn btn-primary btn-sm col-12">Kembali Ke Beranda</a>
             </div>
             <!-- /.card-body -->

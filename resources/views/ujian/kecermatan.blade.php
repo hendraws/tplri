@@ -166,6 +166,8 @@
         let hitungJawaban = 0;
         const PengaturanJumlahKolom = 10;
         const PengaturanJumlahSoal = 50;
+        // const PengaturanJumlahKolom = 1;
+        // const PengaturanJumlahSoal = 10;
         let semuaSoal = <?= json_encode($ujian->getSoalKecermatan) ?>;
 
         $.ajaxSetup({
