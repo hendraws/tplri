@@ -99,11 +99,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ action('RefOptionController@index') }}" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Ref Option</p>
+                    </a>
+                </li>
+                {{-- <li class="nav-item">
                     <a href="{{ action('KelasController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Kelas</p>
                     </a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                     <a href="{{ action('MataPelajaranController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>

@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/master/program-akademik', 'ProgramAkademikController');
         Route::resource('/master/kelas', 'KelasController');
         Route::resource('/master/matapelajaran', 'MataPelajaranController');
+        Route::resource('/master/ref-option', 'RefOptionController');
 
         Route::resource('/soal', 'SoalController');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');

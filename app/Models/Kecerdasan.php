@@ -11,6 +11,7 @@ class Kecerdasan extends Model
 
     protected $fillable = [
         'pertanyaan',
+        'kategori',
         'jawaban_id',
         'created_by',
         'edited_by',
@@ -24,5 +25,10 @@ class Kecerdasan extends Model
     public function getJawaban()
     {
         return $this->belongsTo(KecerdasanPilihanJawaban::class, 'jawaban_id','id');
+    }
+
+    public function getKategori()
+    {
+        return $this->belongsTo(RefOption::class,'kategori','id');
     }
 }
