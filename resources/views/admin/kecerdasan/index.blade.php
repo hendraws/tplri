@@ -18,7 +18,7 @@
                 }
             });
 
-            $('.table').DataTable({
+            $('#table-main').DataTable({
                 "order": [],
             });
 
@@ -76,7 +76,7 @@
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm">
         <div id="showTable" class="card-body table-responsive">
-            <table class="table table-bordered display nowrap table-sm" width="100%">
+            <table class="table table-bordered display nowrap table-sm" width="100%" id="table-main">
                 <thead>
                     <tr class="text-center">
                         <th scope="col">No</th>
@@ -112,5 +112,12 @@
         </div>
     </div>
 
+    <div class="row">
 
+        <div class="col-2">
+            <div class="card card-body">
+
+            </div>
+        </div>
+    </div>
 @endsection
