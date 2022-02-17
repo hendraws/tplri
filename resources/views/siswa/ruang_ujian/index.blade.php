@@ -40,12 +40,12 @@
                             <h5 class=" text-center">Test Kecerdasan</h5>
                             <input type="hidden" name="ujian_id" value="{{ $ujianSiswa->ujian_id }}">
                             <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
-                            <button class="btn btn-secondary col-12 mt-4" disabled>Test Belum Tersedia</button>
-                            {{-- @if($ujianSiswa->kecerdasan == 0)
+                            {{-- <button class="btn btn-secondary col-12 mt-4" disabled>Test Belum Tersedia</button> --}}
+                            @if($ujianSiswa->kecerdasan == 0)
                             <button type="submit" class="btn btn-primary col-12 mt-4" onclick="return confirm('Mulai Test kecerdasan ?')">Mulai Test</button>
                             @elseIf($ujianSiswa->kecerdasan == 1)
                             <button class="btn btn-success col-12 mt-4" disabled>Selesai Test</button>
-                            @endif --}}
+                            @endif
                         </form>
                     </div>
                 </div>
@@ -61,12 +61,11 @@
                         <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
                         {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk
                             of the card's content.</p> --}}
-                        {{-- @if($ujianSiswa->kecermatan == 0 && $ujianSiswa->kecerdasan == 0)
+                        @if($ujianSiswa->kecermatan == 0 && $ujianSiswa->kecerdasan == 0)
                         <button class="btn btn-secondary col-12 mt-4" disabled>Test Belum Tersedia</button>
-                        @else --}}
-                        @if($ujianSiswa->kecerdasan == 0 && $ujianSiswa->kecermatan == 0)
+                        @elseif($ujianSiswa->kecerdasan == 1 && $ujianSiswa->kecermatan == 0)
                         <button type="submit"   class="btn btn-primary col-12 mt-4" onclick="return confirm('Mulai Ujian?')">Mulai Test</button>
-                        @elseIf($ujianSiswa->kecermatan == 0 &&  $ujianSiswa->kecerdasan == 1)
+                        @elseIf($ujianSiswa->kecermatan == 1 &&  $ujianSiswa->kecerdasan == 1)
                         <button class="btn btn-success col-12 mt-4" disabled>Selesai Test</button>
                         @endif
 
@@ -85,11 +84,11 @@
                         <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
                         {{-- <p class="card-text">Some quick example text to build on the card title and make up the bulk
                             of the card's content.</p> --}}
-                        {{-- @If($ujianSiswa->kecermatan == 1 &&  $ujianSiswa->kecerdasan == 1 && $ujianSiswa->kepribadian  == 0 ) --}}
+                        @If($ujianSiswa->kecermatan == 1 &&  $ujianSiswa->kecerdasan == 1 && $ujianSiswa->kepribadian  == 0 )
                         <button type="submit"   class="btn btn-primary col-12 mt-4" onclick="return confirm('Mulai Ujian?')">Mulai Test</button>
-                        {{-- @elseif($ujianSiswa->kepribadian  == 0)
+                        @elseif($ujianSiswa->kepribadian  == 0)
                         <button class="btn btn-secondary col-12 mt-4" disabled>Test Belum Tersedia</button>
-                        @endif --}}
+                        @endif
                     </form>
                     </div>
                 </div>

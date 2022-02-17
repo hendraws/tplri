@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kecerdasan;
 use App\Models\Ujian;
 use App\Models\UjianNilai;
 use App\Models\UjianSiswa;
 use App\Models\Kepribadian;
+use App\Models\PengaturanSoal;
+use App\Models\UjianSiswaJawabanKecerdasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\UjianSiswaJawaban;
@@ -151,9 +154,9 @@ class UjianSiswaController extends Controller
         if($request->has('status')){
             $ujianSiswa =  UjianSiswa::find($request->ujianSiswaId);
 
-            UjianNilai::updateOrCreate(
-            ['ujian_siswa_id'=> $ujianSiswa->id],
-            ['kecerdasan'=> $ujianSiswa->jawabanBenarKecerdasan->count()]);
+            $nilai = UjianNilai::updateOrCreate(
+                ['ujian_siswa_id'=> $ujianSiswa->id],
+                ['kecerdasan'=> $ujianSiswa->jawabanBenarKecerdasan->count() ]);
 
 
             $ujianSiswa->update([
@@ -174,13 +177,13 @@ class UjianSiswaController extends Controller
                     $benar = 0;
                 }
 
-                UjianSiswaJawaban::updateOrCreate(
+                UjianSiswaJawabanKecerdasan::updateOrCreate(
                     [
                         'ujian_siswa_id' => $request->ujianSiswaId,
                         'soal_id' => $request->noSoal,
-                        'kategori' => 1
                     ],
                     [
+                        'kategori' => 1,
                         'jawaban_id' => $request->jawaban,
                         'benar' => $benar,
                     ]
@@ -251,7 +254,26 @@ class UjianSiswaController extends Controller
         $ujian = Ujian::find($request->ujian_id);
         $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
 
-        return view('ujian.kecerdasan', compact('ujian', 'ujianSiswa'));
+        $jawabanSiswa = UjianSiswaJawabanKecerdasan::where('ujian_siswa_id', $request->ujian_siswa_id)->get();
+
+        if($jawabanSiswa->count() > 0){
+            $jawabanSiswa->each->delete();
+        }
+
+        $pengaturanSoal = PengaturanSoal::get();
+        $soalKecerdasan = null;
+        // dd($pengaturanSoal);
+        foreach($pengaturanSoal as $value){
+            $soal = Kecerdasan::where('kategori', $value->kategori)->orderByRaw('RAND()')->take($value->jumlah_soal)->get();
+
+            if(empty($soalKecerdasan)){
+                $soalKecerdasan = $soal;
+            }else{
+                $soalKecerdasan = $soalKecerdasan->merge($soal);
+            }
+        }
+
+        return view('ujian.kecerdasan', compact('ujian', 'ujianSiswa','soalKecerdasan'));
     }
 
     public function ujianKecermatan(Request $request)
@@ -323,6 +345,9 @@ class UjianSiswaController extends Controller
     {
         $data = UjianSiswa::where('user_id',auth()->user()->id)
                 ->where('kecermatan',1)
+                ->where('kecerdasan',1)
+                ->where('kepribadian',1)
+                ->orderBy('updated_at', 'DESC' )
                 ->get();
 
         return view('siswa.riwayat_ujian', compact('data'));

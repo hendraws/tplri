@@ -19,8 +19,7 @@ var storedNames = JSON.parse(localStorage.getItem("semuaJawaban"));
 $(document).on('click', '.nomor-urutan', function () {
 
     let nomorUrut = $(this).data('no');
-
-    $('#list-' + urutanTerkahir).hide();
+    $('.list-soal').hide();
     $('#list-' + nomorUrut).show();
 
     urutanTerkahir = nomorUrut;
@@ -42,8 +41,8 @@ $('.simpan').click(function () {
         'soal': noSoal,
         'jawaban': jawaban
     };
-
-    simpanJawaban(ujianSiswaId, noSoal,jawaban,jb);
+    console.log(jb, $(this));
+    simpanJawaban(ujianSiswaId, noSoal,jawaban,jb,urutan);
 
     if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
         $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');

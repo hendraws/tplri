@@ -34,6 +34,12 @@
             height: 100px;
         }
 
+        input[type="radio"] {
+            -ms-transform: scale(1.5); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+            transform: scale(1.5);
+        }
+
     </style>
 </head>
 
@@ -116,10 +122,10 @@
 
             <div class="col-md-3 border bagianBody">
                 <div class="row p-2">
-                    @for ($i = 1; $i <= count($ujian->getSoalKecerdasan); $i++)
+                    @for ($i = 1; $i <= count($soalKecerdasan); $i++)
                         <div class="col-md-3 col-3">
                             <a href="javascript:void(0)" class="badge badge-danger w-100 p-1 nomor-urutan"
-                                data-no="{{ $i }}">No.
+                                data-no="{{ $i }}">
                                 {{ $i }}</a>
                         </div>
                     @endfor
@@ -127,12 +133,14 @@
             </div>
 
             <div class="col-md-9 border bagianBody">
-                <form action="{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}" id="formUjian">
+
                     <div class="row">
                         <div class="col-12">
                             @include('ujian.kecerdasan_soal')
                         </div>
                     </div>
+                <form action="{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}" id="formUjian">
+                    @csrf
                     <input type="hidden" name="ujian_id" value="{{ $ujian->id }}">
                     <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
                 </form>
@@ -158,8 +166,8 @@
         });
 
 
-        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb) {
-
+        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb, urutan) {
+            console.log(jawaban, jb);
             var url = $('#formUjian').attr('action');
             $.ajax({
                 type: 'POST',
@@ -173,8 +181,12 @@
                 },
                 success: function(data) {
                     if (data.code == '200') {
+                        if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
+                            $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');
+                        }
                         console.log('berhasil');
                     } else {
+                        alert(data.message);
                         console.log('gagal');
                     }
                 },

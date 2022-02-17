@@ -28,7 +28,7 @@ class PengaturanSoalController extends Controller
     public function create()
     {
         $getCategory = PengaturanSoal::pluck('kategori');
-        $kategori = RefOption::where('modul','kategori-kecermatan')->whereNotIn('key', $getCategory)->pluck('option','key');
+        $kategori = RefOption::where('modul','kategori-kecermatan')->whereNotIn('id', $getCategory)->pluck('option','id');
 
         return view('admin.pengaturan_soal.create', compact('kategori'));
     }
@@ -86,7 +86,7 @@ class PengaturanSoalController extends Controller
     public function edit(PengaturanSoal $pengaturanSoal)
     {
 
-        $kategori = RefOption::where('modul','kategori-kecermatan')->pluck('option','key');
+        $kategori = RefOption::where('modul','kategori-kecermatan')->pluck('option','id');
 
         return view('admin.pengaturan_soal.edit', compact('kategori','pengaturanSoal'));
     }
