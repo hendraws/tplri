@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/import-soal', 'KecermatanController@import');
         Route::post('/import-soal/save', 'KecermatanController@saveImport');
 
+        Route::resource('/pengaturan-soal', 'PengaturanSoalController');
+
     });
 
     Route::group(['middleware' => ['role:siswa']], function () {

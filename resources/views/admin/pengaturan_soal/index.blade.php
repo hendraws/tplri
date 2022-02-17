@@ -1,5 +1,5 @@
 @extends('layouts.app-admin')
-@section('title', 'Kecerdasan')
+@section('title', 'Pengaturan Soal')
 @section('css')
     <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -18,15 +18,15 @@
                 }
             });
 
-            $('.table').DataTable({
-                "order": [],
-            });
+            // $('.table').DataTable({
+            //     "aaSorting": []
+            // });
 
             $(document).on('click', '.hapus', function(e) {
                 e.preventDefault();
                 var tag = $(this);
                 var id = $(this).data('id');
-                var url = '{{ action('KecerdasanController@destroy', ':id') }}';
+                var url = '{{ action('PengaturanSoalController@destroy', ':id') }}';
                 url = url.replace(':id', id);
                 Swal.fire({
                     title: 'Apakah Anda Yakin ?',
@@ -53,7 +53,7 @@
                                     );
                                     setTimeout(function() {
                                         window.location =
-                                            "{{ action('KecerdasanController@index') }}";
+                                            "{{ action('PengaturanSoalController@index') }}";
                                     }, 1500);
 
                                 }
@@ -68,56 +68,48 @@
     </script>
 @endsection
 @section('button-title')
-    <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('KecerdasanController@create') }}"
+    <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('PengaturanSoalController@create') }}"
         data-toggle="tooltip" data-placement="top" title="Tambah">Tambah
-        Soal Kecerdasan</a>
+        Pengaturan</a>
 
 @endsection
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm">
-        <div id="showTable" class="card-body table-responsive">
-            <table class="table table-bordered display nowrap table-sm" width="100%">
-                <thead>
-                    <tr class="text-center">
-                        <th scope="col">No</th>
-                        <th scope="col">Kategori</th>
-                        <th scope="col">Soal</th>
-                        <th scope="col">A</th>
-                        <th scope="col">B</th>
-                        <th scope="col">C</th>
-                        <th scope="col">D</th>
-                        <th scope="col">E</th>
-                        <th scope="col">action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($kecerdasan as $data)
-                        <tr>
-                            <th>{{ $loop->index + 1 }}</th>
-                            <td>{{ optional($data->getKategori)->option  }}</td>
-                            <td>{!! $data->pertanyaan !!}</td>
-                            @foreach ($data->getPilihan as $pilihan)
-                                <td class="{{ $pilihan->benar == 'Y' ? 'bg-success' : '' }}"> {!! $pilihan->jawaban !!}
-                                </td>
-                            @endforeach
-                            <td class="text-center">
-                                <a href="{{ action('KecerdasanController@edit', $data) }}" class="btn btn-xs btn-warning">Edit</a>
-                                <button class="btn btn-xs btn-danger hapus" type="button"
-                                data-id="{{ $data->id }}">Hapus</button>
-                            </td>
+        <div id="showTable" class="card-body">
+            <div class="table-responsive">
+
+                <table class="table table-bordered display nowrap table-sm" width="100%">
+                    <thead>
+                        <tr class="text-center">
+                            <th scope="col">No</th>
+                            <th scope="col">Kategori</th>
+                            <th scope="col">Jumlah Soal</th>
+                            <th scope="col">action</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="row">
-        
-        <div class="col-2">
-            <div class="card card-body">
-
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $value)
+                            <tr>
+                                <th>{{ $loop->index + 1 }}</th>
+                                <td>{{ $value->kategori }}</td>
+                                <td>{{ $value->jumlah_soal }}</td>
+                                <td class="text-center">
+                                    <a href="{{ action('PengaturanSoalController@edit', $value) }}"
+                                        class="btn btn-xs btn-warning">Edit</a>
+                                    <button class="btn btn-xs btn-danger hapus" type="button"
+                                        data-id="{{ $value->id }}">Hapus</button>
+                                </td>
+                            </tr>
+                        @endforeach
+                        <tr>
+                            <th colspan="2">Total Soal</th>
+                            <th colspan="2">{{ $data->sum('jumlah_soal') }}</th>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
+
 @endsection
