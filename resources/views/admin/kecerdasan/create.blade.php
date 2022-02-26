@@ -13,6 +13,16 @@
             $('input[type=file]').attr("disabled", true);
             $('.text-editor').summernote({
                 height: 100,
+                toolbar: [
+                    // ['style', ['style']],
+                    ['font', ['bold', 'underline', 'superscript', 'subscript', 'clear', ]],
+                    // ['fontname', ['fontname']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['insert', ['picture']],
+                    //   ['view', ['fullscreen', 'codeview', 'help']],
+                ],
                 maximumImageFileSize: 512000, // 500 KB
                 callbacks: {
                     onImageUploadError: function(msg) {
@@ -54,7 +64,7 @@
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label for="nama_program" class="col-sm-2 col-form-label">Pertanyaan</label>
                     <div class="col-md-12">
