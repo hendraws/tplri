@@ -160,7 +160,7 @@
     <script>
         let waktuSesi = 1;
         let waktuBerjalan = 10;
-        var jumlahSeluruhSoal = "{{ $ujian->getSoalKecerdasan->count() }}";
+        var jumlahSeluruhSoal = "{{ $soalKecermatan->count() }}";
         var ujianSiswaId = "{{ $ujianSiswa->id }}";
         var soalKe = 0;
         var soalId, jawabanBenar;
@@ -170,16 +170,14 @@
         const PengaturanJumlahSoal = 50;
         // const PengaturanJumlahKolom = 1;
         // const PengaturanJumlahSoal = 10;
-        let semuaSoal = <?= json_encode($ujian->getSoalKecermatan) ?>;
+        let semuaSoal = <?= json_encode($soalKecermatan) ?>;
 
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        function beforeExpiryFunc() {
-          console.log('s');
-        }
+
         //
         // jquery ready function
         $(function() {
@@ -214,8 +212,6 @@
                 backgroundColor: "#f6e8c6",
                 fontColor: "#e43205",
                 timeUp: gantiSoal,
-                beforeExpiryTime : "00:00:00",
-                beforeExpiryTimeFunction :  beforeExpiryFunc,
             });
         }
 

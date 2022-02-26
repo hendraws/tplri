@@ -8,6 +8,7 @@ use App\Models\UjianNilai;
 use App\Models\UjianSiswa;
 use App\Models\Kepribadian;
 use App\Models\PengaturanSoal;
+use App\Models\UjianKecermatan;
 use App\Models\UjianSiswaJawabanKecerdasan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use App\Models\UjianSiswaJawabanKecermatan;
 use App\Models\UjianSiswaJawabanKepribadian;
+use App\Models\Kecermatan;
 
 class UjianSiswaController extends Controller
 {
@@ -280,8 +282,8 @@ class UjianSiswaController extends Controller
     {
         $ujian = Ujian::find($request->ujian_id);
         $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
-
-        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'));
+        $soalKecermatan = Kecermatan::where('kategori', $ujian->kategori_kecermatan)->orderByRaw('RAND()')->take(10)->get();
+        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa','soalKecermatan'));
     }
 
 

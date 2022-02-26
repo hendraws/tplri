@@ -27,7 +27,7 @@
 
 </head>
 
-<body class="hold-transition login-page" style="background-color: #ffb236;">
+<body class="hold-transition login-page" style="background-color: #FFEAAD;">
     <div class="container ">
         <h1 class="text-center">Test Psikologi Polri Rumah Private Kino</h1>
         <div class="row mt-5">
