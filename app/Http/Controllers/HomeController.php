@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use App\Models\Ujian;
+use App\Models\Kecerdasan;
 use Illuminate\Http\Request;
 use App\Models\ProgramAkademik;
 
@@ -26,7 +27,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+
+        $soalKecerdasan = Kecerdasan::with('getKategori')->get();
+
+        $jumlahSoalKecerdasan = $soalKecerdasan->mapToGroups(function ($item, $key) {
+            return [optional($item->getKategori)->option => $item->id];
+        });
+
+        return view('admin.dashboard', compact('soalKecerdasan','jumlahSoalKecerdasan' ));
     }
 
     public function cek(Request $request)
