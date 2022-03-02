@@ -12,4 +12,8 @@ class PengaturanSoal extends Model
     use Userstamps;
 
     protected $fillable = ['kategori','jumlah_soal','created_by','updated_by'];
+
+    public function getKategori(){
+        return $this->belongsTo(RefOption::class, 'kategori', 'id');
+    }
 }

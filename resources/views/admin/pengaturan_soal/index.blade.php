@@ -91,7 +91,7 @@
                         @foreach ($data as $value)
                             <tr>
                                 <th>{{ $loop->index + 1 }}</th>
-                                <td>{{ $value->kategori }}</td>
+                                <td>{{ optional($value->getKategori)->option }}</td>
                                 <td>{{ $value->jumlah_soal }}</td>
                                 <td class="text-center">
                                     <a href="{{ action('PengaturanSoalController@edit', $value) }}"
