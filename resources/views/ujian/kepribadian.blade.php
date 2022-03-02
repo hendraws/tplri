@@ -154,7 +154,7 @@
     <script src="{{ asset('vendors/bootstrap-4/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/countdowntimer/jquery.countdownTimer.min.js') }}"></script>
     <script>
-        let waktuBerjalan = 100;
+        let waktuBerjalan = 90;
         var jumlahSeluruhSoal = "{{ $ujian->getSoalKecerdasan->count() }}";
         var ujianSiswaId = "{{ $ujianSiswa->id }}";
 
@@ -186,7 +186,7 @@
                         }
                         console.log('berhasil');
                     } else {
-                        alert(data.message);
+                        // alert('Jawaban Tidak boleh kosong');
                         console.log('gagal');
                     }
                 },
