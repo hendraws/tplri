@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap-4/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/countdowntimer/jquery.countdownTimer.css') }}">
     <style>
+        body {
+            background: #f6e8c6;
+        }
+
         .bagianTitle {
             min-height: 15vh;
         }
@@ -25,13 +29,42 @@
             width: 400px !important;
         }
 
+        .cover {
+            object-fit: cover;
+            height: 100px;
+        }
+
+        input[type="radio"] {
+            -ms-transform: scale(1.5); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Chrome, Safari, Opera */
+            transform: scale(1.5);
+        }
+
     </style>
 </head>
 
 <body>
     <div class="container-fluid" style="min-height:100vh;">
+        <div class="row p-3" style="background: #e43205;">
+            <div class="col-9 align-self-center">
+                <img class="cover mx-2" src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino">
+                <img class="cover mx-2" src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino">
+                <img class="cover mx-2" src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino">
+            </div>
+            <div class="col-2 align-self-center text-center">
+                <div id="countdowntimer"><span id="timer"><span></div>
+                <button type="button" id="selesiTest" class="btn btn-warning">Selesai
+                    Test</button>
+                <form action="{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}" id="selesaiUjianForm"
+                    method="POST">
+                    @csrf
+                    <input type="hidden" name="ujianSiswaId" value="{{ $ujianSiswa->id }}">
+                    <input type="hidden" name="status" value="selesai_test">
+                </form>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-12 border bagianTitle">
+            {{-- <div class="col-md-12 border bagianTitle">
                 <div class="row py-2" style="height:100%">
                     <div class="col-md-3 align-self-center">
                         <div class="row align-self-center">
@@ -85,14 +118,14 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-md-3 border bagianBody">
                 <div class="row p-2">
-                    @for ($i = 1; $i <= count($ujian->getSoalKecerdasan); $i++)
+                    @for ($i = 1; $i <= count($soalKecerdasan); $i++)
                         <div class="col-md-3 col-3">
-                            <a href="javascript:void(0)" class="badge badge-secondary w-100 p-1 nomor-urutan"
-                                data-no="{{ $i }}">No.
+                            <a href="javascript:void(0)" class="badge badge-danger w-100 p-1 nomor-urutan"
+                                data-no="{{ $i }}">
                                 {{ $i }}</a>
                         </div>
                     @endfor
@@ -100,12 +133,14 @@
             </div>
 
             <div class="col-md-9 border bagianBody">
-                <form action="{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}" id="formUjian">
+
                     <div class="row">
                         <div class="col-12">
                             @include('ujian.kecerdasan_soal')
                         </div>
                     </div>
+                <form action="{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}" id="formUjian">
+                    @csrf
                     <input type="hidden" name="ujian_id" value="{{ $ujian->id }}">
                     <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
                 </form>
@@ -131,8 +166,8 @@
         });
 
 
-        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb) {
-
+        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb, urutan) {
+            console.log(jawaban, jb);
             var url = $('#formUjian').attr('action');
             $.ajax({
                 type: 'POST',
@@ -146,8 +181,12 @@
                 },
                 success: function(data) {
                     if (data.code == '200') {
+                        if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
+                            $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');
+                        }
                         console.log('berhasil');
                     } else {
+                        alert(data.message);
                         console.log('gagal');
                     }
                 },

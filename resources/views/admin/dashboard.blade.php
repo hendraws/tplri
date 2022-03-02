@@ -3,62 +3,71 @@
 @section('button-title')
 @endsection
 @section('content')
+    @php
+        $jumlahKecerdasan = [];
+        $jumlahKecermatan = [];
+    @endphp
     <div class="row">
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>150</h3>
-                    <p>Total Soal</p>
+        <div class="col-3">
+            <h4>Kecerdasan</h4>
+            <div class="card">
+                <div class="card-body p-1">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr class="bg-dark">
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Jumlah Soal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($jumlahSoalKecerdasan as $key => $value)
+                                <tr>
+                                    <th scope="row">{{ $key }}</th>
+                                    <td class="text-right">{{ $value->count() }}</td>
+                                </tr>
+                                @php
+                                    $jumlahKecerdasan[] = $value->count();
+                                @endphp
+                            @endforeach
+                            <tr>
+                                <th scope="row">Jumlah Soal Kecerdasan</th>
+                                <th class="text-right">{{ array_sum($jumlahKecerdasan) }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-bag"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-                    <p>Total Program Akademik</p>
+        <div class="col-3">
+            <h4>Kecermatan</h4>
+            <div class="card">
+                <div class="card-body p-1">
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                            <tr class="bg-dark">
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Jumlah Soal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($jumlahSoalKecermatan as $key => $value)
+                                <tr>
+                                    <th scope="row">{{ $key }}</th>
+                                    <td class="text-right">{{ $value->count() }}</td>
+                                </tr>
+                                @php
+                                    $jumlahKecermatan[] = $value->count();
+                                @endphp
+                            @endforeach
+                            <tr>
+                                <th scope="row">Jumlah Soal Kecermatan</th>
+                                <th class="text-right">{{ array_sum($jumlahKecermatan) }}</th>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3>44</h3>
-                    <p>Total Siswa</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>65</h3>
-                    <p>Mata Pelajaran</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-        <!-- ./col -->
+
     </div>
 @endsection

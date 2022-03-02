@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c8f7a7f2215ce9041a6cbc30e19cbec",
+    "content-hash": "0b944429f1517a4f7ba7bbcfb33b814d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -6528,25 +6528,25 @@
         },
         {
             "name": "wildside/userstamps",
-            "version": "2.1.0",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/WildsideUK/Laravel-Userstamps.git",
-                "reference": "98c38d2f487e5168ef559cb29ed6cc63fbe70a18"
+                "reference": "a54e057de179cd575ef839935d068cf21ce85960"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WildsideUK/Laravel-Userstamps/zipball/98c38d2f487e5168ef559cb29ed6cc63fbe70a18",
-                "reference": "98c38d2f487e5168ef559cb29ed6cc63fbe70a18",
+                "url": "https://api.github.com/repos/WildsideUK/Laravel-Userstamps/zipball/a54e057de179cd575ef839935d068cf21ce85960",
+                "reference": "a54e057de179cd575ef839935d068cf21ce85960",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "^5.2|^6.0|^7.0|^8.0",
+                "illuminate/support": "^5.2|^6.0|^7.0|^8.0|^9.0",
                 "php": ">=5.5.9"
             },
             "require-dev": {
-                "illuminate/database": "^5.2|^6.0|^7.0|^8.0",
-                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0",
+                "illuminate/database": "^5.2|^6.0|^7.0|^8.0|^9.0",
+                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0|^7.0",
                 "phpunit/phpunit": "^5.0|^6.0|^7.0|^8.4|^9.0"
             },
             "type": "library",
@@ -6577,9 +6577,9 @@
             ],
             "support": {
                 "issues": "https://github.com/WildsideUK/Laravel-Userstamps/issues",
-                "source": "https://github.com/WildsideUK/Laravel-Userstamps/tree/2.1.0"
+                "source": "https://github.com/WildsideUK/Laravel-Userstamps/tree/2.2.0"
             },
-            "time": "2020-09-11T06:54:28+00:00"
+            "time": "2022-02-09T08:47:54+00:00"
         },
         {
             "name": "yajra/laravel-datatables-oracle",

@@ -83,6 +83,7 @@ class UjianController extends Controller
 
 
             $inputUjian['judul'] = $request->judul;
+            $inputUjian['kategori_kecermatan'] = $request->kategori_kecermatan;
             $inputUjian['is_active'] = $request->is_active;
             $inputUjian['tanggal'] = date('Y-m-d');
             $inputUjian['token'] = $token;

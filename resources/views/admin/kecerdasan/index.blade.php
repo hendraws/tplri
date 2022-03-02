@@ -112,12 +112,5 @@
         </div>
     </div>
 
-    <div class="row">
 
-        <div class="col-2">
-            <div class="card card-body">
-
-            </div>
-        </div>
-    </div>
 @endsection

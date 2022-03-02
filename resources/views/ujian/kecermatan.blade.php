@@ -69,10 +69,14 @@
 <body>
     <div class="container-fluid" style="min-height:100vh;">
         <div class="row p-3" style="background: #e43205;">
-            <div class="col-12 align-self-center">
+            <div class="col-md-10 align-self-center">
                 <img class="cover mx-2" src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino">
                 <img class="cover mx-2" src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino">
                 <img class="cover mx-2" src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino">
+            </div>
+            <div class="col-md-2 align-self-center">
+
+                    <div id="countdowntimer2"><span id="timer"><span></div>
             </div>
         </div>
         <div class="row">
@@ -98,7 +102,7 @@
 
                             </div>
                             <div class="col-md-3 align-self-center text-center">
-
+                                <div id="countdowntimer"><span id="timerSesi"><span></div>
                             </div>
                         </div>
                     </div>
@@ -132,8 +136,6 @@
 
                             </div>
                             <div class="col-md-3 align-self-center text-center">
-                                <div id="countdowntimer" class="none"><span id="timerSesi"><span></div>
-                                <div id="countdowntimer2" class="none"><span id="timer"><span></div>
                                 <form action="{{ action('UjianSiswaController@simpanJawabanKecermatan') }}"
                                     id="formUjian" method="POST">
                                     @csrf
@@ -158,7 +160,7 @@
     <script>
         let waktuSesi = 1;
         let waktuBerjalan = 10;
-        var jumlahSeluruhSoal = "{{ $ujian->getSoalKecerdasan->count() }}";
+        var jumlahSeluruhSoal = "{{ $soalKecermatan->count() }}";
         var ujianSiswaId = "{{ $ujianSiswa->id }}";
         var soalKe = 0;
         var soalId, jawabanBenar;
@@ -166,7 +168,9 @@
         let hitungJawaban = 0;
         const PengaturanJumlahKolom = 10;
         const PengaturanJumlahSoal = 50;
-        let semuaSoal = <?= json_encode($ujian->getSoalKecermatan) ?>;
+        // const PengaturanJumlahKolom = 1;
+        // const PengaturanJumlahSoal = 10;
+        let semuaSoal = <?= json_encode($soalKecermatan) ?>;
 
         $.ajaxSetup({
             headers: {
@@ -183,9 +187,9 @@
             $("#timer").countdowntimer({
                 minutes: waktuBerjalan,
                 size: "lg",
-                borderColor: "#ffffff",
-                backgroundColor: "#ffffff",
-                fontColor: "#ffffff",
+                borderColor: "#e43205",
+                backgroundColor: "#e43205",
+                fontColor: "#f6e8c6",
                 timeUp: timeisUp,
             });
             sesiTimer();
@@ -200,15 +204,23 @@
 
         function sesiTimer() {
             soalKe++;
+            $('#countdowntimer').addClass('none');
             $("#timerSesi").countdowntimer({
                 minutes: waktuSesi,
                 size: "lg",
-                borderColor: "#ffffff",
-                backgroundColor: "#ffffff",
-                fontColor: "#ffffff",
+                borderColor: "#f6e8c6",
+                backgroundColor: "#f6e8c6",
+                fontColor: "#e43205",
                 timeUp: gantiSoal,
             });
         }
+
+        const interval = setInterval(function() {
+        if($("#timerSesi").text() == '00:06'){
+            $('#countdowntimer').removeClass('none');
+        }
+        }, 1000);
+
 
         function resetSoal(soalKe) {
             if (soalKe == PengaturanJumlahKolom) {

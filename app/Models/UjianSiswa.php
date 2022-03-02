@@ -18,7 +18,7 @@ class UjianSiswa extends Model
 
     public function jawabanBenarKecerdasan()
     {
-        return $this->hasMany(UjianSiswaJawaban::class, 'ujian_siswa_id','id')->where('benar', 1);
+        return $this->hasMany(UjianSiswaJawabanKecerdasan::class, 'ujian_siswa_id','id')->where('benar', 1);
     }
     public function jawabanBenarKecermatan()
     {

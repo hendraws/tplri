@@ -71,7 +71,15 @@
             <a href="{{ action('UjianController@index') }}" class="nav-link">
                 <i class="fas fa-cog nav-icon"></i>
                 <p>
-                    Pengaturan Test
+                    Token
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ action('PengaturanSoalController@index') }}" class="nav-link">
+                <i class="fas fa-wrench nav-icon"></i>
+                <p>
+                    Pengaturan Soal
                 </p>
             </a>
         </li>

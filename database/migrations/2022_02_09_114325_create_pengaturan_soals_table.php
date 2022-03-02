@@ -15,6 +15,10 @@ class CreatePengaturanSoalsTable extends Migration
     {
         Schema::create('pengaturan_soals', function (Blueprint $table) {
             $table->id();
+            $table->string('kategori');
+            $table->string('jumlah_soal');
+            $table->string('created_by');
+            $table->string('updated_by');
             $table->timestamps();
         });
     }

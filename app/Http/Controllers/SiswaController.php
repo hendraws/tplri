@@ -69,7 +69,6 @@ class SiswaController extends Controller
             }
         }
 
-
         $user  = auth()->user();
         $programAkademik = ProgramAkademik::pluck('nama_program', 'id');
         $kelas = Kelas::where('program_akademik_id', $user->program_id)->pluck('nama_kelas','id');
