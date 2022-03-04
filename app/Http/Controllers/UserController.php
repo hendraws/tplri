@@ -17,12 +17,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data = User::paginate(50);
-
-            return view('admin.user.table', compact('data'));
-        }
-        return view('admin.user.index');
+        $data = User::orderBy('created_at', 'DESC')->get();
+        return view('admin.user.index', compact('data'));
     }
 
     /**

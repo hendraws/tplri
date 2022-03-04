@@ -36,12 +36,4 @@
 			@endforelse
 		</tbody>
 	</table>
-
-</div>
-<div class="card-body p-2 border-top">
-	<div class="row justify-content-between align-items-center">
-		<div class="col-auto ml-auto">
-			{!! $data->appends(request()->except('_token'))->links() !!}
-		</div>
-	</div>
 </div>

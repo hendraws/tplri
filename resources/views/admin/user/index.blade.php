@@ -16,20 +16,9 @@
 			}
 		});
 
-		var url = "{{ url()->full() }}";
-		getDataTable(url, "#showTable");
-
-		$(document).on('click', '.pagination li a.page-link',function(event){
-			event.preventDefault();
-
-			$('li').removeClass('active');
-			$(this).parent('li').addClass('active');
-
-			var myurl = $(this).attr('href');
-			var page=$(this).attr('href').split('page=')[1];
-
-			getDataTable(myurl, '#showTable');
-		})
+        $('.table').DataTable({
+                "order": []
+            });
 
         $(document).on('click','.aktifkan',function(e){
 			e.preventDefault();
@@ -134,7 +123,7 @@ Tambah Pengguna
 @section('content')
 <div class="card card-accent-primary border-primary shadow-sm table-responsive">
 	<div id="showTable">
-
+        @includeIf('admin.user.table')
 	</div>
 </div>
 

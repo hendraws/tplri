@@ -31,8 +31,8 @@
     <div class="container ">
         <h1 class="text-center">Test Psikologi Polri Rumah Private Kino</h1>
         <div class="row mt-5">
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
+            <div class="col-md-4">
+                <div class="card">
                     {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
                     <div class="card-body ">
                         <form method="POST" action="{{ action('UjianSiswaController@ujianKecerdasan') }}">
@@ -50,8 +50,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
+            <div class="col-md-4">
+                <div class="card">
                     {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
                     <div class="card-body">
                         <form method="POST" action="{{ action('UjianSiswaController@ujianKecermatan') }}">
@@ -73,8 +73,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
+            <div class="col-md-4">
+                <div class="card">
                     {{-- <img class="card-img-top" src="..." alt="Card image cap"> --}}
                     <div class="card-body">
                         <form method="POST" action="{{ action('UjianSiswaController@ujianKepribadian') }}">

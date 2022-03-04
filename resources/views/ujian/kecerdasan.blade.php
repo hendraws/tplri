@@ -31,7 +31,7 @@
 
         .cover {
             object-fit: cover;
-            height: 100px;
+            height: 75px;
         }
 
         input[type="radio"] {
@@ -40,18 +40,47 @@
             transform: scale(1.5);
         }
 
+        .pilihanVertical {
+            display: block;
+        }
+
+        .pilihanHorizontal {
+            display: flex;
+        }
+
+
+        .li-pilihan > p img {
+            width: 100% !important;
+        }
+
+        @media (max-width:641px){
+            .cover {
+                object-fit: cover;
+                height: 75px;
+            }
+
+            p img {
+            width: 100% !important;
+            }
+
+            .li-pilihan > p img {
+                width: 75px !important;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid" style="min-height:100vh;">
         <div class="row p-3" style="background: #e43205;">
-            <div class="col-9 align-self-center">
+            <div class="col-md-3 align-self-center text-center">
                 <img class="cover mx-2" src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino">
                 <img class="cover mx-2" src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino">
                 <img class="cover mx-2" src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino">
             </div>
-            <div class="col-2 align-self-center text-center">
+            <div class="col-md-7">
+            </div>
+            <div class="col-md-2 align-self-center text-center">
                 <div id="countdowntimer"><span id="timer"><span></div>
                 <button type="button" id="selesiTest" class="btn btn-warning">Selesai
                     Test</button>
@@ -130,10 +159,14 @@
                         </div>
                     @endfor
                 </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <button id="ubah" class="btn btn-sm btn-info px-5">Ubah Tampilan Pilihan Jawaban</button>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-9 border bagianBody">
-
                     <div class="row">
                         <div class="col-12">
                             @include('ujian.kecerdasan_soal')
@@ -227,6 +260,16 @@
                 text = "You canceled!";
             }
         })
+
+        $('#ubah').click(function(){
+            if($('.listPilihanJawaban').hasClass('pilihanHorizontal').toString() == 'false'){
+                $('.listPilihanJawaban').removeClass('pilihanVertical').addClass('pilihanHorizontal')
+            }else{
+                $('.listPilihanJawaban').removeClass('pilihanHorizontal').addClass('pilihanVertical')
+            }
+
+        })
+
     </script>
     <script src="{{ asset('js/ujian_kecerdasan.js') }}"></script>
 
