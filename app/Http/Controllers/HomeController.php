@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Ujian;
 use App\Models\Kecerdasan;
 use App\Models\Kecermatan;
+use App\Models\Kepribadian;
 use Illuminate\Http\Request;
 use App\Models\ProgramAkademik;
+use App\Models\UjianNilai;
 
 class HomeController extends Controller
 {
@@ -31,7 +34,12 @@ class HomeController extends Controller
 
         $soalKecerdasan = Kecerdasan::with('getKategori')->get();
         $soalKecermatan = Kecermatan::get();
+        $soalKepribadianSesi1 = Kepribadian::where('sesi','1')->get();
+        $soalKepribadianSesi2 = Kepribadian::where('sesi','2')->get();
 
+        $dataUser = User::role('siswa')->get();
+
+        $nilai = UjianNilai::where('nilai_akhir','>', 0)->orderBy('nilai_akhir', 'DESC')->take(10)->get();
 
         $jumlahSoalKecerdasan = $soalKecerdasan->mapToGroups(function ($item, $key) {
             return [optional($item->getKategori)->option => $item->id];
@@ -40,8 +48,11 @@ class HomeController extends Controller
         $jumlahSoalKecermatan = $soalKecermatan->mapToGroups(function ($item, $key) {
             return [$item->kategori => $item->id];
         });
+        $jumlahSoalKepribadianSesi1 = $soalKepribadianSesi1->mapToGroups(function ($item, $key) {
+            return [$item->jenis => $item->id];
+        });
 
-        return view('admin.dashboard', compact('soalKecerdasan','jumlahSoalKecerdasan','jumlahSoalKecermatan' ));
+        return view('admin.dashboard', compact('soalKecerdasan','jumlahSoalKecerdasan','jumlahSoalKecermatan' ,'dataUser','jumlahSoalKepribadianSesi1','soalKepribadianSesi2','nilai'));
     }
 
     public function cek(Request $request)
