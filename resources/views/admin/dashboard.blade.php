@@ -171,16 +171,22 @@
                     <div class="">
                         <table class="table table-bordered table-sm">
                             <thead>
-                            <tr class="bg-dark">
-                                <th scope="col" width="30%">Nama</th>
-                                <th scope="col" width="30%">Nilai</th>
-                                <th scope="col" width="30%">Tanggal</th>
+                            <tr class="bg-dark text-center">
+                                <th scope="col" class="align-middle" width="30%">Nama</th>
+                                <th scope="col" class="align-middle" width="10%">Kecerdasan</th>
+                                <th scope="col" class="align-middle" width="10%">Kecermatan</th>
+                                <th scope="col" class="align-middle" width="10%">Kepribadian</th>
+                                <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
+                                <th scope="col" class="align-middle" width="30%">Tanggal</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($nilai as $key => $value)
-                            <tr>
+                            <tr >
                                 <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</th>
+                                <td class="text-right">{{ $value->kecerdasan }}</td>
+                                <td class="text-right">{{ $value->kecermatan }}</td>
+                                <td class="text-right">{{ $value->kepribadian }}</td>
                                 <td class="text-right">{{ $value->nilai_akhir }}</td>
                                 <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
                             </tr>
