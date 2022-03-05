@@ -15,7 +15,9 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-            $('.table').DataTable();
+            $('.table').DataTable({
+                "order": []
+            });
 
             $(document).on('click', '.hapus', function(e) {
                 e.preventDefault();
@@ -68,28 +70,34 @@
         <div id="showTable">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" style="font-size: 13px;">
-                        <thead class="thead-dark">
-                            <tr class="text-center">
-                                <th scope="col">Judul</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data as $item)
-                                <tr>
-                                    <td>{{ $item->judul }}</td>
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="btn btn-xs btn-primary"
-                                            href="{{ action('UjianController@show', $item) }}" data-toggle="tooltip"
-                                            data-placement="top" title="Lihat Nilai Siswa" data-id="{{ $item->id }}">Lihat Nilai Siswa</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
+                    <table class="table table-bordered table-sm">
+                        <thead>
+                        <tr class="bg-dark text-center">
+                            <th scope="col" class="align-middle" width="30%">Nama</th>
+                            <th scope="col" class="align-middle" width="10%">Kecerdasan</th>
+                            <th scope="col" class="align-middle" width="10%">Kecermatan</th>
+                            <th scope="col" class="align-middle" width="10%">Kepribadian</th>
+                            <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
+                            <th scope="col" class="align-middle" width="">Tanggal</th>
+                            <th scope="col" class="align-middle" width="">Detail Ujian</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $key => $value)
+                        <tr >
+                            <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</th>
+                            <td class="text-right">{{ $value->kecerdasan }}</td>
+                            <td class="text-right">{{ $value->kecermatan }}</td>
+                            <td class="text-right">{{ $value->kepribadian }}</td>
+                            <td class="text-right">{{ $value->nilai_akhir }}</td>
+                            <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
+                            <td class="text-center">
+                                <a href="{{ action('UjianNilaiController@index') }}" class="btn btn-primary">Detail Test</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 </div>
             </div>
         </div>

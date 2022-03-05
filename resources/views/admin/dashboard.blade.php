@@ -165,7 +165,7 @@
         </div>
 
         <div class="col-md-6">
-            <h4>Top 10 Nilai Test</h4>
+            <h4>Top 10 Nilai Test Siswa</h4>
             <div class="card">
                 <div class="card-body p-1">
                     <div class="">

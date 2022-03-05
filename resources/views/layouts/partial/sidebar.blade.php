@@ -87,7 +87,7 @@
             <a href="{{ action('UjianNilaiController@index') }}" class="nav-link">
                 <i class="fas fa-book nav-icon"></i>
                 <p>
-                    Hasil Test
+                    Riwayat Ujian
                 </p>
             </a>
         </li>
