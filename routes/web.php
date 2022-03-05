@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('/manajemen-pengguna', 'UserController');
         Route::PUT('/manajemen-pengguna/{manajemen_pengguna}/aktifkan-akun', 'UserController@aktifkanAkun');
+        Route::PUT('/manajemen-pengguna/{manajemen_pengguna}/reset-password', 'UserController@resetPassword');
 
         Route::resource('/master/program-akademik', 'ProgramAkademikController');
         Route::resource('/master/kelas', 'KelasController');

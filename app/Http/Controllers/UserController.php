@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('created_at', 'DESC')->get();
+        $data = User::role('siswa')->orderBy('created_at', 'DESC')->get();
         return view('admin.user.index', compact('data'));
     }
 
@@ -151,6 +151,31 @@ class UserController extends Controller
             $manajemen_pengguna->update([
                 'is_active' => $status
             ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            $result['code'] = '500';
+            $result['message'] = $e->getMessage();
+            return response()->json($result);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            $result['code'] = '500';
+            $result['message'] = $e->getMessage();
+            return response()->json($result);
+        }
+
+        DB::commit();
+        $result['code'] = '200';
+    	return response()->json($result);
+
+    }
+
+    public function resetPassword(User $manajemen_pengguna)
+    {
+        DB::beginTransaction();
+        try {
+
+            $manajemen_pengguna->update(['password' => Hash::make(date('dmY',strtotime($manajemen_pengguna->tanggal_lahir)))]);
+
         } catch (\Exception $e) {
             DB::rollback();
             $result['code'] = '500';

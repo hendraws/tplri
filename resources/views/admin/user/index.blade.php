@@ -107,6 +107,46 @@
 				}
 			})
 		}) //tutup
+
+        $(document).on('click','.reset-password',function(e){
+			e.preventDefault();
+            var tag = $(this);
+			var url = $(this).data('url');
+            var nama = $(this).data('nama');
+			Swal.fire({
+				title: "Password "+ nama + " akan di Reset  !",
+				text: "Password direset menjadi tanggal lahir (DDMMYYYY)",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: 'Iya, Reset!'
+			}).then((result) => {
+				if (result.value == true) {
+					$.ajax({
+						type:'PUT',
+						url:url,
+						data:{
+							"_token": "{{ csrf_token() }}",
+						},
+						success:function(data) {
+							if (data.code == '200'){
+								Swal.fire(
+									'Berhasil Reset!',
+									'success'
+									);
+                                setTimeout(function(){ window.location = "{{ url()->full() }}"; }, 1500);
+
+							}
+						},
+                        error: function(data){
+                                alert(data.message);
+                            }
+					});
+
+				}
+			})
+		}) //tutup
 	});
 </script>
 @endsection
