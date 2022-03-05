@@ -111,7 +111,7 @@
 </script>
 @endsection
 @section('button-title')
-<a class="btn btn-sm btn-primary modal-button ml-2 float-right" href="Javascript:void(0)"  data-target="ModalForm" data-url="{{ action([App\Http\Controllers\UserController::class, 'create']) }}"  data-toggle="tooltip" data-placement="top" title="Edit" >Tambah Pengguna</a>
+{{-- <a class="btn btn-sm btn-primary modal-button ml-2 float-right" href="Javascript:void(0)"  data-target="ModalForm" data-url="{{ action([App\Http\Controllers\UserController::class, 'create']) }}"  data-toggle="tooltip" data-placement="top" title="Edit" >Tambah Pengguna</a> --}}
 {{-- <button class="btn btn-primary float-right btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample"
 aria-expanded="false" aria-controls="collapseExample">
 Tambah Pengguna
