@@ -5,7 +5,7 @@
 				<th scope="col">Nama</th>
 				<th scope="col">Email</th>
 				<th scope="col">Aktif?</th>
-				<th scope="col">Kelas</th>
+				{{-- <th scope="col">Kelas</th> --}}
 				<th scope="col">Program</th>
 				<th scope="col">aksi</th>
 			</tr>
@@ -16,8 +16,8 @@
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
                 <td>{{ $item->is_active }}</td>
-                <td>{{ $item->kelas_id ?? '-' }}</td>
-                <td>{{ $item->program_id ?? '-' }}</td>
+                {{-- <td>{{ $item->kelas_id ?? '-' }}</td> --}}
+                <td>{{ optional($item->getProgramAkademik)->nama_program ?? '-' }}</td>
                 <td class="text-center">
                     @if($item->is_active == 'N')
                     <a href="Javascript:void(0)" class="btn btn-xs btn-primary aktifkan"  data-url="{{ action('UserController@aktifkanAkun', $item) }}"  data-status="{{ $item->is_active }}" data-nama="{{ $item->name }}">Aktifkan</a>
