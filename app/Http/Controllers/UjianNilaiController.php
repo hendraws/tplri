@@ -12,7 +12,11 @@ class UjianNilaiController extends Controller
 
     public function index()
     {
-        $data = UjianNilai::where('nilai_akhir','>', 0)->where('id', '!=', 40)->orderBy('created_at', 'DESC')->take(10)->get();
+        $data = UjianNilai::where('nilai_akhir','>', 0)
+        ->whereHas('getUjianSiswa', function($q){
+                $q->where('user_id', '!=', 40);
+        })
+        ->orderBy('created_at', 'DESC')->take(10)->get();
 
         return view('admin.nilai.index', compact('data'));
     }

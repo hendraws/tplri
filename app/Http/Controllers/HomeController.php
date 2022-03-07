@@ -39,7 +39,12 @@ class HomeController extends Controller
 
         $dataUser = User::role('siswa')->get();
 
-        $nilai = UjianNilai::where('nilai_akhir','>', 0)->orderBy('nilai_akhir', 'DESC')->where('id', '!=', 40)->take(10)->get();
+        $nilai = UjianNilai::where('nilai_akhir','>', 0)
+                    ->whereHas('getUjianSiswa', function($q){
+                        $q->where('user_id', '!=', 40);
+                    })
+                    ->orderBy('nilai_akhir', 'DESC')
+                    ->take(10)->get();
 
         $jumlahSoalKecerdasan = $soalKecerdasan->mapToGroups(function ($item, $key) {
             return [optional($item->getKategori)->option => $item->id];
