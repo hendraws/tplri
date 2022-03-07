@@ -92,7 +92,7 @@
                             <td class="text-right">{{ $value->nilai_akhir }}</td>
                             <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
                             <td class="text-center">
-                                <a href="{{ action('UjianNilaiController@index') }}" class="btn btn-primary">Detail Test</a>
+                                <a href="{{ action('UjianNilaiController@detail', $value->ujian_siswa_id) }}" class="btn btn-primary btn-xs">Detail Test</a>
                             </td>
                         </tr>
                         @endforeach

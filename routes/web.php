@@ -66,6 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/banksoal/kepribadian/sesi-2/{id}/destroy', 'KepribadianController@destroy_sesi2');
 
         Route::get('/list-ujian', 'UjianNilaiController@index');
+        Route::get('/list-ujian/{id}/detail', 'UjianNilaiController@detail');
 
         Route::get('/import-soal', 'KecermatanController@import');
         Route::post('/import-soal/save', 'KecermatanController@saveImport');

@@ -119,7 +119,7 @@
                                 <th scope="col">Token</th>
                                 <th scope="col">Judul</th>
                                 <th scope="col">Aktif?</th>
-                                <th scope="col">Soal</th>
+                                {{-- <th scope="col">Soal</th> --}}
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
@@ -133,29 +133,9 @@
                                     <td class="text-center">{{ $item->is_active == '1' ? 'Aktif' : 'Tidak Aktif' }}
                                     </td>
                                     <td class="text-center">
-                                        <a class="btn btn-app bg-success">
-                                            <span class="badge bg-purple">{{ $item->getSoalKecerdasan->count() }}</span>
-                                            <i class="fas fa-brain"></i> Kecerdasan
-                                        </a>
-                                        <a class="btn btn-app bg-success">
-                                            <span class="badge bg-purple">{{ $item->getSoalKecermatan->count() }}</span>
-                                            <i class="fas fa-eye"></i> kecermatan
-                                        </a>
-                                        <a class="btn btn-app bg-success">
-                                            <span
-                                                class="badge bg-purple">{{ $item->getSoalKepribadianSatu->count() }}</span>
-                                            <i class="fas fa-child"></i> Kepribadian Sesi 1
-                                        </a>
-                                        <a class="btn btn-app bg-success">
-                                            <span
-                                                class="badge bg-purple">{{ $item->getSoalKepribadianDua->count() }}</span>
-                                            <i class="fas fa-child"></i> kepribadian Sesi 2
-                                        </a>
-                                    </td>
-                                    <td class="text-center">
-                                        <a class="btn btn-xs btn-primary"
+                                        {{-- <a class="btn btn-xs btn-primary"
                                             href="{{ action('UjianController@show', $item) }}" data-toggle="tooltip"
-                                            data-placement="top" title="Detail" data-id="{{ $item->id }}">Detail</a>
+                                            data-placement="top" title="Detail" data-id="{{ $item->id }}">Detail</a> --}}
                                         <a class="btn btn-xs btn-warning"
                                             href="{{ action('UjianController@edit', $item) }}" data-toggle="tooltip"
                                             data-placement="top" title="Edit" data-id="{{ $item->id }}">Edit</a>

@@ -25,6 +25,13 @@ class UjianSiswa extends Model
         return $this->hasMany(UjianSiswaJawabanKecermatan::class, 'ujian_siswa_id','id')->where('benar', 1);
     }
 
+    public function getJawabanKecerdasan()
+    {
+        return $this->hasMany(UjianSiswaJawabanKecerdasan::class, 'ujian_siswa_id','id');
+    }
+
+
+
     public function getNilai()
     {
         return $this->belongsTo(UjianNilai::class, 'id', 'ujian_siswa_id');
