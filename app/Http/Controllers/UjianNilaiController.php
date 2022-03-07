@@ -28,5 +28,4 @@ class UjianNilaiController extends Controller
         return view('admin.nilai.detail', compact('data'));
     }
 
-
 }

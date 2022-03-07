@@ -154,7 +154,7 @@
     <script src="{{ asset('vendors/bootstrap-4/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/countdowntimer/jquery.countdownTimer.min.js') }}"></script>
     <script>
-        let waktuBerjalan = 90;
+        let waktuBerjalan = 35;
         var jumlahSeluruhSoal = "{{ $ujian->getSoalKecerdasan->count() }}";
         var ujianSiswaId = "{{ $ujianSiswa->id }}";
 
