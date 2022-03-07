@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ujian;
+use App\Models\Kecermatan;
 use App\Models\UjianNilai;
 use App\Models\UjianSiswa;
 use Illuminate\Http\Request;
@@ -118,16 +119,14 @@ class UjianSiswaController extends Controller
             return back();
         }
 
-        // $cekUjian = UjianSiswa::where('user_id', auth()->user()->id)->where('ujian_id', $pengaturanUjian->id)->first();
+        $ujianSiswa = UjianSiswa::create([
+            'user_id' => auth()->user()->id,
+            'ujian_id' => $ujian->id,
+        ]);
 
-        // if (empty($cekUjian)) {
-            $ujianSiswa = UjianSiswa::create([
-                'user_id' => auth()->user()->id,
-                'ujian_id' => $ujian->id,
-            ]);
-        // }
+        $soalKecermatan = Kecermatan::where('kategori', $ujian->kategori_kecermatan)->orderByRaw('RAND()')->take(10)->get();
 
-        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'))->with('ujian_siswa_id', $ujianSiswa->id);
+        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa','soalKecermatan'))->with('ujian_siswa_id', $ujianSiswa->id);
         // return view('siswa.ruang_ujian.index', compact('pengaturanUjian', 'cekUjian'));
         // $request->session()->put('ujian_id', $pengaturanUjian->id);
         // $request->session()->put('ujian_user_id', auth()->user()->id);
@@ -256,8 +255,9 @@ class UjianSiswaController extends Controller
     {
         $ujian = Ujian::find($request->ujian_id);
         $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
-
-        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'));
+        $soalKecermatan = Kecermatan::where('kategori', $ujian->kategori_kecermatan)->orderByRaw('RAND()')->take(10)->get();
+        dd($soalKecermatan);
+        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa','soalKecermatan'));
     }
 
 
