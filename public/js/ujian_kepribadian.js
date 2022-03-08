@@ -82,45 +82,13 @@ $(function () {
 
 // action waktu habis
 function timeisUp() {
-    alert('asdf');
-}
-
-// simpan data
-function submitData() {
-    var form = $('#formUjian');
-    var url = form.attr('action');
-    let timeprogress = $('#timer').text().split(":");
-
-    $.ajax({
-        type: "POST",
-        url: url,
-        data: form.serialize()  + "&sisa_waktu=" + timeprogress[0], // serializes the form's elements.
-        success: function (data) {
-            console.log(data);
-        }
-    });
+    $("input[type=radio]").attr('disabled', true);
+    alert('waktu Habis');
+    $('form#formUjian').submit();
 }
 
 function displayNone(){
     $('.list-soal').removeAttr("style").css("display", "none");
 }
 
-function setProgressBar() {
-
-
-    let jumlahJawaban = $('input[type="radio"]:checked').length;
-    let jumlahJawabanPersentase = jumlahJawaban / jumlahSeluruhSoal * 100;
-    if(jumlahJawabanPersentase != 0 ){
-        $('#progress-bar').removeAttr("style").css("width", jumlahJawabanPersentase+"%").html(jumlahJawaban + " Soal");
-    }else{
-        $('#progress-bar').removeAttr("style").css("width", jumlahJawabanPersentase+"%").html("");
-    }
-
-
-}
-
-// function setTimeProgress(){
-//     let timeprogress = $('#timer').text().split(":");
-//     localStorage.setItem("getTimeUjian", timeprogress[0]);
-// }
 

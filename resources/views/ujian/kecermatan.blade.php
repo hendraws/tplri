@@ -75,8 +75,7 @@
                 <img class="cover mx-2" src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino">
             </div>
             <div class="col-md-2 align-self-center">
-
-                    <div id="countdowntimer2"><span id="timer"><span></div>
+                    <div id="countdowntimer2" class="none"><span id="timer"><span></div>
             </div>
         </div>
         <div class="row">

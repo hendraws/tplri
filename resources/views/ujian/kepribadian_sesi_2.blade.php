@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>Test Kepribadian POLRI</title>
+    <title>Test Kepribadian Sesi 2 POLRI</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap-4/css/bootstrap.min.css') }}">
@@ -52,7 +52,7 @@
             </div>
             <div class="col-2 align-self-center text-center">
                 <div id="countdowntimer"><span id="timer"><span></div>
-                <button type="button" id="selesiTest" class="btn btn-warning">Lanjut Kepribadian Sesi 2</button>
+                <button type="button" id="selesiTest" class="btn btn-warning">Selesai Ujian</button>
             </div>
         </div>
         <div class="row">
@@ -71,10 +71,10 @@
             <div class="col-md-9 border bagianBody">
                 <div class="row">
                     <div class="col-12">
-                        @include('ujian.kepribadian_soal')
+                        @include('ujian.kepribadian_soal_sesi_2')
                     </div>
                 </div>
-                <form action="{{ action('UjianSiswaController@simpanJawabanKepribadian') }}" id="formUjian" method="POST">
+                <form action="{{ action('UjianSiswaController@simpanJawabanKepribadian2') }}" id="formUjian" method="POST">
                     @csrf
                     <input type="hidden" name="ujian_id" value="{{ $ujian->id }}">
                     <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
@@ -91,7 +91,7 @@
     <script src="{{ asset('vendors/bootstrap-4/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/countdowntimer/jquery.countdownTimer.min.js') }}"></script>
     <script>
-        let waktuBerjalan = 20;
+        let waktuBerjalan = 15;
         var jumlahSeluruhSoal = "{{ $ujian->getSoalKecerdasan->count() }}";
         var ujianSiswaId = "{{ $ujianSiswa->id }}";
 
@@ -133,11 +133,10 @@
             });
         }
 
+
         $(document).on('click', '#selesiTest', function() {
             if (confirm("Apakah Anda Yakin Menyelesaikan Test ?") == true) {
                 $('form#formUjian').submit();
-            } else {
-                text = "You canceled!";
             }
         })
     </script>

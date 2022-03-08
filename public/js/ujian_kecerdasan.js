@@ -76,7 +76,9 @@ $(function () {
 
 // action waktu habis
 function timeisUp() {
-    alert('asdf');
+    $("input[type=radio]").attr('disabled', true);
+    alert('waktu Habis');
+    $('form#selesaiUjianForm').submit();
 }
 
 // simpan data
@@ -98,23 +100,4 @@ function submitData() {
 function displayNone(){
     $('.list-soal').removeAttr("style").css("display", "none");
 }
-
-function setProgressBar() {
-
-
-    let jumlahJawaban = $('input[type="radio"]:checked').length;
-    let jumlahJawabanPersentase = jumlahJawaban / jumlahSeluruhSoal * 100;
-    if(jumlahJawabanPersentase != 0 ){
-        $('#progress-bar').removeAttr("style").css("width", jumlahJawabanPersentase+"%").html(jumlahJawaban + " Soal");
-    }else{
-        $('#progress-bar').removeAttr("style").css("width", jumlahJawabanPersentase+"%").html("");
-    }
-
-
-}
-
-// function setTimeProgress(){
-//     let timeprogress = $('#timer').text().split(":");
-//     localStorage.setItem("getTimeUjian", timeprogress[0]);
-// }
 

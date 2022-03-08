@@ -93,61 +93,6 @@
             </div>
         </div>
         <div class="row">
-            {{-- <div class="col-md-12 border bagianTitle">
-                <div class="row py-2" style="height:100%">
-                    <div class="col-md-3 align-self-center">
-                        <div class="row align-self-center">
-                            <div class="col-12">
-                                <img src="{{ asset('images/kino.png') }}" alt="Rumah Private Kino" width="40%">
-                            </div>
-                            <div class="col-6 ">
-                                Nama
-                            </div>
-                            <div class="col-6 ">
-                                : {{ ucfirst($ujianSiswa->getSiswa->name) }}
-                            </div>
-                            <div class="col-6 ">
-                                Program Akademik
-                            </div>
-                            <div class="col-6 ">
-                                :
-                                {{ ucfirst(optional(optional($ujianSiswa->getSiswa)->getProgramAkademik)->nama_program) }}
-                            </div>
-                            <div class="col-6 ">
-                                Test
-                            </div>
-                            <div class="col-6 ">
-                                :
-                                Kecerdasan POLRI
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-9 align-self-center">
-                        <div class="row">
-                            <div class="col-md-9 align-self-center px-5">
-                                <div class="progress ">
-                                    <div id="progress-bar" class="progress-bar progress-bar-striped " role="progressbar"
-                                        aria-valuenow="1" aria-valuemin="0" aria-valuemax="4">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-3 align-self-center text-center">
-                                <div id="countdowntimer"><span id="timer"><span></div>
-                                <button type="button" id="selesiTest" class="btn btn-danger col-12">Selesai
-                                    Test</button>
-                                <form action="{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}"
-                                    id="selesaiUjianForm" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="ujianSiswaId" value="{{ $ujianSiswa->id }}">
-                                    <input type="hidden" name="status" value="selesai_test">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="col-md-3 border bagianBody">
                 <div class="row p-2">
@@ -201,7 +146,7 @@
 
         function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb, urutan) {
             console.log(jawaban, jb);
-            var url = $('#formUjian').attr('action');
+            var url = "{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}";
             $.ajax({
                 type: 'POST',
                 url: url,

@@ -83,10 +83,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/ujian/ujian-siswa', 'UjianSiswaController@ujianSiswa');
         Route::post('/ujian/ujian-siswa/store-ujian', 'UjianSiswaController@simpanJawabanKecerdasan');
         Route::post('/ujian/ujian-siswa/store-ujian-kecermatan', 'UjianSiswaController@simpanJawabanKecermatan');
-        Route::post('/ujian/ujian-siswa/store-ujian-kepribadian', 'UjianSiswaController@simpanJawabanKepribadian');
+        Route::post('/ujian/ujian-siswa/ujian-kepribadian-sesi-2', 'UjianSiswaController@simpanJawabanKepribadian');
+        Route::post('/ujian/ujian-siswa/store-ujian-kepribadian', 'UjianSiswaController@simpanJawabanKepribadian2');
         Route::post('/ujian/ujian-kecerdasan', 'UjianSiswaController@ujianKecerdasan');
         Route::post('/ujian/ujian-kecermatan', 'UjianSiswaController@ujianKecermatan');
         Route::post('/ujian/ujian-kepribadian', 'UjianSiswaController@ujianKepribadian');
+        // Route::post('/ujian/ujian-kepribadian-sesi-2', 'UjianSiswaController@ujianKepribadian2');
         Route::get('/hasil-Ujian/{nilai}', 'UjianSiswaController@hasilUjian');
         Route::get('/riwayat-test-psikologi', 'UjianSiswaController@riwayatUjian');
     });
