@@ -104,7 +104,7 @@
                 </script>
 
                 <a href="">Rumah Private Kino</a>, Template By Now UI Kit. </strong>
-                Coded by <a href="https://www.instagram.com/knighturnal/">Knighturnal</a>.
+                Coded by <a href="https://www.instagram.com/hendrawijayas_/">WijayaTech</a>.
             </div>
 
         </div>

@@ -171,6 +171,7 @@ class KecerdasanController extends Controller
             $contentSoal = $request->pertanyaan;
 
             $contents = new \DomDocument();
+            libxml_use_internal_errors(true);
             $contents->loadHtml($contentSoal, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
             $imageFileSoal = $contents->getElementsByTagName('img');
 
