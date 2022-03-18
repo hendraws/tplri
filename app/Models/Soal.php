@@ -2,22 +2,35 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Wildside\Userstamps\Userstamps;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Soal extends Model
 {
-    use HasFactory;
+    use HasFactory, Userstamps, SoftDeletes;
 
-    protected $fillable = [ 'mata_pelajaran_id', 'pertanyaan', 'jawaban_benar', 'pertanyaan_gambar', 'jawaban_gambar', 'created_by', 'updated_by',];
+    protected $connection = 'DbBankSoal';
+    protected $table = 'soal';
 
-    public function getJawaban(){
+    protected $fillable = ['pertanyaan', 'jawaban_id', 'mapel', 'jabatan', 'created_by', 'updated_by','deleted_by'];
+
+    protected $with = ['getPilihan'];
+
+    public function getPilihan()
+    {
         return $this->hasMany(SoalPilihanGanda::class, 'soal_id','id');
     }
 
-    public function getJawabanBenar(){
-        return $this->hasOne(SoalPilihanGanda::class, 'id','jawaban_benar');
+    public function getJawaban()
+    {
+        return $this->belongsTo(SoalPilihanGanda::class, 'jawaban_id','id');
     }
+
+    // public function getJawabanBenar(){
+    //     return $this->hasOne(SoalPilihanGanda::class, 'id','jawaban_benar');
+    // }
 
 
 }

@@ -30,36 +30,71 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ action('KecerdasanController@index') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kecerdasan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ action('KecermatanController@index') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kecermatan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>
-                            kepribadian
+                            AKPOL
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ action('KepribadianController@sesi1') }}" class="nav-link">
+                            <a href="{{ action('SoalController@index', ['bind','akpol']) }}" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Sesi 1</p>
+                                <p>Bahasa Indonesia</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ action('KepribadianController@sesi2') }}" class="nav-link">
+                            <a href="{{ action('SoalController@index', ['mtk','akpol']) }}" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Sesi 2</p>
+                                <p>Matematika</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ action('SoalController@index', ['pu','akpol']) }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Pengetahuan Umum</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ action('SoalController@index', ['wk','akpol']) }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Wawasan Kebangsaan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>
+                            BINTARA
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ action('SoalController@index', ['bing','bintara']) }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Bahasa Inggris</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ action('SoalController@index', ['mtk','bintara']) }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Matematika</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ action('SoalController@index', ['pu','bintara']) }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Pengetahuan Umum</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ action('SoalController@index', ['wk','bintara']) }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Wawasan Kebangsaan</p>
                             </a>
                         </li>
                     </ul>

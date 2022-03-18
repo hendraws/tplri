@@ -65,6 +65,28 @@ return [
             'collation' => 'utf8_unicode_ci',
         ],
 
+        'DbBankSoal' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST_BANKSOAL', '127.0.0.1'),
+            'port' => env('DB_PORT_BANKSOAL', '3306'),
+            'database' => env('DB_DATABASE_BANKSOAL', 'forge'),
+            'username' => env('DB_USERNAME_BANKSOAL', 'forge'),
+            'password' => env('DB_PASSWORD_BANKSOAL', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            // 'charset' => 'utf8mb4',
+            // 'collation' => 'utf8mb4_un   icode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

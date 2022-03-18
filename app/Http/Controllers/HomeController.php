@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        
         $soalKecerdasan = Kecerdasan::with('getKategori')->get();
         $soalKecermatan = Kecermatan::get();
         $soalKepribadianSesi1 = Kepribadian::where('sesi','1')->get();

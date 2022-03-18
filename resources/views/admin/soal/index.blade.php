@@ -1,9 +1,11 @@
 @extends('layouts.app-admin')
-@section('title', 'Mata Pelajaran')
+@section('title', 'Mapel ' . $mataPelajaran->option . ' - ' . strtoupper($jabatan)  )
 @section('css')
 <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
+
 @endsection
 @section('js')
 <script src="{{ asset('vendors/DataTables/datatables.min.js') }}"></script>
@@ -16,26 +18,17 @@
 			}
 		});
 
-		var url = "{{ url()->full() }}";
-		getDataTable(url, "#showTable");
 
-		$(document).on('click', '.pagination li a.page-link',function(event){
-			event.preventDefault();
-
-			$('li').removeClass('active');
-			$(this).parent('li').addClass('active');
-
-			var myurl = $(this).attr('href');
-			var page=$(this).attr('href').split('page=')[1];
-
-			getDataTable(myurl, '#showTable');
-		})
+        $('#table-main').DataTable({
+                "order": [],
+                "pageLength": 50
+            });
 
         $(document).on('click','.hapus',function(e){
 			e.preventDefault();
             var tag = $(this);
 			var id = $(this).data('id');
-			var url = '{{ action('MataPelajaranController@destroy',':id') }}';
+			var url = '{{ action('SoalController@destroy',':id') }}';
 			url = url.replace(':id',id);
 			Swal.fire({
 				title: 'Apakah Anda Yakin ?',
@@ -60,7 +53,7 @@
 									'Your file has been deleted.',
 									'success'
 									);
-                                setTimeout(function(){ window.location = "{{ action('MataPelajaranController@index') }}"; }, 1500);
+                                setTimeout(function(){ window.location = "{{ action('SoalController@index',[$mapel,  $jabatan]) }}"; }, 1500);
 
 							}
 						}
@@ -72,38 +65,48 @@
 
 	});
 </script>
+<script>
+    $('p img').attr('class', 'img-fluid img-thumbnail mh').removeAttr('style');
+</script>
 @endsection
 @section('button-title')
+    <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('SoalController@create', [$mapel, $jabatan]) }}"
+        data-toggle="tooltip" data-placement="top" title="Tambah">Tambah Soal</a>
 @endsection
 @section('content')
-<div class="card card-accent-primary border-primary shadow-sm table-responsive">
-	<div class="table-responsive">
-        <table class="table" style="font-size: 13px;">
-            <thead class="thead-dark">
+<div class="card card-accent-primary border-primary shadow-sm">
+    <div id="showTable" class="card-body table-responsive">
+        <table class="table table-bordered display nowrap table-sm" width="100%" id="table-main">
+            <thead>
                 <tr class="text-center">
-                    <th scope="col">Nama Mata Pelajaran</th>
-                    <th scope="col">Total Soal</th>
-                    <th scope="col">aksi</th>
+                    <th scope="col">No</th>
+                    <th scope="col">Soal</th>
+                    <th scope="col">A</th>
+                    <th scope="col">B</th>
+                    <th scope="col">C</th>
+                    <th scope="col">D</th>
+                    <th scope="col">E</th>
+                    <th scope="col">action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($data as $item)
-                <tr class="text-center">
-                    <td>{{ $item->nama_mapel }}</td>
-                    <td>{{ $item->getSoal->count() }}</td>
-                    <td class="text-center">
-                        <a class="btn btn-xs btn-primary" href="{{ action('SoalController@show', $item) }}" data-id="{{ $item->id }}" >Daftar Soal</a>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td class="text-center text-bold bg-secondary" colspan="7"><h5>TIDAK ADA DATA</h5></td>
-                </tr>
-                @endforelse
+                @foreach ($data as $item)
+                    <tr>
+                        <th>{{ $loop->index + 1 }}</th>
+                        <td>{!! $item->pertanyaan !!}</td>
+                        @foreach ($item->getPilihan as $pilihan)
+                            <td class="{{ $pilihan->benar == 'Y' ? 'bg-success' : '' }}"> {!! $pilihan->jawaban !!}
+                            </td>
+                        @endforeach
+                        <td class="text-center">
+                            <a href="{{ action('SoalController@edit', [$mapel, $jabatan, $item->id]) }}" class="btn btn-xs btn-warning">Edit</a>
+                            <button class="btn btn-xs btn-danger hapus" type="button"
+                            data-id="{{ $item->id }}">Hapus</button>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
-
     </div>
 </div>
-
 @endsection

@@ -34,8 +34,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/master/matapelajaran', 'MataPelajaranController');
         Route::resource('/master/ref-option', 'RefOptionController');
 
-        Route::resource('/soal', 'SoalController');
+        Route::get('/soal/{mapel}/{jabatan}', 'SoalController@index');
+        Route::get('/soal/{mapel}/{jabatan}/tambah', 'SoalController@create');
+        Route::get('/soal/{mapel}/{jabatan}/{id}/edit', 'SoalController@edit');
+        Route::put('/soal/{mapel}/{jabatan}/{id}/update', 'SoalController@update');
+        Route::post('/soal/store', 'SoalController@store');
+        Route::delete('/soal/{id}/delete', 'SoalController@destroy');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
+
 
         Route::resource('/pengaturan-ujian', 'UjianController');
         Route::PUT('/pengaturan-ujian/{id}/is-aktive', 'UjianController@is_active');

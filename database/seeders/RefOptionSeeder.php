@@ -21,6 +21,11 @@ class RefOptionSeeder extends Seeder
             ['key'=>'spasial','option' => 'Spasial', 'modul'=> 'kategori-kecermatan'],
             ['key'=>'satuan','option' => 'Satuan', 'modul'=> 'kategori-kecermatan'],
             ['key'=>'mtk-kotak','option' => 'MTK Kotak', 'modul'=> 'kategori-kecermatan'],
+            ['key'=>'bind','option' => 'Bahasa Indonesia', 'modul'=> 'mapel_akademik'],
+            ['key'=>'bing','option' => 'Bahasa Inggris', 'modul'=> 'mapel_akademik'],
+            ['key'=>'mtk','option' => 'Matematika', 'modul'=> 'mapel_akademik'],
+            ['key'=>'pu','option' => 'Pengetahuan Umum', 'modul'=> 'mapel_akademik'],
+            ['key'=>'wk','option' => 'Wawasan Kebangsaan', 'modul'=> 'mapel_akademik'],
         ];
 
         foreach($options as $op){
