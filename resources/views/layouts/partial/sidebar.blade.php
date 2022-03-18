@@ -2,6 +2,7 @@
     <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-compact" data-widget="treeview" role="menu"
         data-accordion="false">
 
+        @role('super-admin')
         <li class="nav-item">
             <a href="{{ action([App\Http\Controllers\HomeController::class, 'index']) }}" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -10,7 +11,6 @@
                 </p>
             </a>
         </li>
-        @role('super-admin')
         <li class="nav-item">
             <a href="{{ action('UserController@index') }}" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>

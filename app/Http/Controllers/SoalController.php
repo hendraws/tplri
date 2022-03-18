@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Soal;
+use App\Models\RefOption;
 use App\Models\Texteditor;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\MataPelajaran;
-use App\Models\RefOption;
 use App\Models\SoalPilihanGanda;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -162,7 +163,7 @@ class SoalController extends Controller
         $mataPelajaran = RefOption::where('key', $mapel)->first();
         $data = Soal::findOrFail($id);
         // $mapel = MataPelajaran::find($soal->mata_pelajaran_id);
-        return view('admin.soal.edit', compact('data','jabatan', 'mapel', 'mataPelajaran'));
+        return view('admin.soal.edit', compact('data', 'jabatan', 'mapel', 'mataPelajaran'));
     }
 
     /**
@@ -235,7 +236,7 @@ class SoalController extends Controller
                 $contentjawaban = $dom->saveHTML();
                 $dataJawaban['jawaban'] = $contentjawaban;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
-                $soalPilihanGanda = SoalPilihanGanda::where('soal_id', $soal->id)->where('pilihan',$k)->first();
+                $soalPilihanGanda = SoalPilihanGanda::where('soal_id', $soal->id)->where('pilihan', $k)->first();
                 $soalPilihanGanda->update($dataJawaban);
                 if ($request->jawaban_benar == $k) {
                     $soal->update([
@@ -243,8 +244,6 @@ class SoalController extends Controller
                     ]);
                 }
             }
-
-
         } catch (\Exception $e) {
             DB::rollback();
             toastr()->error($e->getMessage(), 'Error');
@@ -305,12 +304,11 @@ class SoalController extends Controller
             // }
             // $soal->delete();
 
-            $soal = Soal::where('id',$id)->first();
+            $soal = Soal::where('id', $id)->first();
             $soal->delete();
             $soal->getPilihan()->delete();
             $result['code'] = '200';
             return response()->json($result);
-
         } catch (\Exception $e) {
             DB::rollback();
             toastr()->error($e->getMessage(), 'Error');
@@ -328,7 +326,7 @@ class SoalController extends Controller
 
         DB::commit();
         $result['code'] = '200';
-    	return response()->json($result);
+        return response()->json($result);
     }
 
     public function listMapel(Request $request)
