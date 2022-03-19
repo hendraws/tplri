@@ -26,7 +26,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>{{ $dataUser->where('is_active','Y')->count() }}</h3>
+                    <h3>{{ $dataUser->where('is_active', 'Y')->count() }}</h3>
                     <p>User Aktif</p>
                 </div>
                 <div class="icon">
@@ -40,11 +40,11 @@
             <!-- small box -->
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>{{ $dataUser->where('is_active','N')->count() }}</h3>
+                    <h3>{{ $dataUser->where('is_active', 'N')->count() }}</h3>
                     <p>User Non Aktif</p>
                 </div>
                 <div class="icon">
-                  <i class="fas fa-user-times"></i>
+                    <i class="fas fa-user-times"></i>
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
             </div>
@@ -52,7 +52,7 @@
         <!-- ./col -->
     </div>
     <div class="row">
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <h4>Kecerdasan</h4>
             <div class="card">
                 <div class="card-body p-1">
@@ -162,38 +162,77 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="col-md-6">
-            <h4>Top 10 Nilai Test Siswa</h4>
+            <h4>Top 10 Nilai CAT AKADEMIK AKPOL</h4>
             <div class="card">
                 <div class="card-body p-1">
                     <div class="">
                         <table class="table table-bordered table-sm">
                             <thead>
-                            <tr class="bg-dark text-center">
-                                <th scope="col" class="align-middle" width="30%">Nama</th>
-                                <th scope="col" class="align-middle" width="10%">Kecerdasan</th>
-                                <th scope="col" class="align-middle" width="10%">Kecermatan</th>
-                                <th scope="col" class="align-middle" width="10%">Kepribadian</th>
-                                <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
-                                <th scope="col" class="align-middle" width="30%">Tanggal</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($nilai as $key => $value)
-                            <tr >
-                                <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</th>
-                                <td class="text-right">{{ $value->kecerdasan }}</td>
-                                <td class="text-right">{{ $value->kecermatan }}</td>
-                                <td class="text-right">{{ $value->kepribadian }}</td>
-                                <td class="text-right">{{ $value->nilai_akhir }}</td>
-                                <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                <tr class="bg-dark text-center">
+                                    <th scope="col" class="align-middle" width="30%">Nama</th>
+                                    <th scope="col" class="align-middle" width="10%">MTK</th>
+                                    <th scope="col" class="align-middle" width="10%">WK</th>
+                                    <th scope="col" class="align-middle" width="10%">PU</th>
+                                    <th scope="col" class="align-middle" width="10%">B. Ind</th>
+                                    <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
+                                    <th scope="col" class="align-middle" width="30%">Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($nilai as $key => $value)
+                                    <tr>
+                                        <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}
+                                        </th>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Top 10 Nilai CAT AKADEMIK BINTARA</h4>
+            <div class="card">
+                <div class="card-body p-1">
+                    <div class="">
+                        <table class="table table-bordered table-sm">
+                            <thead>
+                                <tr class="bg-dark text-center">
+                                    <th scope="col" class="align-middle" width="30%">Nama</th>
+                                    <th scope="col" class="align-middle" width="10%">MTK</th>
+                                    <th scope="col" class="align-middle" width="10%">WK</th>
+                                    <th scope="col" class="align-middle" width="10%">PU</th>
+                                    <th scope="col" class="align-middle" width="10%">B. Ing</th>
+                                    <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
+                                    <th scope="col" class="align-middle" width="30%">Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($nilai as $key => $value)
+                                    <tr>
+                                        <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}
+                                        </th>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-right">0</td>
+                                        <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
