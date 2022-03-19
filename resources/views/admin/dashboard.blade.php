@@ -181,6 +181,7 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             @foreach ($nilai as $key => $value)
                             <tr >
                                 <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</th>

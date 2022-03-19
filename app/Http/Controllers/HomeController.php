@@ -7,10 +7,11 @@ use App\Models\Kelas;
 use App\Models\Ujian;
 use App\Models\Kecerdasan;
 use App\Models\Kecermatan;
+use App\Models\UjianNilai;
 use App\Models\Kepribadian;
 use Illuminate\Http\Request;
 use App\Models\ProgramAkademik;
-use App\Models\UjianNilai;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -43,7 +44,7 @@ class HomeController extends Controller
                     ->whereHas('getUjianSiswa', function($q){
                         $q->where('user_id', '!=', 40);
                     })
-                    ->orderBy('nilai_akhir', 'DESC')
+                    ->orderBy( DB::raw("CONVERT(nilai_akhir, DECIMAL)") , 'DESC')
                     ->take(10)->get();
 
         $jumlahSoalKecerdasan = $soalKecerdasan->mapToGroups(function ($item, $key) {
