@@ -229,6 +229,7 @@
             tampilSimbol(soalKe);
             console.log("reset:" + soal);
             acakSoal(soal);
+            hitungJawaban = 0;
         }
 
         $(document).on('change', '.pilih', function(e) {
