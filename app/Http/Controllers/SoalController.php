@@ -48,64 +48,18 @@ class SoalController extends Controller
 
         DB::beginTransaction();
         try {
-            $contentSoal = $request->pertanyaan;
-
-            $contents = new \DomDocument();
-            $contents->loadHtml($contentSoal, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-            $imageFileSoal = $contents->getElementsByTagName('img');
-
-            foreach ($imageFileSoal as $k => $img) {
-                $dataSoal = $img->getAttribute('src');
-
-                list($type, $dataSoal) = explode(';', $dataSoal);
-                list(, $dataSoal)      = explode(',', $dataSoal);
-
-                $imgeData = base64_decode($dataSoal);
-                $image_name = "/akademik/upload/soal/" . time() . $k . '.png';
-                $path = public_path() . $image_name;
-                file_put_contents($path, $imgeData);
-
-                $img->removeAttribute('src');
-                $img->setAttribute('src', $image_name);
-            }
-
-            $contentSoal = $contents->saveHTML();
-
             // dd($contentSoal,  $request->mapel_id);
-            $input['pertanyaan'] = $contentSoal;
+            $input['pertanyaan'] = $request->pertanyaan;
             $input['jawaban_id'] = 0;
             $input['mapel'] = $request->mapel;
             $input['jabatan'] = $request->jabatan;
             $soal =  Soal::create($input);
 
             foreach ($request->jawaban as $k => $v) {
-                unset($dom, $contentjawaban);
-                $contentjawaban = $v;
-                $dom = new \DomDocument();
-                $dom->loadHtml($contentjawaban, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                $imageFile = $dom->getElementsByTagName('img');
-
-
-                foreach ($imageFile as $item => $image) {
-                    $data = $image->getAttribute('src');
-
-                    list($type, $data) = explode(';', $data);
-                    list(, $data)      = explode(',', $data);
-
-                    $imgeData = base64_decode($data);
-                    $image_name = "/akademik/upload/jawaban/" . $k . '-' . time() . $item . '.png';
-                    $path = public_path() . $image_name;
-                    file_put_contents($path, $imgeData);
-
-                    $image->removeAttribute('src');
-                    $image->setAttribute('src', $image_name);
-                }
-
-                $contentjawaban = $dom->saveHTML();
 
                 $dataJawaban['soal_id'] = $soal->id;
                 $dataJawaban['pilihan'] = $k;
-                $dataJawaban['jawaban'] = $contentjawaban;
+                $dataJawaban['jawaban'] = $v;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
                 $soalPilihanGanda = SoalPilihanGanda::create($dataJawaban);
 
@@ -115,7 +69,6 @@ class SoalController extends Controller
                     ]);
                 }
             }
-
 
             // $mapel['created_by'] = auth()->user()->id;
         } catch (\Exception $e) {
@@ -335,5 +288,17 @@ class SoalController extends Controller
         $data = MataPelajaran::get();
 
         return view('admin.soal.index', compact('data'));
+    }
+
+    public function upload(Request $request)
+    {
+        $soal = new Soal();
+        $soal->id  = 0;
+        $soal->exists = true;
+        $image  = $soal->addMediaFromRequest('upload')->toMediaCollection('images');
+        // dd($image);
+        return response()->json([
+            'url' => $image->getUrl()
+        ]);
     }
 }

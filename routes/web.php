@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/soal/{mapel}/{jabatan}/{id}/update', 'SoalController@update');
         Route::post('/soal/store', 'SoalController@store');
         Route::delete('/soal/{id}/delete', 'SoalController@destroy');
+        Route::post('/soal/upload', 'SoalController@upload')->name('upload');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
 
 
@@ -77,6 +78,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/import-soal', 'KecermatanController@import');
         Route::post('/import-soal/save', 'KecermatanController@saveImport');
 
+        Route::resource('/pengaturan-soal', 'PengaturanSoalController');
         Route::resource('/pengaturan-soal', 'PengaturanSoalController');
 
     });

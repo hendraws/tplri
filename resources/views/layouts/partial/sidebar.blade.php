@@ -110,7 +110,7 @@
                 </p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ action('PengaturanSoalController@index') }}" class="nav-link">
                 <i class="fas fa-wrench nav-icon"></i>
                 <p>
@@ -118,6 +118,14 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ action('PengaturanSoalController@index') }}" class="nav-link">
+                <i class="fas fa-wrench nav-icon"></i>
+                <p>
+                    Pengaturan Soal
+                </p>
+            </a>
+        </li> --}}
         <li class="nav-item">
             <a href="{{ action('UjianNilaiController@index') }}" class="nav-link">
                 <i class="fas fa-book nav-icon"></i>

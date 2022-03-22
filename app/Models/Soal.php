@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use Spatie\MediaLibrary\HasMedia;
 use Wildside\Userstamps\Userstamps;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Soal extends Model
+class Soal extends Model implements HasMedia
 {
-    use HasFactory, Userstamps, SoftDeletes;
+    use HasFactory, Userstamps, SoftDeletes, InteractsWithMedia;
 
     protected $connection = 'DbBankSoal';
     protected $table = 'soal';

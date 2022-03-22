@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+    {{-- <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" /> --}}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -12,7 +16,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/toastr/toastr.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/summernote/summernote.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('vendors/summernote/summernote.min.css') }}"> --}}
+
     <!-- Google Font: Source Sans Pro -->
     {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
 
@@ -23,6 +28,7 @@
             object-fit: cover;
             height: 80px;
         }
+
     </style>
 
     <!-- jQuery -->
@@ -35,10 +41,12 @@
     <script src="{{ asset('vendors/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     <script src="{{ asset('js/print-this.js') }}"></script>
-    <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendors/summernote/summernote.min.js') }}"></script> --}}
+
+
 </head>
 
-<body class="sidebar-mini layout-fixed" style="height: auto;" >
+<body class="sidebar-mini layout-fixed" style="height: auto;">
     <div class="wrapper">
 
         <!-- Navbar -->
