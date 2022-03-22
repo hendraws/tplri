@@ -41,6 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/soal/store', 'SoalController@store');
         Route::delete('/soal/{id}/delete', 'SoalController@destroy');
         Route::post('/soal/upload', 'SoalController@upload')->name('upload');
+        Route::post('/soal/duplikasi', 'SoalController@duplikasi')->name('upload');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
 
 

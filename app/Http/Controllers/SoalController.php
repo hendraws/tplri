@@ -132,62 +132,13 @@ class SoalController extends Controller
         DB::beginTransaction();
         try {
             $soal = Soal::where('id', $id)->first();
-            // dd($soal, $request->all());
-            $contentSoal = $request->pertanyaan;
-
-            $contents = new \DomDocument();
-            libxml_use_internal_errors(true);
-            $contents->loadHtml($contentSoal, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-            $imageFileSoal = $contents->getElementsByTagName('img');
-
-            foreach ($imageFileSoal as $k => $img) {
-                $dataSoal = $img->getAttribute('src');
-                if (!Str::contains($dataSoal, '/upload')) {
-                    list($type, $dataSoal) = explode(';', $dataSoal);
-                    list(, $dataSoal)      = explode(',', $dataSoal);
-
-                    $imgeData = base64_decode($dataSoal);
-                    $image_name = "/akademik/upload/soal/" . time() . $k . '.png';
-                    $path = public_path() . $image_name;
-                    file_put_contents($path, $imgeData);
-
-                    $img->removeAttribute('src');
-                    $img->setAttribute('src', $image_name);
-                }
-            }
-
-            $contentSoal = $contents->saveHTML();
-
-            // dd($contentSoal,  $request->mapel_id);
-            $input['pertanyaan'] = $contentSoal;
+            $input['pertanyaan'] = $request->pertanyaan;
             $soal->update($input);
 
             foreach ($request->jawaban as $k => $v) {
-                unset($dom, $contentjawaban);
-                $contentjawaban = $v;
-                $dom = new \DomDocument();
-                $dom->loadHtml($contentjawaban, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-                $imageFile = $dom->getElementsByTagName('img');
 
 
-                foreach ($imageFile as $item => $image) {
-                    $data = $image->getAttribute('src');
-                    if (!Str::contains($data, '/upload')) {
-                        list($type, $data) = explode(';', $data);
-                        list(, $data)      = explode(',', $data);
-
-                        $imgeData = base64_decode($data);
-                        $image_name = "/akademik/upload/jawaban/" . $k . '-' . time() . $item . '.png';
-                        $path = public_path() . $image_name;
-                        file_put_contents($path, $imgeData);
-
-                        $image->removeAttribute('src');
-                        $image->setAttribute('src', $image_name);
-                    }
-                }
-
-                $contentjawaban = $dom->saveHTML();
-                $dataJawaban['jawaban'] = $contentjawaban;
+                $dataJawaban['jawaban'] = $v;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
                 $soalPilihanGanda = SoalPilihanGanda::where('soal_id', $soal->id)->where('pilihan', $k)->first();
                 $soalPilihanGanda->update($dataJawaban);
@@ -300,5 +251,47 @@ class SoalController extends Controller
         return response()->json([
             'url' => $image->getUrl()
         ]);
+    }
+
+    public function duplikasi(Request $request)
+    {
+
+        DB::beginTransaction();
+        try {
+            $soal = Soal::where('id', $id)->first();
+
+            $input['pertanyaan'] = $request->pertanyaan;
+            $soal->update($input);
+
+            foreach ($request->jawaban as $k => $v) {
+
+
+                $dataJawaban['jawaban'] = $v;
+                $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $soalPilihanGanda = SoalPilihanGanda::where('soal_id', $soal->id)->where('pilihan', $k)->first();
+                $soalPilihanGanda->update($dataJawaban);
+                if ($request->jawaban_benar == $k) {
+                    $soal->update([
+                        'jawaban_id' => $soalPilihanGanda->id,
+                    ]);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah diubah', 'Berhasil');
+        return redirect(action('SoalController@index', [$mapel, $jabatan]));
+
+        dd($request);
     }
 }
