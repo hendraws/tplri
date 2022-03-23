@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Kecerdasan extends Model
+class Kecerdasan extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory,  InteractsWithMedia;
 
     protected $fillable = [
         'pertanyaan',

@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/matapelajaran-ujian-soal', 'UjianSoalController');
 
         Route::resource('/banksoal/kecerdasan', 'KecerdasanController');
+        Route::post('/banksoal/kecerdasan/upload', 'KecerdasanController@upload');
         Route::resource('/banksoal/kecermatan', 'KecermatanController');
 
         Route::get('/banksoal/kepribadian/sesi-1', 'KepribadianController@sesi1');
