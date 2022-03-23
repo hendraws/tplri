@@ -240,23 +240,23 @@
                         <label class="col-form-label">Jawaban Benar</label>
                         <div class="col-md-12">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="A" value="a">
+                                <input class="form-check-input" type="radio" name="jawaban_benar" id="A" required value="a">
                                 <label class="form-check-label" for="A">A</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="B" value="b">
+                                <input class="form-check-input" type="radio" name="jawaban_benar" id="B" required value="b">
                                 <label class="form-check-label" for="B">B</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="C" value="c">
+                                <input class="form-check-input" type="radio" name="jawaban_benar" id="C" required value="c">
                                 <label class="form-check-label" for="C">C</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="D" value="d">
+                                <input class="form-check-input" type="radio" name="jawaban_benar" id="D" required value="d">
                                 <label class="form-check-label" for="D">D</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="jawaban_benar" id="E" value="e">
+                                <input class="form-check-input" type="radio" name="jawaban_benar" id="E" required value="e">
                                 <label class="form-check-label" for="E">E</label>
                             </div>
                         </div>

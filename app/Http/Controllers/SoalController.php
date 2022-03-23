@@ -21,7 +21,7 @@ class SoalController extends Controller
      */
     public function index(Request $request, $mapel, $jabatan)
     {
-        $data = Soal::where('mapel', $mapel)->where('jabatan', $jabatan)->get();
+        $data = Soal::where('mapel', $mapel)->where('jabatan', $jabatan)->orderBy('id', 'desc')->get();
         $mataPelajaran = RefOption::where('key', $mapel)->first();
         return view('admin.soal.index', compact('data', 'mataPelajaran', 'jabatan', 'mapel'));
     }
@@ -45,7 +45,7 @@ class SoalController extends Controller
      */
     public function store(Request $request)
     {
-
+        // dd($request);
         DB::beginTransaction();
         try {
             // dd($contentSoal,  $request->mapel_id);
@@ -56,6 +56,10 @@ class SoalController extends Controller
             $soal =  Soal::create($input);
 
             foreach ($request->jawaban as $k => $v) {
+
+                if(empty($v)){
+                    $v = '-';
+                }
 
                 $dataJawaban['soal_id'] = $soal->id;
                 $dataJawaban['pilihan'] = $k;
@@ -258,20 +262,26 @@ class SoalController extends Controller
 
         DB::beginTransaction();
         try {
-            $soal = Soal::where('id', $id)->first();
+            $soal = Soal::where('id', $request->id)->first();
 
-            $input['pertanyaan'] = $request->pertanyaan;
-            $soal->update($input);
+            $jabatan = $request->jabatan == 'akpol' ? 'bintara' : 'akpol';
 
-            foreach ($request->jawaban as $k => $v) {
+            $input['pertanyaan'] = $soal->pertanyaan;
+            $input['jawaban_id'] = 0;
+            $input['mapel'] = $request->mapel;
+            $input['jabatan'] = $jabatan;
 
+            $soalDuplikasi =  Soal::create($input);
+            foreach ($soal->getPilihan as $k => $v) {
 
-                $dataJawaban['jawaban'] = $v;
-                $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
-                $soalPilihanGanda = SoalPilihanGanda::where('soal_id', $soal->id)->where('pilihan', $k)->first();
-                $soalPilihanGanda->update($dataJawaban);
-                if ($request->jawaban_benar == $k) {
-                    $soal->update([
+                $dataJawaban['soal_id'] = $soalDuplikasi->id;
+                $dataJawaban['pilihan'] = $v->pilihan;
+                $dataJawaban['jawaban'] = $v->jawaban;
+                $dataJawaban['benar'] = $v->benar;
+                $soalPilihanGanda = SoalPilihanGanda::create($dataJawaban);
+
+                if ($v->benar == 'Y') {
+                    $soalDuplikasi->update([
                         'jawaban_id' => $soalPilihanGanda->id,
                     ]);
                 }
@@ -279,19 +289,20 @@ class SoalController extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             toastr()->error($e->getMessage(), 'Error');
-
+            dd($e->getMessage());
             return back();
         } catch (\Throwable $e) {
             DB::rollback();
+            dd($e->getMessage());
 
             toastr()->error($e->getMessage(), 'Error');
             throw $e;
         }
 
         DB::commit();
-        toastr()->success('Data telah diubah', 'Berhasil');
-        return redirect(action('SoalController@index', [$mapel, $jabatan]));
+        $result['code'] = '200';
+        return response()->json($result);
 
-        dd($request);
+
     }
 }
