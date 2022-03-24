@@ -16,7 +16,7 @@ class UjianNilaiController extends Controller
         ->whereHas('getUjianSiswa', function($q){
                 $q->where('user_id', '!=', 40);
         })
-        ->orderBy('created_at', 'DESC')->take(10)->get();
+        ->orderBy('created_at', 'DESC')->get();
 
         return view('admin.nilai.index', compact('data'));
     }
