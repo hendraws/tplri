@@ -118,6 +118,7 @@
                             <tr class="text-center">
                                 <th scope="col">Token</th>
                                 <th scope="col">Judul</th>
+                                <th scope="col">Kategori Kecermatan</th>
                                 <th scope="col">Aktif?</th>
                                 {{-- <th scope="col">Soal</th> --}}
                                 <th scope="col">Aksi</th>
@@ -130,6 +131,7 @@
                                         <h5>{{ $item->token }}</h5>
                                     </td>
                                     <td>{{ $item->judul }}</td>
+                                    <td class="text-center">{{ $item->kategori_kecermatan }}</td>
                                     <td class="text-center">{{ $item->is_active == '1' ? 'Aktif' : 'Tidak Aktif' }}
                                     </td>
                                     <td class="text-center">

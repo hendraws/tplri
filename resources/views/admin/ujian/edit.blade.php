@@ -61,14 +61,14 @@
                             placeholder="Judul">
                     </div>
                 </div>
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <label for="token" class="col-sm-2 col-form-label">Token</label>
                     <div class="col-md-10">
                         <input id="token" type="text" class="form-control @error('token') is-invalid @enderror"
                             name="token" value="{{ $pengaturan_ujian->token }}" required autocomplete="token" autofocus
                             placeholder="Token">
                     </div>
-                </div>
+                </div> --}}
                 <div class="modal-footer">
                     <button class="btn btn-brand btn-square btn-primary col">Simpan</button>
                 </div>
