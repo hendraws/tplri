@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Wildside\Userstamps\Userstamps;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Ujian extends Model
 {
-    use HasFactory;
+    use HasFactory,  Userstamps, SoftDeletes;
 
-    protected $fillable = [ 'judul', 'tanggal', 'token', 'is_active', 'created_by', 'updated_by',  'kategori_kecermatan'   ];
+    protected $fillable = [ 'judul', 'tanggal', 'token', 'is_active', 'created_by', 'updated_by',  'kategori_kecermatan', 'source', 'deleted_by', 'kategori', 'posisi'   ];
     protected $with = ['getSoalKecerdasan','getSoalKecermatan','getSoalKepribadianSatu','getSoalKepribadianDua'];
 
     public function getProgramAkademik()

@@ -42,7 +42,7 @@ class UjianController extends Controller
             return abort(404);
         }
 
-        $data = Ujian::orderBy('created_at', 'desc')->get();
+        $data = Ujian::where('source', 'cat-akademik')->orderBy('created_at', 'desc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 
@@ -78,16 +78,17 @@ class UjianController extends Controller
         DB::beginTransaction();
         try {
             do {
-                $token = strtoupper(Str::random(6));
+                $token = "AKA".strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
-
 
             $inputUjian['judul'] = $request->judul;
             $inputUjian['kategori_kecermatan'] = $request->kategori_kecermatan;
             $inputUjian['is_active'] = $request->is_active;
             $inputUjian['tanggal'] = date('Y-m-d');
             $inputUjian['token'] = $token;
-            $inputUjian['created_by'] = auth()->user()->id;
+            $inputUjian['source'] = 'cat-akademik';
+            $inputUjian['kategori'] = $request->kategori;
+            $inputUjian['posisi'] = $request->posisi;
 
             Ujian::create($inputUjian);
         } catch (\Exception $e) {
@@ -148,13 +149,11 @@ class UjianController extends Controller
 
         $inputUjian = $request->validate([
             'judul' => 'required|string|max:255',
-            'token' => 'required|string|max:255',
         ]);
 
         DB::beginTransaction();
         try {
 
-            $inputUjian['updated_by'] = auth()->user()->id;
             $pengaturan_ujian->update($inputUjian);
         } catch (\Exception $e) {
             DB::rollback();
@@ -317,14 +316,12 @@ class UjianController extends Controller
             $ujian = Ujian::find($id);
 
             do {
-                $token = strtoupper(Str::random(6));
+                $token = "AKA".strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
             $ujian->update([
                 'token' => $token
             ]);
-
-
         } catch (\Exception $e) {
             DB::rollback();
             toastr()->warning($e->getMessage(), '?');
@@ -348,6 +345,7 @@ class UjianController extends Controller
             'is_active' => $status,
             'updated_by' => auth()->user()->id,
         ]);
+
         $result['code'] = '200';
         return response()->json($result);
     }
