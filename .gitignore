@@ -2,7 +2,9 @@
 /public/hot
 /public/storage
 /public/upload/*
+/public/akademik/*
 /storage/*.key
+/storage/*
 /vendor
 .env
 .github
