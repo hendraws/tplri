@@ -9,7 +9,7 @@ class UjianSiswa extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'user_id', 'ujian_id', 'kecerdasan', 'kepribadian', 'kecermatan', 'status_ujian',      ];
+    protected $fillable = [ 'user_id', 'ujian_id', 'kecerdasan', 'kepribadian', 'kecermatan', 'status_ujian', 'token' ];
 
     public function getSiswa()
     {
@@ -20,6 +20,7 @@ class UjianSiswa extends Model
     {
         return $this->hasMany(UjianSiswaJawabanKecerdasan::class, 'ujian_siswa_id','id')->where('benar', 1);
     }
+
     public function jawabanBenarKecermatan()
     {
         return $this->hasMany(UjianSiswaJawabanKecermatan::class, 'ujian_siswa_id','id')->where('benar', 1);
@@ -29,8 +30,6 @@ class UjianSiswa extends Model
     {
         return $this->hasMany(UjianSiswaJawabanKecerdasan::class, 'ujian_siswa_id','id');
     }
-
-
 
     public function getNilai()
     {

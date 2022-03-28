@@ -118,20 +118,27 @@ class UjianSiswaController extends Controller
 
         $ujian = Ujian::where('token', $request->token)
             ->where('is_active', 1)
+            ->where('source', 'cat-akademik')
             ->first();
-
+        
         if (empty($ujian)) {
             toastr()->error('Token Salah!, Silahkan periksa kembali atau hubungi Admin', 'Error');
             return back();
+        }
+        $ujianSiswa = UjianSiswa::firstOrCreate([],[
+            'user_id' => auth()->user()->id,
+            'ujian_id' => $ujian->id,
+            'token' => $ujian->id,
+        ]);
+
+        if($ujian->kategori == 'all'){
+
         }
 
         // $cekUjian = UjianSiswa::where('user_id', auth()->user()->id)->where('ujian_id', $pengaturanUjian->id)->first();
 
         // if (empty($cekUjian)) {
-            $ujianSiswa = UjianSiswa::create([
-                'user_id' => auth()->user()->id,
-                'ujian_id' => $ujian->id,
-            ]);
+
         // }
 
         // return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'))->with('ujian_siswa_id', $ujianSiswa->id);

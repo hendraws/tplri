@@ -57,7 +57,7 @@ class SoalController extends Controller
 
             foreach ($request->jawaban as $k => $v) {
 
-                if(empty($v)){
+                if (empty($v)) {
                     $v = '-';
                 }
 
@@ -270,6 +270,7 @@ class SoalController extends Controller
             $input['jawaban_id'] = 0;
             $input['mapel'] = $request->mapel;
             $input['jabatan'] = $jabatan;
+            $input['duplicate'] = 'Y';
 
             $soalDuplikasi =  Soal::create($input);
             foreach ($soal->getPilihan as $k => $v) {
@@ -302,7 +303,54 @@ class SoalController extends Controller
         DB::commit();
         $result['code'] = '200';
         return response()->json($result);
+    }
 
+    public function duplicateMtk()
+    {
+        DB::beginTransaction();
+        try {
+            $soalMtk = Soal::where('mapel', 'mtk')->where('jabatan', 'akpol')->where('duplicate', 'N')->take(150)->get();
 
+            foreach ($soalMtk as $soal) {
+                $soal->update(['duplicate' => 'Y']);
+                $input['pertanyaan'] = $soal->pertanyaan;
+                $input['jawaban_id'] = 0;
+                $input['mapel'] = 'mtk';
+                $input['jabatan'] = 'bintara';
+                $input['duplicate'] = 'Y';
+
+                $soalDuplikasi =  Soal::create($input);
+                foreach ($soal->getPilihan as $k => $v) {
+
+                    $dataJawaban['soal_id'] = $soalDuplikasi->id;
+                    $dataJawaban['pilihan'] = $v->pilihan;
+                    $dataJawaban['jawaban'] = $v->jawaban;
+                    $dataJawaban['benar'] = $v->benar;
+                    $soalPilihanGanda = SoalPilihanGanda::create($dataJawaban);
+
+                    if ($v->benar == 'Y') {
+                        $soalDuplikasi->update([
+                            'jawaban_id' => $soalPilihanGanda->id,
+                        ]);
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+
+        $result['code'] = '200';
+        $result['code2'] = 'berhasil dulpicate '.$soalMtk->count().'soal';
+        return response()->json($result);
     }
 }

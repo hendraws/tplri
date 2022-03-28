@@ -16,7 +16,7 @@ class Soal extends Model implements HasMedia
     protected $connection = 'DbBankSoal';
     protected $table = 'soal';
 
-    protected $fillable = ['pertanyaan', 'jawaban_id', 'mapel', 'jabatan', 'created_by', 'updated_by','deleted_by'];
+    protected $fillable = ['pertanyaan', 'jawaban_id', 'mapel', 'jabatan', 'created_by', 'updated_by','deleted_by','duplicate'];
 
     protected $with = ['getPilihan'];
 
