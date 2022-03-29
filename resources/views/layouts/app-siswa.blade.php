@@ -39,6 +39,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
 
         .content-wrapper{
+            /* background-image:url('{{ asset('images/backgound-kino.png') }}') !important;
+            background-size: contain; */
             background: #FFEAAD !important;
         }
     </style>

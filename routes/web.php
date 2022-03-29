@@ -102,6 +102,10 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::post('/ujian/ujian-kepribadian-sesi-2', 'UjianSiswaController@ujianKepribadian2');
         Route::get('/hasil-Ujian/{nilai}', 'UjianSiswaController@hasilUjian');
         Route::get('/riwayat-test-psikologi', 'UjianSiswaController@riwayatUjian');
+
+        Route::post('cat-akademik/matematika', 'AkademikUjianSiswaController@halamanUjian');
+        Route::post('cat-akademik/simpan-jawaban-cat-akademik', 'AkademikUjianSiswaController@storeJawaban');
+        Route::post('cat-akademik/cek-token', 'AkademikUjianSiswaController@cekToken');
     });
 });
 Route::get('token', 'HomeController@token');

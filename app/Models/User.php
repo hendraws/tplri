@@ -53,6 +53,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['getProgramAkademik'];
+
     public function getProgramAkademik() {
         return $this->belongsTo(ProgramAkademik::class, 'program_id','id');
     }
