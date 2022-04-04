@@ -32,27 +32,14 @@ class AkademikUjianSiswaController extends Controller
         }
 
 
-        $ujianSiswa = AkademikUjianSiswa::firstOrCreate(['token' => $ujian->id, 'ujian_id' => $ujian->id, 'user_id' => auth()->user()->id], []);
-        // dd($ujianSiswa);
+        $ujianSiswa = AkademikUjianSiswa::firstOrCreate(['token' => $request->token, 'ujian_id' => $ujian->id, 'user_id' => auth()->user()->id], []);
 
         if ($ujian->kategori == 'all') {
-
             return view('siswa.ruang_ujian.all_mapel', compact('ujianSiswa', 'ujian'));
         }
 
-        // $cekUjian = UjianSiswa::where('user_id', auth()->user()->id)->where('ujian_id', $pengaturanUjian->id)->first();
 
-        // if (empty($cekUjian)) {
-
-        // }
-
-        // return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'))->with('ujian_siswa_id', $ujianSiswa->id);
-        return view('siswa.ruang_ujian.index', compact('ujianSiswa', 'ujian'));
-        // $request->session()->put('ujian_id', $pengaturanUjian->id);
-        // $request->session()->put('ujian_user_id', auth()->user()->id);
-        // $request->session()->put('ujian_siswa', $cekUjian->id);
-
-        return view('siswa.ujian.data_profile', compact('pengaturanUjian', 'cekUjian'));
+        return view('siswa.ruang_ujian.per_mapel', compact('ujianSiswa', 'ujian'));
     }
 
     public function halamanUjian(Request $request)
@@ -80,8 +67,8 @@ class AkademikUjianSiswaController extends Controller
     {
 
         if ($request->has('status')) {
-
             $ujianSiswa =  AkademikUjianSiswa::find($request->ujianSiswaId);
+
             $jawabanBenar = AkademikUjianSiswaJawaban::where('akademik_ujian_siswa_id', $request->ujianSiswaId)->where('benar', '1')->where('mapel', $request->ujian_mapel)->get()->count();
 
             if ($request->ujian_mapel == 'mtk') {
@@ -114,6 +101,10 @@ class AkademikUjianSiswaController extends Controller
             }
 
             $ujian = Ujian::find($ujianSiswa->ujian_id);
+
+            if($ujian != 'all'){
+                return view('siswa.ruang_ujian.per_mapel', compact('ujianSiswa', 'ujian'));
+            }
 
             return view('siswa.ruang_ujian.all_mapel', compact('ujianSiswa', 'ujian'));
         }
