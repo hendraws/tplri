@@ -34,15 +34,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/master/matapelajaran', 'MataPelajaranController');
         Route::resource('/master/ref-option', 'RefOptionController');
 
-        Route::get('/soal/{mapel}/{jabatan}', 'SoalController@index');
-        Route::get('/soal/{mapel}/{jabatan}/tambah', 'SoalController@create');
-        Route::get('/soal/{mapel}/{jabatan}/{id}/edit', 'SoalController@edit');
-        Route::put('/soal/{mapel}/{jabatan}/{id}/update', 'SoalController@update');
-        Route::post('/soal/store', 'SoalController@store');
-        Route::delete('/soal/{id}/delete', 'SoalController@destroy');
-        Route::post('/soal/upload', 'SoalController@upload')->name('upload');
-        Route::post('/soal/duplikasi', 'SoalController@duplikasi')->name('upload');
-        Route::get('/duplicate/mtk', 'SoalController@duplicateMtk');
+        Route::get('/soal-tiu/{kategori}', 'SoalCatSkdController@tiu');
+        Route::get('/soal-tiu/{kategori}/create', 'SoalCatSkdController@createTiu');
+        Route::post('/soal-tiu/store', 'SoalCatSkdController@storeTiu');
+
+        Route::post('/soal/upload', 'SoalCatSkdController@upload')->name('upload');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
 
 

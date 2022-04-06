@@ -15,17 +15,17 @@ class BankSoalPilihanTable extends Migration
      */
     public function up()
     {
-        if(!Schema::connection('DbBankSoal')->hasTable($this->tableName)){
-            Schema::connection('DbBankSoal')->create($this->tableName, function (Blueprint $table){
-                $table->id();
-                $table->bigInteger('soal_id');
-                $table->string('pilihan');
-                $table->text('jawaban');
-                $table->string('benar',1)->default('N');
-                $table->timestamps();
-                $table->softDeletes();
-            });
-        }
+        // if(!Schema::connection('DbBankSoal')->hasTable($this->tableName)){
+        //     Schema::connection('DbBankSoal')->create($this->tableName, function (Blueprint $table){
+        //         $table->id();
+        //         $table->bigInteger('soal_id');
+        //         $table->string('pilihan');
+        //         $table->text('jawaban');
+        //         $table->string('benar',1)->default('N');
+        //         $table->timestamps();
+        //         $table->softDeletes();
+        //     });
+        // }
     }
 
     /**

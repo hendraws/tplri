@@ -13,11 +13,11 @@ class AddDuplicateToSoalsTable extends Migration
      */
     public function up()
     {
-        if(Schema::connection('DbBankSoal')->hasTable('soal')){
-            Schema::connection('DbBankSoal')->table('soal', function (Blueprint $table){
-                $table->string('duplicate')->default('N')->after('jabatan')->nullable();
-            });
-        }
+        // if(Schema::connection('DbBankSoal')->hasTable('soal')){
+        //     Schema::connection('DbBankSoal')->table('soal', function (Blueprint $table){
+        //         $table->string('duplicate')->default('N')->after('jabatan')->nullable();
+        //     });
+        // }
     }
 
     /**

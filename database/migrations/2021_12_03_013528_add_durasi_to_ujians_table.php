@@ -15,7 +15,7 @@ class AddDurasiToUjiansTable extends Migration
     {
         if (!Schema::hasColumn('ujians', 'durasi')) {
             Schema::table('ujians', function (Blueprint $table) {
-                $table->integer('durasi')->nullable()->after('kelas_id');
+                $table->integer('durasi')->nullable();
             });
         }
     }

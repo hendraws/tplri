@@ -13,20 +13,20 @@ class BankSoalTable extends Migration
      */
     public function up()
     {
-        if(!Schema::connection('DbBankSoal')->hasTable('soal')){
-            Schema::connection('DbBankSoal')->create('soal', function (Blueprint $table){
-                $table->id();
-                $table->longText('pertanyaan');
-                $table->bigInteger('jawaban_id');
-                $table->string('mapel')->nullable();
-                $table->string('jabatan')->nullable();
-                $table->bigInteger('created_by')->nullable();
-                $table->bigInteger('updated_by')->nullable();
-                $table->bigInteger('deleted_by')->nullable();
-                $table->timestamps();
-                $table->softDeletes();
-            });
-        }
+        // if(!Schema::connection('DbBankSoal')->hasTable('soal')){
+        //     Schema::connection('DbBankSoal')->create('soal', function (Blueprint $table){
+        //         $table->id();
+        //         $table->longText('pertanyaan');
+        //         $table->bigInteger('jawaban_id');
+        //         $table->string('mapel')->nullable();
+        //         $table->string('jabatan')->nullable();
+        //         $table->bigInteger('created_by')->nullable();
+        //         $table->bigInteger('updated_by')->nullable();
+        //         $table->bigInteger('deleted_by')->nullable();
+        //         $table->timestamps();
+        //         $table->softDeletes();
+        //     });
+        // }
     }
 
     /**

@@ -65,14 +65,14 @@ return [
             'collation' => 'utf8_unicode_ci',
         ],
 
-        'DbBankSoal' => [
+        'DbBaseCat' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST_BANKSOAL', '127.0.0.1'),
-            'port' => env('DB_PORT_BANKSOAL', '3306'),
-            'database' => env('DB_DATABASE_BANKSOAL', 'forge'),
-            'username' => env('DB_USERNAME_BANKSOAL', 'forge'),
-            'password' => env('DB_PASSWORD_BANKSOAL', ''),
+            'host' => env('DB_HOST_BASECAT', '127.0.0.1'),
+            'port' => env('DB_PORT_BASECAT', '3306'),
+            'database' => env('DB_DATABASE_BASECAT', 'forge'),
+            'username' => env('DB_USERNAME_BASECAT', 'forge'),
+            'password' => env('DB_PASSWORD_BASECAT', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             // 'charset' => 'utf8mb4',
             // 'collation' => 'utf8mb4_un   icode_ci',

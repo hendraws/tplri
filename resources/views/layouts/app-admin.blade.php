@@ -165,12 +165,10 @@
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                Rumah Belajar Private Kino
+                Rumah Belajar Private Kino - <b> (CAT SKD) </b>
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; {{ now()->year }} <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All
-            rights
-            reserved.
+            <strong>Copyright &copy; {{ now()->year }}
         </footer>
     </div>
     <!-- ./wrapper -->
