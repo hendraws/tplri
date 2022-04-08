@@ -117,6 +117,7 @@ class UjianSiswaController extends Controller
         // session(['key' => 'value']);
 
         $ujian = Ujian::where('token', $request->token)
+            ->where('source','cat-psikologi')
             ->where('is_active', 1)
             ->first();
 
