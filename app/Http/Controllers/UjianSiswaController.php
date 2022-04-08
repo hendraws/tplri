@@ -105,12 +105,8 @@ class UjianSiswaController extends Controller
     public function ujianSiswa(Request $request)
     {
 
-        // $request->session()->put('key', 'value');
-        // $request->session()->forget('key');
-        // $request->session()->put('ujian', auth()->user()->id );
-        // session(['key' => 'value']);
-
         $ujian = Ujian::where('token', $request->token)
+            ->where('source','cat-kecermatan')
             ->where('is_active', 1)
             ->first();
 

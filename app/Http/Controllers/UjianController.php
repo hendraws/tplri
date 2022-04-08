@@ -25,24 +25,8 @@ class UjianController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('ujian')) {
 
-            $dataUjian = Ujian::where('id', $request->ujian)->first();
-            dd($dataUjian);
-            if ($request->kategori == 'kecerdasan') {
-                $data = Kecerdasan::get();
-            }
-            if ($request->kategori == 'kecermatan') {
-            }
-            if ($request->kategori == 'kepribadian-sesi-1') {
-            }
-            if ($request->kategori == 'kepribadian-sesi-2') {
-            }
-
-            return abort(404);
-        }
-
-        $data = Ujian::orderBy('created_at', 'desc')->get();
+        $data = Ujian::where('source', 'cat-kecermatan')->orderBy('created_at', 'desc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 
@@ -78,14 +62,16 @@ class UjianController extends Controller
         DB::beginTransaction();
         try {
             do {
-                $token = strtoupper(Str::random(6));
+                $token = strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
 
             $inputUjian['judul'] = $request->judul;
+            $inputUjian['kategori_kecermatan'] = $request->kategori_kecermatan;
+            $inputUjian['source'] = 'cat-kecermatan';
             $inputUjian['is_active'] = $request->is_active;
             $inputUjian['tanggal'] = date('Y-m-d');
-            $inputUjian['token'] = $token;
+            $inputUjian['token'] = 'KEC'.$token;
             $inputUjian['created_by'] = auth()->user()->id;
 
             Ujian::create($inputUjian);
@@ -316,11 +302,11 @@ class UjianController extends Controller
             $ujian = Ujian::find($id);
 
             do {
-                $token = strtoupper(Str::random(6));
+                $token = strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
             $ujian->update([
-                'token' => $token
+                'token' => 'KEC'.$token
             ]);
 
 

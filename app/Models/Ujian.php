@@ -9,7 +9,7 @@ class Ujian extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'judul', 'tanggal', 'token', 'is_active', 'created_by', 'updated_by',     ];
+    protected $fillable = [  'judul', 'tanggal', 'token', 'is_active', 'created_by', 'updated_by',  'kategori_kecermatan', 'source', 'deleted_by', 'kategori', 'posisi'];
     protected $with = ['getSoalKecerdasan','getSoalKecermatan','getSoalKepribadianSatu','getSoalKepribadianDua'];
 
     public function getProgramAkademik()
