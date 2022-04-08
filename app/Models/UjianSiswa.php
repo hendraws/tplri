@@ -9,7 +9,7 @@ class UjianSiswa extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'user_id', 'ujian_id', 'kecerdasan', 'kepribadian', 'kecermatan', 'status_ujian',      ];
+    protected $fillable = [ 'user_id', 'ujian_id', 'kecerdasan', 'kepribadian', 'kecermatan', 'status_ujian',  'token'    ];
 
     public function getSiswa()
     {

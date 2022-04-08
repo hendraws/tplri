@@ -28,7 +28,7 @@ class UjianController extends Controller
         if ($request->has('ujian')) {
 
             $dataUjian = Ujian::where('id', $request->ujian)->first();
-            dd($dataUjian);
+
             if ($request->kategori == 'kecerdasan') {
                 $data = Kecerdasan::get();
             }

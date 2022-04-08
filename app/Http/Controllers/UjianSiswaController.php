@@ -111,37 +111,21 @@ class UjianSiswaController extends Controller
     public function ujianSiswa(Request $request)
     {
 
-        // $request->session()->put('key', 'value');
-        // $request->session()->forget('key');
-        // $request->session()->put('ujian', auth()->user()->id );
-        // session(['key' => 'value']);
-
         $ujian = Ujian::where('token', $request->token)
-            ->where('source','cat-psikologi')
             ->where('is_active', 1)
+            ->where('source', 'cat-psikologi')
             ->first();
 
+
         if (empty($ujian)) {
-            toastr()->error('Token Salah!, Silahkan periksa kembali atau hubungi Admin', 'Error');
+            toastr()->error('Token Salah!, Silahkan periksa kembali atau hubungi Admin', 'Error code 404');
             return back();
         }
 
-        // $cekUjian = UjianSiswa::where('user_id', auth()->user()->id)->where('ujian_id', $pengaturanUjian->id)->first();
+        $ujianSiswa = UjianSiswa::firstOrCreate(['token' => $request->token, 'ujian_id' => $ujian->id, 'user_id' => auth()->user()->id], []);
 
-        // if (empty($cekUjian)) {
-            $ujianSiswa = UjianSiswa::create([
-                'user_id' => auth()->user()->id,
-                'ujian_id' => $ujian->id,
-            ]);
-        // }
-
-        // return view('ujian.kecermatan', compact('ujian', 'ujianSiswa'))->with('ujian_siswa_id', $ujianSiswa->id);
         return view('siswa.ruang_ujian.index', compact('ujianSiswa', 'ujian'));
-        // $request->session()->put('ujian_id', $pengaturanUjian->id);
-        // $request->session()->put('ujian_user_id', auth()->user()->id);
-        // $request->session()->put('ujian_siswa', $cekUjian->id);
 
-        return view('siswa.ujian.data_profile', compact('pengaturanUjian', 'cekUjian'));
     }
 
     public function mulaiUjian(Request $request)
@@ -154,12 +138,13 @@ class UjianSiswaController extends Controller
 
     public function simpanJawabanKecerdasan(Request $request)
     {
-        if($request->has('status')){
+        if ($request->has('status')) {
             $ujianSiswa =  UjianSiswa::find($request->ujianSiswaId);
 
             $nilai = UjianNilai::updateOrCreate(
-                ['ujian_siswa_id'=> $ujianSiswa->id],
-                ['kecerdasan'=> $ujianSiswa->jawabanBenarKecerdasan->count() ]);
+                ['ujian_siswa_id' => $ujianSiswa->id],
+                ['kecerdasan' => $ujianSiswa->jawabanBenarKecerdasan->count()]
+            );
 
 
             $ujianSiswa->update([
@@ -174,9 +159,9 @@ class UjianSiswaController extends Controller
         if ($request->ajax()) {
             try {
 
-                if($request->jb == $request->jawaban){
+                if ($request->jb == $request->jawaban) {
                     $benar = 1;
-                }else{
+                } else {
                     $benar = 0;
                 }
 
@@ -203,7 +188,6 @@ class UjianSiswaController extends Controller
             $result['code'] = '200';
             return response()->json($result);
         }
-
     }
 
 
@@ -214,24 +198,24 @@ class UjianSiswaController extends Controller
 
         $jawabanSiswa = UjianSiswaJawabanKecerdasan::where('ujian_siswa_id', $request->ujian_siswa_id)->get();
 
-        if($jawabanSiswa->count() > 0){
+        if ($jawabanSiswa->count() > 0) {
             $jawabanSiswa->each->delete();
         }
 
         $pengaturanSoal = PengaturanSoal::get();
         $soalKecerdasan = null;
         // dd($pengaturanSoal);
-        foreach($pengaturanSoal as $value){
+        foreach ($pengaturanSoal as $value) {
             $soal = Kecerdasan::where('kategori', $value->kategori)->orderByRaw('RAND()')->take($value->jumlah_soal)->get();
 
-            if(empty($soalKecerdasan)){
+            if (empty($soalKecerdasan)) {
                 $soalKecerdasan = $soal;
-            }else{
+            } else {
                 $soalKecerdasan = $soalKecerdasan->merge($soal);
             }
         }
 
-        return view('ujian.kecerdasan', compact('ujian', 'ujianSiswa','soalKecerdasan'));
+        return view('ujian.kecerdasan', compact('ujian', 'ujianSiswa', 'soalKecerdasan'));
     }
 
     public function ujianKecermatan(Request $request)
@@ -239,18 +223,19 @@ class UjianSiswaController extends Controller
         $ujian = Ujian::find($request->ujian_id);
         $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
         $soalKecermatan = Kecermatan::where('kategori', $ujian->kategori_kecermatan)->orderByRaw('RAND()')->take(10)->get();
-        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa','soalKecermatan'));
+        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa', 'soalKecermatan'));
     }
 
 
     public function simpanJawabanKecermatan(Request $request)
     {
-        if($request->has('status')){
+        if ($request->has('status')) {
             $ujianSiswa =  UjianSiswa::find($request->ujianSiswaId);
 
             $nilai = UjianNilai::updateOrCreate(
-                ['ujian_siswa_id'=> $ujianSiswa->id],
-                ['kecermatan'=>$ujianSiswa->jawabanBenarKecermatan->count() * 0.2]);
+                ['ujian_siswa_id' => $ujianSiswa->id],
+                ['kecermatan' => $ujianSiswa->jawabanBenarKecermatan->count() * 0.2]
+            );
 
             $ujianSiswa->update([
                 'kecermatan' => 1
@@ -267,15 +252,14 @@ class UjianSiswaController extends Controller
             try {
                 UjianSiswaJawabanKecermatan::create([
                     'ujian_siswa_id' => $request->ujianSiswaId,
-                    'soal_id'=>$request->soal_id,
-                    'soal_a'=>$request->soal[0],
-                    'soal_b'=>$request->soal[1],
-                    'soal_c'=>$request->soal[2],
-                    'soal_d'=>$request->soal[3],
-                    'jawaban'=>$request->jawaban,
-                    'benar'=>$request->jb,
+                    'soal_id' => $request->soal_id,
+                    'soal_a' => $request->soal[0],
+                    'soal_b' => $request->soal[1],
+                    'soal_c' => $request->soal[2],
+                    'soal_d' => $request->soal[3],
+                    'jawaban' => $request->jawaban,
+                    'benar' => $request->jb,
                 ]);
-
             } catch (\Exception $e) {
                 $result['code'] = '500';
                 $result['message'] = $e->getMessage();
@@ -288,7 +272,6 @@ class UjianSiswaController extends Controller
             $result['code'] = '200';
             return response()->json($result);
         }
-
     }
 
     public function hasilUjian(Request $request, $id)
@@ -296,17 +279,16 @@ class UjianSiswaController extends Controller
         $data = UjianSiswa::find($id);
 
         return view('ujian.hasil-ujian', compact('data'));
-
     }
 
     public function riwayatUjian()
     {
-        $data = UjianSiswa::where('user_id',auth()->user()->id)
-                ->where('kecermatan',1)
-                ->where('kecerdasan',1)
-                ->where('kepribadian',1)
-                ->orderBy('updated_at', 'DESC' )
-                ->get();
+        $data = UjianSiswa::where('user_id', auth()->user()->id)
+            ->where('kecermatan', 1)
+            ->where('kecerdasan', 1)
+            ->where('kepribadian', 1)
+            ->orderBy('updated_at', 'DESC')
+            ->get();
 
         return view('siswa.riwayat_ujian', compact('data'));
     }
@@ -315,37 +297,38 @@ class UjianSiswaController extends Controller
     {
         $ujian = Ujian::find($request->ujian_id);
         $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
-        $jawabanSiswa = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi','1')->get();
-        if($jawabanSiswa->count() > 0){
+        $jawabanSiswa = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi', '1')->get();
+        if ($jawabanSiswa->count() > 0) {
             $jawabanSiswa->each->delete();
         }
         // dd($ujian, $ujianSiswa,$jawabanSiswa);
-        $soalPositif = Kepribadian::where('sesi','1')->where('jenis','positif')->orderByRaw('RAND()')->take(25)->get();
-        $soalNegatif = Kepribadian::where('sesi','1')->where('jenis','negatif')->orderByRaw('RAND()')->take(25)->get();
+        $soalPositif = Kepribadian::where('sesi', '1')->where('jenis', 'positif')->orderByRaw('RAND()')->take(25)->get();
+        $soalNegatif = Kepribadian::where('sesi', '1')->where('jenis', 'negatif')->orderByRaw('RAND()')->take(25)->get();
 
         $soalSesi1 = $soalPositif->merge($soalNegatif)->shuffle();
         // $soalSesi2 = Kepribadian::where('sesi','2')->orderByRaw('RAND()')->take(50)->get();
 
         // dd($ujianSiswa, $soalSesi1->toArray(), $soalSesi2->toArray());
-        return view('ujian.kepribadian', compact('ujian', 'ujianSiswa','soalSesi1'));
+        return view('ujian.kepribadian', compact('ujian', 'ujianSiswa', 'soalSesi1'));
     }
 
     public function simpanJawabanKepribadian(Request $request)
     {
-        if($request->has('status')){
+        if ($request->has('status')) {
             $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
 
-            $jumlahSkor = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi',1)->get();
-            $ujianNilai = UjianNilai::where('ujian_siswa_id',$request->ujian_siswa_id)->first();
-            $nilaiAkhir = ($ujianNilai->kecerdasan / 100 * 35 ) + ($ujianNilai->kecermatan / 100 * 30 ) + ((($jumlahSkor->sum('skor') / 5) * 2) / 100 * 35 ) ;
+            $jumlahSkor = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi', 1)->get();
+            $ujianNilai = UjianNilai::where('ujian_siswa_id', $request->ujian_siswa_id)->first();
+            $nilaiAkhir = ($ujianNilai->kecerdasan / 100 * 35) + ($ujianNilai->kecermatan / 100 * 30) + ((($jumlahSkor->sum('skor') / 5) * 2) / 100 * 35);
 
             $nilai = UjianNilai::updateOrCreate(
-                ['ujian_siswa_id'=> $request->ujian_siswa_id],
-                ['kepribadian'=> ($jumlahSkor->sum('skor') / 5) * 2, 'nilai_akhir' => $nilaiAkhir]);
+                ['ujian_siswa_id' => $request->ujian_siswa_id],
+                ['kepribadian' => ($jumlahSkor->sum('skor') / 5) * 2, 'nilai_akhir' => $nilaiAkhir]
+            );
 
-            $jawabanSiswa = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi','2')->get();
+            $jawabanSiswa = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi', '2')->get();
             // dd($jawabanSiswa);
-            if($jawabanSiswa->count() > 0){
+            if ($jawabanSiswa->count() > 0) {
                 $jawabanSiswa->each->delete();
             }
 
@@ -355,9 +338,9 @@ class UjianSiswaController extends Controller
             ]);
 
             $ujian = Ujian::find($request->ujian_id);
-            $soalSesi2 = Kepribadian::where('sesi','2')->orderByRaw('RAND()')->take(50)->get();
+            $soalSesi2 = Kepribadian::where('sesi', '2')->orderByRaw('RAND()')->take(50)->get();
 
-            return view('ujian.kepribadian_sesi_2', compact('ujian', 'ujianSiswa','soalSesi2'));
+            return view('ujian.kepribadian_sesi_2', compact('ujian', 'ujianSiswa', 'soalSesi2'));
         }
 
         if ($request->ajax()) {
@@ -367,12 +350,12 @@ class UjianSiswaController extends Controller
 
                 UjianSiswaJawabanKepribadian::updateOrCreate([
                     'ujian_siswa_id' => $request->ujianSiswaId,
-                    'soal_id'=>$request->noSoal],[
-                    'jawaban'=>$request->jawaban,
-                    'skor'=>$request->skor,
-                    'sesi'=>$request->sesi,
+                    'soal_id' => $request->noSoal
+                ], [
+                    'jawaban' => $request->jawaban,
+                    'skor' => $request->skor,
+                    'sesi' => $request->sesi,
                 ]);
-
             } catch (\Exception $e) {
                 $result['code'] = '500';
                 $result['message'] = $e->getMessage();
@@ -385,16 +368,14 @@ class UjianSiswaController extends Controller
             $result['code'] = '200';
             return response()->json($result);
         }
-
     }
 
     public function simpanJawabanKepribadian2(Request $request)
     {
-        if($request->has('status')){
+        if ($request->has('status')) {
             $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
 
             return redirect(action('UjianSiswaController@hasilUjian', $ujianSiswa->id));
-
         }
 
         if ($request->ajax()) {
@@ -404,12 +385,12 @@ class UjianSiswaController extends Controller
 
                 UjianSiswaJawabanKepribadian::updateOrCreate([
                     'ujian_siswa_id' => $request->ujianSiswaId,
-                    'soal_id'=>$request->noSoal],[
-                    'jawaban'=>$request->jawaban,
-                    'skor'=>$request->skor,
-                    'sesi'=>$request->sesi,
+                    'soal_id' => $request->noSoal
+                ], [
+                    'jawaban' => $request->jawaban,
+                    'skor' => $request->skor,
+                    'sesi' => $request->sesi,
                 ]);
-
             } catch (\Exception $e) {
                 $result['code'] = '500';
                 $result['message'] = $e->getMessage();
@@ -422,8 +403,5 @@ class UjianSiswaController extends Controller
             $result['code'] = '200';
             return response()->json($result);
         }
-
     }
-
 }
-
