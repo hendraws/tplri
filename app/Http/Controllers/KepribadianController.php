@@ -88,7 +88,7 @@ class KepribadianController extends Controller
     // sesi 1
     public function sesi1()
     {
-        $kepribadian = Kepribadian::where('sesi', 1)->get();
+        $kepribadian = Kepribadian::where('sesi', 1)->orderBy('id','desc' )->get();
 
         return view('admin.kepribadian_sesi1.index', compact('kepribadian'));
     }
@@ -197,7 +197,7 @@ class KepribadianController extends Controller
 
     public function sesi2()
     {
-        $kepribadian = Kepribadian::where('sesi', 2)->get();
+        $kepribadian = Kepribadian::where('sesi', 2)->orderBy('id','desc' )->get();
         return view('admin.kepribadian_sesi2.index', compact('kepribadian'));
     }
 

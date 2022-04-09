@@ -18,7 +18,7 @@ class KecerdasanController extends Controller
      */
     public function index()
     {
-        $kecerdasan = Kecerdasan::with('getPilihan')->get();
+        $kecerdasan = Kecerdasan::with('getPilihan')->orderBy('id','desc' )->get();
         return view('admin.kecerdasan.index', compact('kecerdasan'));
     }
 
