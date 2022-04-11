@@ -20,7 +20,7 @@
             </a>
         </li>
         @endrole
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file"></i>
                 <p>
@@ -65,7 +65,7 @@
                     </ul>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         @role('super-admin')
         <li class="nav-item">
             <a href="{{ action('UjianController@index') }}" class="nav-link">
@@ -75,7 +75,7 @@
                 </p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ action('PengaturanSoalController@index') }}" class="nav-link">
                 <i class="fas fa-wrench nav-icon"></i>
                 <p>
@@ -90,9 +90,9 @@
                     Riwayat Ujian
                 </p>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            {{-- <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-database"></i>
                 <p>
                     Master Data
@@ -111,7 +111,7 @@
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ref Option</p>
                     </a>
-                </li>
+                </li> --}}
                 {{-- <li class="nav-item">
                     <a href="{{ action('KelasController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
