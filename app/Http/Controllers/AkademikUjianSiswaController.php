@@ -38,7 +38,6 @@ class AkademikUjianSiswaController extends Controller
             return view('siswa.ruang_ujian.all_mapel', compact('ujianSiswa', 'ujian'));
         }
 
-
         return view('siswa.ruang_ujian.per_mapel', compact('ujianSiswa', 'ujian'));
     }
 
@@ -101,8 +100,8 @@ class AkademikUjianSiswaController extends Controller
             }
 
             $ujian = Ujian::find($ujianSiswa->ujian_id);
-
-            if($ujian != 'all'){
+            // dd($ujian);
+            if($ujian->kategori != 'all'){
                 return view('siswa.ruang_ujian.per_mapel', compact('ujianSiswa', 'ujian'));
             }
 
