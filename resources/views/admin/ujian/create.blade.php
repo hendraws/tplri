@@ -32,29 +32,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="kategori" class="col-sm-2 col-form-label">Kategori Kecermatan</label>
-                    <div class="col-md-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault2" checked value="angka">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Angka
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault1"  value="huruf">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Huruf
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault1" value="simbol">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Simbol
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="judul" class="col-sm-2 col-form-label">Aktif ?</label>
                     <div class="col-md-10">
                         <div class="form-check">

@@ -42,7 +42,7 @@ class UjianController extends Controller
             return abort(404);
         }
 
-        $data = Ujian::where('source','cat-psikologi')->orderBy('created_at', 'desc')->get();
+        $data = Ujian::where('source','cat-kepribadian')->orderBy('created_at', 'desc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 
@@ -78,16 +78,15 @@ class UjianController extends Controller
         DB::beginTransaction();
         try {
             do {
-                $token = 'PSI'.strtoupper(Str::random(3));
+                $token = 'PRI'.strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
 
             $inputUjian['judul'] = $request->judul;
-            $inputUjian['kategori_kecermatan'] = $request->kategori_kecermatan;
             $inputUjian['is_active'] = $request->is_active;
             $inputUjian['tanggal'] = date('Y-m-d');
             $inputUjian['token'] = $token;
-            $inputUjian['source'] = 'cat-psikologi';
+            $inputUjian['source'] = 'cat-kepribadian';
 
 
             Ujian::create($inputUjian);
@@ -317,7 +316,7 @@ class UjianController extends Controller
             $ujian = Ujian::find($id);
 
             do {
-                $token = 'PSI'.strtoupper(Str::random(3));
+                $token = 'PRI'.strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
             $ujian->update([

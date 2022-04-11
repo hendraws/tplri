@@ -113,7 +113,7 @@ class UjianSiswaController extends Controller
 
         $ujian = Ujian::where('token', $request->token)
             ->where('is_active', 1)
-            ->where('source', 'cat-psikologi')
+            ->where('source', 'cat-kepribadian')
             ->first();
 
 
@@ -318,12 +318,10 @@ class UjianSiswaController extends Controller
             $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
 
             $jumlahSkor = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi', 1)->get();
-            $ujianNilai = UjianNilai::where('ujian_siswa_id', $request->ujian_siswa_id)->first();
-            $nilaiAkhir = ($ujianNilai->kecerdasan / 100 * 35) + ($ujianNilai->kecermatan / 100 * 30) + ((($jumlahSkor->sum('skor') / 5) * 2) / 100 * 35);
 
             $nilai = UjianNilai::updateOrCreate(
                 ['ujian_siswa_id' => $request->ujian_siswa_id],
-                ['kepribadian' => ($jumlahSkor->sum('skor') / 5) * 2, 'nilai_akhir' => $nilaiAkhir]
+                ['kepribadian' => ($jumlahSkor->sum('skor') / 5) * 2]
             );
 
             $jawabanSiswa = UjianSiswaJawabanKepribadian::where('ujian_siswa_id', $request->ujian_siswa_id)->where('sesi', '2')->get();
@@ -333,8 +331,7 @@ class UjianSiswaController extends Controller
             }
 
             $ujianSiswa->update([
-                'kepribadian' => 1,
-                'status_ujian' => 1
+                'kepribadian' => 1
             ]);
 
             $ujian = Ujian::find($request->ujian_id);
@@ -373,9 +370,12 @@ class UjianSiswaController extends Controller
     public function simpanJawabanKepribadian2(Request $request)
     {
         if ($request->has('status')) {
+            $ujian = Ujian::find($request->ujian_id);
             $ujianSiswa =  UjianSiswa::find($request->ujian_siswa_id);
 
-            return redirect(action('UjianSiswaController@hasilUjian', $ujianSiswa->id));
+            return view('siswa.ruang_ujian.index', compact('ujian', 'ujianSiswa'));
+
+            // return redirect(action('UjianSiswaController@hasilUjian', $ujianSiswa->id));
         }
 
         if ($request->ajax()) {
