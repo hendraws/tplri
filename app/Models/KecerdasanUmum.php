@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Kecerdasan extends Model implements HasMedia
+class KecerdasanUmum extends Model implements HasMedia
 {
     use HasFactory,  InteractsWithMedia;
-
-    protected $table = 'kecerdasan_umums';
 
     protected $fillable = [
         'pertanyaan',
@@ -23,12 +21,12 @@ class Kecerdasan extends Model implements HasMedia
 
     public function getPilihan()
     {
-        return $this->hasMany(KecerdasanPilihanJawaban::class, 'kecerdasan_id','id');
+        return $this->hasMany(KecerdasanPilihanUmum::class, 'kecerdasan_id','id');
     }
 
     public function getJawaban()
     {
-        return $this->belongsTo(KecerdasanPilihanJawaban::class, 'jawaban_id','id');
+        return $this->belongsTo(KecerdasanPilihanUmum::class, 'jawaban_id','id');
     }
 
     public function getKategori()

@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kepribadian extends Model
+class KepribadianUmum extends Model
 {
     use HasFactory;
-    protected $table = 'kepribadian_umums';
+
+
 
     protected $fillable = [ 'pertanyaan','sesi','jenis','jawaban_id','created_by','edited_by',];
 

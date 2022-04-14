@@ -45,9 +45,9 @@ class Ujian extends Model
     }
 
     public function getSoalKepribadianSatu() {
-        return $this->belongsToMany(Kepribadian::class, 'ujian_kepribadians','ujian_id','kepribadian_id')->where('kepribadians.sesi', 1);
+        return $this->belongsToMany(Kepribadian::class, 'ujian_kepribadians','ujian_id','kepribadian_id')->where('kepribadian_umums.sesi', 1);
     }
     public function getSoalKepribadianDua() {
-        return $this->belongsToMany(Kepribadian::class, 'ujian_kepribadians','ujian_id','kepribadian_id')->where('kepribadians.sesi', 2);
+        return $this->belongsToMany(Kepribadian::class, 'ujian_kepribadians','ujian_id','kepribadian_id')->where('kepribadian_umums.sesi', 2);
     }
 }

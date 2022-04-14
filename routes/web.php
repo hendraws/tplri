@@ -38,6 +38,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/soal', 'SoalController');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
 
+        Route::get('/generate-kecerdasan', 'KecerdasanUmumController@index');
+        Route::get('/generate-kepribadian', 'KepribadianUmumController@index');
+        Route::get('/generate-kepribadian-dua', 'KepribadianUmumController@index2');
+
         Route::resource('/pengaturan-ujian', 'UjianController');
         Route::PUT('/pengaturan-ujian/{id}/is-aktive', 'UjianController@is_active');
         Route::get('/pengaturan-ujian-soal/{kategori}', 'UjianController@soalUjian');

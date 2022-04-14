@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kecerdasan;
+use App\Models\KecerdasanUmum;
 use App\Models\Ujian;
 use App\Models\UjianNilai;
 use App\Models\UjianSiswa;
@@ -202,18 +203,7 @@ class UjianSiswaController extends Controller
             $jawabanSiswa->each->delete();
         }
 
-        $pengaturanSoal = PengaturanSoal::get();
-        $soalKecerdasan = null;
-        // dd($pengaturanSoal);
-        foreach ($pengaturanSoal as $value) {
-            $soal = Kecerdasan::where('kategori', $value->kategori)->orderByRaw('RAND()')->take($value->jumlah_soal)->get();
-
-            if (empty($soalKecerdasan)) {
-                $soalKecerdasan = $soal;
-            } else {
-                $soalKecerdasan = $soalKecerdasan->merge($soal);
-            }
-        }
+        $soalKecerdasan = KecerdasanUmum::with('getPilihan')->orderByRaw('RAND()')->take(100)->get();
 
         return view('ujian.kecerdasan', compact('ujian', 'ujianSiswa', 'soalKecerdasan'));
     }
