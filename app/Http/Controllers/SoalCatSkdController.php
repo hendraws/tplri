@@ -131,13 +131,21 @@ class SoalCatSkdController extends Controller
 
     public function tiu(Request $request, $kategori)
     {
-            $data = SoalCatSkd::where('mapel', 'tiu')->where('kategori', $kategori)->get();
-            return view('admin.soal_cat_skd.index_tiu', compact('data', 'kategori'));
+        $data = SoalCatSkd::where('mapel', 'tiu')->where('kategori', $kategori)->get();
+        return view('admin.soal_cat_skd.tiu.index', compact('data', 'kategori'));
     }
 
     public function createTiu(Request $request, $kategori)
     {
-        return view('admin.soal_cat_skd.create_tiu', compact('kategori'));
+        return view('admin.soal_cat_skd.tiu.create', compact('kategori'));
+    }
+
+    public function editTiu(Request $request, $kategori, $id)
+    {
+
+        $data = SoalCatSkd::findOrFail($id);
+
+        return view('admin.soal_cat_skd.tiu.edit', compact('kategori', 'data'));
     }
 
     public function storeTiu(Request $request)
@@ -189,6 +197,56 @@ class SoalCatSkdController extends Controller
         return redirect(action('SoalCatSkdController@tiu', [$request->kategori]));
     }
 
+    public function updateTiu(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            // dd($request->all(), $id);
+            $soal = SoalCatSkd::where('id', $id)->first();
+            $input['pertanyaan'] = $request->pertanyaan;
+            $soal->update($input);
+
+            foreach ($request->jawaban as $k => $v) {
+
+
+                $dataJawaban['jawaban'] = $v;
+                $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $soalPilihanGanda = SoalPilihanCatSkd::where('soal_id', $soal->id)->where('pilihan', $k)->first();
+                $soalPilihanGanda->update($dataJawaban);
+                if ($request->jawaban_benar == $k) {
+                    $soal->update([
+                        'jawaban_id' => $soalPilihanGanda->id,
+                    ]);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah ditambahkan', 'Berhasil');
+        return redirect(action('SoalCatSkdController@tiu', [$request->kategori]));
+    }
+
+    public function deleteTiu($id)
+    {
+
+        $soal = SoalCatSkd::where('id', $id)->first();
+        $soal->delete();
+        $soal->getPilihan()->delete();
+        $result['code'] = '200';
+        return response()->json($result);
+    }
+
     public function upload(Request $request)
     {
         $soal = new SoalCatSkd();
@@ -201,5 +259,230 @@ class SoalCatSkdController extends Controller
         ]);
     }
 
+    public function twk(Request $request)
+    {
+        $data = SoalCatSkd::where('mapel', 'twk')->get();
+
+        return view('admin.soal_cat_skd.twk.index', compact('data'));
+    }
+
+    public function createTwk(Request $request)
+    {
+        return view('admin.soal_cat_skd.twk.create');
+    }
+
+    public function editTwk($id)
+    {
+
+        $data = SoalCatSkd::findOrFail($id);
+
+        return view('admin.soal_cat_skd.twk.edit', compact('data'));
+    }
+
+    public function storeTwk(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            // dd($contentSoal,  $request->mapel_id);
+            $input['pertanyaan'] = $request->pertanyaan;
+            $input['jawaban_id'] = 0;
+            $input['mapel'] = 'twk';
+            $soal =  SoalCatSkd::create($input);
+
+            foreach ($request->jawaban as $k => $v) {
+
+                if (empty($v)) {
+                    $v = '-';
+                }
+
+                $dataJawaban['soal_id'] = $soal->id;
+                $dataJawaban['pilihan'] = $k;
+                $dataJawaban['jawaban'] = $v;
+                $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $soalPilihanGanda = SoalPilihanCatSkd::create($dataJawaban);
+
+                if ($request->jawaban_benar == $k) {
+                    $soal->update([
+                        'jawaban_id' => $soalPilihanGanda->id,
+                    ]);
+                }
+            }
+
+            // $mapel['created_by'] = auth()->user()->id;
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah ditambahkan', 'Berhasil');
+        return redirect(action('SoalCatSkdController@twk'));
+    }
+
+    public function updateTwk(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            // dd($request->all(), $id);
+            $soal = SoalCatSkd::where('id', $id)->first();
+            $input['pertanyaan'] = $request->pertanyaan;
+            $soal->update($input);
+
+            foreach ($request->jawaban as $k => $v) {
+
+
+                $dataJawaban['jawaban'] = $v;
+                $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $soalPilihanGanda = SoalPilihanCatSkd::where('soal_id', $soal->id)->where('pilihan', $k)->first();
+                $soalPilihanGanda->update($dataJawaban);
+                if ($request->jawaban_benar == $k) {
+                    $soal->update([
+                        'jawaban_id' => $soalPilihanGanda->id,
+                    ]);
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah ditambahkan', 'Berhasil');
+        return redirect(action('SoalCatSkdController@twk'));
+    }
+
+    public function deleteTwk($id)
+    {
+
+        $soal = SoalCatSkd::where('id', $id)->first();
+        $soal->delete();
+        $soal->getPilihan()->delete();
+        $result['code'] = '200';
+        return response()->json($result);
+    }
+
+
+    public function tkp(Request $request)
+    {
+        $data = SoalCatSkd::where('mapel', 'tkp')->get();
+        return view('admin.soal_cat_skd.tkp.index', compact('data'));
+    }
+
+    public function editTkp($id)
+    {
+        $data = SoalCatSkd::findOrFail($id);
+
+        return view('admin.soal_cat_skd.tkp.edit', compact('data'));
+    }
+
+    public function createTkp(Request $request)
+    {
+        return view('admin.soal_cat_skd.tkp.create');
+    }
+
+    public function storeTkp(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+
+            $input['pertanyaan'] = $request->pertanyaan;
+            $input['mapel'] = 'tkp';
+            $input['jawaban_id'] = 0;
+            $input['kategori'] = $request->kategori;
+            $input['created_by'] = auth()->user()->id;
+            $soal =  SoalCatSkd::create($input);
+
+            foreach ($request->jawaban as $key => $value) {
+                SoalPilihanCatSkd::create([
+
+                    'soal_id' => $soal->id,
+                    'pilihan' => $key,
+                    'jawaban' => $value['jawaban'],
+                    'skor' => $value['bobot'],
+                ]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah ditambahkan', 'Berhasil');
+        return redirect(action('SoalCatSkdController@tkp'));
+    }
+
+    public function updateTkp(Request $request, $id)
+    {
+        DB::beginTransaction();
+        try {
+
+            $soal = SoalCatSkd::where('id', $id)->first();
+            $input['pertanyaan'] = $request->pertanyaan;
+            $input['jenis'] = $request->jenis_soal;
+            $input['sesi'] = 1;
+            $input['updated_by'] = auth()->user()->id;
+
+            $soal->update($input);
+
+            foreach ($request->jawaban as $key => $value) {
+
+                SoalPilihanCatSkd::where('soal_id', $id)
+                ->where('pilihan', $key)
+                ->update([
+                    'jawaban' => $value['jawaban'],
+                    'skor' => $value['bobot'],
+                ]);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+
+            return back();
+        } catch (\Throwable $e) {
+            DB::rollback();
+            dd($e->getMessage());
+            toastr()->error($e->getMessage(), 'Error');
+            throw $e;
+        }
+
+        DB::commit();
+        toastr()->success('Data telah diubah', 'Berhasil');
+        return redirect(action('SoalCatSkdController@tkp'));
+    }
+
+    public function deleteTkp($id)
+    {
+
+        $soal = SoalCatSkd::where('id', $id)->first();
+        $soal->delete();
+        $soal->getPilihan()->delete();
+        $result['code'] = '200';
+        return response()->json($result);
+    }
 
 }

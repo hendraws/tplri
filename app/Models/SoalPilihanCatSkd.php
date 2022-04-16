@@ -10,6 +10,6 @@ class SoalPilihanCatSkd extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [ 'soal_id','pilihan','jawaban','benar', ];
+    protected $fillable = [ 'soal_id','pilihan','jawaban','benar', 'skor'];
 
 }

@@ -25,10 +25,7 @@
 
             $(document).on('click', '.hapus', function(e) {
                 e.preventDefault();
-                var tag = $(this);
-                var id = $(this).data('id');
-                // var url = '';
-                url = url.replace(':id', id);
+                var url = $(this).data('url');
                 Swal.fire({
                     title: 'Apakah Anda Yakin ?',
                     text: "Data akan terhapus tidak dapat dikembalikan lagi !",
@@ -54,7 +51,7 @@
                                     );
                                     setTimeout(function() {
                                         window.location =
-                                            "";
+                                        "{{ action('SoalCatSkdController@tiu', $kategori) }}";
                                     }, 1500);
 
                                 }
@@ -65,49 +62,6 @@
                 })
             }) //tutup
 
-            $(document).on('click', '.duplikasi', function(e) {
-                e.preventDefault();
-
-                var soalId = $(this).data('id');
-                var url = '';
-                Swal.fire({
-                    title: 'Apakah Anda Yakin ?',
-                    text: "Anda Akan Menduplikasi Soal",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Ya, Duplikasi!'
-                }).then((result) => {
-                    if (result.value == true) {
-                        $.ajax({
-                            type: 'POST',
-                            url: url,
-                            data: {
-                                "_token": "{{ csrf_token() }}",
-                                "id": soalId,
-                                "mapel": "$mapel ",
-                                "jabatan": "$jabatan ",
-                            },
-                            success: function(data) {
-                                if (data.code == '200') {
-                                    Swal.fire(
-                                        'Berhasil!',
-                                        'Data berhasil Di duplikasi.',
-                                        'success'
-                                    );
-                                    setTimeout(function() {
-                                        window.location =
-                                            "action('SoalController@index', [$mapel, $jabatan])";
-                                    }, 1500);
-
-                                }
-                            }
-                        });
-
-                    }
-                })
-            }) //tutup
 
         });
     </script>
@@ -147,10 +101,10 @@
                                 </td>
                             @endforeach
                             <td class="text-center">
-                                {{-- <a href="{{ action('SoalController@edit', [$mapel, $kate, $item->id]) }}"
-                                    class="btn btn-xs btn-warning">Edit</a> --}}
+                                <a href="{{ action('SoalCatSkdController@editTiu', [$kategori, $item->id]) }}"
+                                    class="btn btn-xs btn-warning">Edit</a>
                                 <button class="btn btn-xs btn-danger hapus" type="button"
-                                    data-id="{{ $item->id }}">Hapus</button>
+                                    data-url="{{ action('SoalCatSkdController@deleteTiu', $item->id) }}">Hapus</button>
                             </td>
                         </tr>
                     @endforeach

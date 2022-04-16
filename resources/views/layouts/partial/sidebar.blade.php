@@ -57,7 +57,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ action('SoalCatSkdController@tiu', ['verval']) }}" class="nav-link">
+                            <a href="{{ action('SoalCatSkdController@tiu', ['verbal']) }}" class="nav-link">
                                 <i class="far fa-dot-circle nav-icon"></i>
                                 <p>Verbal</p>
                             </a>
@@ -65,13 +65,13 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ action('ProgramAkademikController@index') }}" class="nav-link">
+                    <a href="{{ action('SoalCatSkdController@twk') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>TWK</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ action('ProgramAkademikController@index') }}" class="nav-link">
+                    <a href="{{ action('SoalCatSkdController@tkp') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>TKP</p>
                     </a>
@@ -103,15 +103,15 @@
                 </p>
             </a>
         </li> --}}
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ action('UjianNilaiController@index') }}" class="nav-link">
                 <i class="fas fa-book nav-icon"></i>
                 <p>
                     Riwayat Ujian
                 </p>
             </a>
-        </li>
-        <li class="nav-item">
+        </li> --}}
+        {{-- <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-database"></i>
                 <p>
@@ -132,20 +132,20 @@
                         <p>Ref Option</p>
                     </a>
                 </li>
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="{{ action('KelasController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Kelas</p>
                     </a>
-                </li> --}}
-                {{-- <li class="nav-item">
+                </li>
+                <li class="nav-item">
                     <a href="{{ action('MataPelajaranController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mata Pelajaran</p>
                     </a>
-                </li> --}}
+                </li>
             </ul>
-        </li>
+        </li> --}}
         @endrole
         {{-- <li class="nav-item menu-open">
             <a href="#" class="nav-link active">

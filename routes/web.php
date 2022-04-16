@@ -37,6 +37,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/soal-tiu/{kategori}', 'SoalCatSkdController@tiu');
         Route::get('/soal-tiu/{kategori}/create', 'SoalCatSkdController@createTiu');
         Route::post('/soal-tiu/store', 'SoalCatSkdController@storeTiu');
+        Route::get('/soal-tiu/{kategori}/edit/{id}', 'SoalCatSkdController@editTiu');
+        Route::put('/soal-tiu/{id}/update', 'SoalCatSkdController@updateTiu');
+        Route::delete('/soal-tiu/{id}/delete', 'SoalCatSkdController@deleteTiu');
+
+        Route::get('soal-twk', 'SoalCatSkdController@twk');
+        Route::get('soal-twk/create', 'SoalCatSkdController@createTwk');
+        Route::post('soal-twk/store', 'SoalCatSkdController@storeTwk');
+        Route::get('soal-twk/{id}/edit', 'SoalCatSkdController@editTwk');
+        Route::put('soal-twk/{id}/update', 'SoalCatSkdController@updateTwk');
+        Route::delete('soal-twk/{id}/delete', 'SoalCatSkdController@deleteTwk');
+
+        Route::get('soal-tkp', 'SoalCatSkdController@tkp');
+        Route::get('soal-tkp/crate', 'SoalCatSkdController@createTkp');
+        Route::post('soal-tkp/store', 'SoalCatSkdController@storeTkp');
+        Route::get('soal-tkp/{id}/edit', 'SoalCatSkdController@editTkp');
+        Route::put('soal-tkp/{id}/update', 'SoalCatSkdController@updateTkp');
+        Route::delete('soal-tkp/{id}/delete', 'SoalCatSkdController@deleteTkp');
 
         Route::post('/soal/upload', 'SoalCatSkdController@upload')->name('upload');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
