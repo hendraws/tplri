@@ -11,8 +11,8 @@ class SoalPilihanGanda extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $connection = 'DbBankSoal';
-    protected $table = 'soal_pilihan';
+    // protected $connection = 'DbBankSoal';
+    // protected $table = 'soal_pilihan';
 
     protected $fillable = [ 'soal_id','pilihan','jawaban','benar', ];
 

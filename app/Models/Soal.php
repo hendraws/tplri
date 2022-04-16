@@ -13,8 +13,8 @@ class Soal extends Model implements HasMedia
 {
     use HasFactory, Userstamps, SoftDeletes, InteractsWithMedia;
 
-    protected $connection = 'DbBankSoal';
-    protected $table = 'soal';
+    // protected $connection = 'DbBankSoal';
+    // protected $table = 'soal';
 
     protected $fillable = ['pertanyaan', 'jawaban_id', 'mapel', 'jabatan', 'created_by', 'updated_by','deleted_by','duplicate'];
 

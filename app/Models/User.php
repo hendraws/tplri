@@ -13,8 +13,7 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-    protected $connection = 'DbBaseCat';
-    protected $table = 'users';
+
 
     /**
      * The attributes that are mass assignable.
