@@ -66,7 +66,18 @@
 
                                     <div class="col-md-12">
                                         <div class="card-body" style="padding: 0px !important; margin-top : -5%;">
-
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm">
+                                                    <div class="alert alert-danger alert-dismissible"
+                                                        style="padding: 0px !important;">
+                                                        <ul>
+                                                            @if ($errors->any())
+                                                                {!! implode('', $errors->all('<li>:message</li>')) !!}
+                                                            @endif
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-12 no-border input-lg">
                                                     <input id="name" type="text"

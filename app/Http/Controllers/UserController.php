@@ -224,6 +224,7 @@ class UserController extends Controller
         $result['code'] = '200';
         $result['message'] = 'berhasil';
 
+        
     	return response()->json($result);
     }
 }
