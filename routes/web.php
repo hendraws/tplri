@@ -50,6 +50,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/banksoal/kecerdasan', 'KecerdasanController');
         Route::resource('/banksoal/kecermatan', 'KecermatanController');
 
+        Route::get('/import-soal-kecermatan-sama', 'KecermatanSamaController@import');
+        Route::post('/import-soal-kecermatan-sama/save', 'KecermatanSamaController@saveImport');
+        Route::get('kecermatan-sama/{kategori}/{jumlah}', 'KecermatanSamaController@generate');
+        Route::resource('kecermatan-sama', 'KecermatanSamaController');
         Route::get('/banksoal/kepribadian/sesi-1', 'KepribadianController@sesi1');
         Route::get('/banksoal/kepribadian/sesi-1/create', 'KepribadianController@create_sesi1');
         Route::post('/banksoal/kepribadian/sesi-1/store', 'KepribadianController@store_sesi1');

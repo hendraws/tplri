@@ -21,50 +21,12 @@
         </li>
         @endrole
         <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-file"></i>
+            <a href="{{ action('KecermatanSamaController@index') }}" class="nav-link">
+                <i class="fas fa-file nav-icon"></i>
                 <p>
-                    Bank Soal
-                    <i class="right fas fa-angle-left"></i>
+                    Soal
                 </p>
             </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ action('KecerdasanController@index') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kecerdasan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ action('KecermatanController@index') }}" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kecermatan</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>
-                            kepribadian
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ action('KepribadianController@sesi1') }}" class="nav-link">
-                                <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Sesi 1</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ action('KepribadianController@sesi2') }}" class="nav-link">
-                                <i class="far fa-dot-circle nav-icon"></i>
-                                <p>Sesi 2</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
         </li>
         @role('super-admin')
         <li class="nav-item">

@@ -7,6 +7,7 @@ use App\Models\Kecermatan;
 use App\Models\UjianNilai;
 use App\Models\UjianSiswa;
 use Illuminate\Http\Request;
+use App\Models\KecermatanSama;
 use Illuminate\Support\Carbon;
 use App\Models\UjianSiswaJawaban;
 use Illuminate\Support\Facades\Cookie;
@@ -106,7 +107,7 @@ class UjianSiswaController extends Controller
     {
 
         $ujian = Ujian::where('token', $request->token)
-            ->where('source','cat-kecermatan')
+            ->where('source','cat-kecermatan-sama')
             ->where('is_active', 1)
             ->first();
 
@@ -120,9 +121,9 @@ class UjianSiswaController extends Controller
             'ujian_id' => $ujian->id,
         ]);
 
-        $soalKecermatan = Kecermatan::where('kategori', $ujian->kategori_kecermatan)->orderByRaw('RAND()')->take(10)->get();
-
-        return view('ujian.kecermatan', compact('ujian', 'ujianSiswa','soalKecermatan'))->with('ujian_siswa_id', $ujianSiswa->id);
+        $soalKecermatan = KecermatanSama::where('kategori', $ujian->kategori_kecermatan)->orderByRaw('RAND()')->take(10)->get();
+        // dd($soalKecermatan);
+        return view('ujian.kecermatan_sama', compact('ujian', 'ujianSiswa','soalKecermatan'))->with('ujian_siswa_id', $ujianSiswa->id);
         // return view('siswa.ruang_ujian.index', compact('pengaturanUjian', 'cekUjian'));
         // $request->session()->put('ujian_id', $pengaturanUjian->id);
         // $request->session()->put('ujian_user_id', auth()->user()->id);

@@ -26,7 +26,7 @@ class UjianController extends Controller
     public function index(Request $request)
     {
 
-        $data = Ujian::where('source', 'cat-kecermatan')->orderBy('created_at', 'desc')->get();
+        $data = Ujian::where('source', 'cat-kecermatan-sama')->orderBy('created_at', 'desc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 
@@ -68,10 +68,10 @@ class UjianController extends Controller
 
             $inputUjian['judul'] = $request->judul;
             $inputUjian['kategori_kecermatan'] = $request->kategori_kecermatan;
-            $inputUjian['source'] = 'cat-kecermatan';
+            $inputUjian['source'] = 'cat-kecermatan-sama';
             $inputUjian['is_active'] = $request->is_active;
             $inputUjian['tanggal'] = date('Y-m-d');
-            $inputUjian['token'] = 'KEC'.$token;
+            $inputUjian['token'] = 'KES'.$token;
             $inputUjian['created_by'] = auth()->user()->id;
 
             Ujian::create($inputUjian);
@@ -306,7 +306,7 @@ class UjianController extends Controller
             } while (Ujian::where('token', $token)->exists());
 
             $ujian->update([
-                'token' => 'KEC'.$token
+                'token' => 'KES'.$token
             ]);
 
 
