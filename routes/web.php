@@ -83,6 +83,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/ujian/ujian-siswa', 'UjianSiswaController@ujianSiswa');
         Route::post('/ujian/ujian-siswa/store-ujian', 'UjianSiswaController@simpanJawabanKecerdasan');
         Route::post('/ujian/ujian-siswa/store-ujian-kecermatan', 'UjianSiswaController@simpanJawabanKecermatan');
+        Route::post('/ujian/ujian-siswa/store-ujian-kecermatan-sama', 'UjianSiswaController@simpanJawabanKecermatanSama');
         Route::post('/ujian/ujian-kecerdasan', 'UjianSiswaController@ujianKecerdasan');
         Route::post('/ujian/ujian-kecermatan', 'UjianSiswaController@ujianKecermatan');
         Route::get('/hasil-Ujian/{nilai}', 'UjianSiswaController@hasilUjian');

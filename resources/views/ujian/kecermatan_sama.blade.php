@@ -136,7 +136,7 @@
 
                             </div>
                             <div class="col-md-3 align-self-center text-center">
-                                <form action="{{ action('UjianSiswaController@simpanJawabanKecermatan') }}"
+                                <form action="{{ action('UjianSiswaController@simpanJawabanKecermatanSama') }}"
                                     id="formUjian" method="POST">
                                     @csrf
                                     <input type="hidden" name="ujianSiswaId" id="ujianSiswaId"
@@ -193,13 +193,6 @@
                 timeUp: timeisUp,
             });
             sesiTimer();
-
-            // window.addEventListener('beforeunload', function(e) {
-            //     // Cancel the event
-            //     e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
-            //     // Chrome requires returnValue to be set
-            //     e.returnValue = '';
-            // });
         });
 
         function sesiTimer() {
@@ -226,39 +219,34 @@
             if (soalKe == PengaturanJumlahKolom) {
                 selesaiTest();
             }
-            tampilSimbol(soalKe);
-            console.log("reset:" + soal);
+            tampilSoal(soalKe);
             acakSoal(soal);
             hitungJawaban = 0;
         }
 
         $(document).on('change', '.pilih', function(e) {
-            // e.preventDefault();
 
-            // var jawaban = $(this).find('input:radio').prop('checked', true);
             if ($(".pilih").is(":checked")) {
                 var jawaban = $(this);
 
                 var jb = $('#jb').val();
+
+
                 if (jawaban.val() == jb) {
                     var statusJawaban = 1;
                 } else {
                     var statusJawaban = 0;
                 }
-                console.log('stat' + statusJawaban);
-
-                console.log('jawab : ' + statusJawaban + ' , hitungJawaban : ' + hitungJawaban);
 
                 simpanJawaban(ujianSiswaId, soalId, soalSekarang, jawaban.val(), statusJawaban);
-                // setTimeout(function() {}, 300);
             }
 
         })
 
         function simpanJawaban(ujianSiswaId, soalId, soalHilang, jawaban, jb) {
-            console.log('SIMPNJA ' + ujianSiswaId, soalHilang, jawaban, jb);
+            console.log('jawaban anda = '+ jawaban, 'apakah benar => '+ jb)
             var url = $('#formUjian').attr('action');
-            console.log(url);
+
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -272,12 +260,17 @@
                 },
                 success: function(data) {
                     if (data.code == '200') {
-                        console.log(data);
+
                         setTimeout(function() {
+                            var number = Math.floor((Math.random()*5) + 0); //random number 0-4
+                            jawabanSamaBenar = jawabanSama[number];
+                            soal = jawabanSamaBenar.split('');
+
+                            console.log('soal => ' + jawabanSamaBenar, 'soal-pecah => ' +soal);
                             acakSoal(soal);
                             $('input:radio').prop('checked', false);
                         }, 100);
-                        console.log('ht:' + hitungJawaban + ' -asd- ' + PengaturanJumlahSoal);
+                        console.log('no:' + hitungJawaban + ' -max- ' + PengaturanJumlahSoal);
                         hitungJawaban++;
                         if (hitungJawaban == PengaturanJumlahSoal) {
                             resetSoal(soalKe);
@@ -327,9 +320,9 @@
             return array;
         }
 
-        function tampilSimbol(index) {
-            console.log(index, semuaSoal[index], semuaSoal[index]["jawaban_a"].split(''));
-
+        function tampilSoal(index) {
+            console.log('function tampil soal no ', index);
+            console.table(semuaSoal[index]);
             $('#soalKecerdasan').html(`
 
             <tr class="text-center" style="font-size:20px">
@@ -374,6 +367,8 @@
             </tr>
             `);
 
+
+
             soal = jawabanSama = [];
             jawabanSama[0] = semuaSoal[index]["jawaban_a"];
             jawabanSama[1] = semuaSoal[index]["jawaban_b"];
@@ -382,29 +377,14 @@
             jawabanSama[4] = semuaSoal[index]["jawaban_e"];
             soalId = semuaSoal[index]['id'];
 
-            var number = Math.floor(Math.random() * 4) + 1;
+            var number = Math.floor((Math.random()*5) + 0); //random number 0-4
+
             jawabanSamaBenar = jawabanSama[number];
             soal = jawabanSamaBenar.split('');
 
-            console.log(jawabanSamaBenar, 'jawabanSamaBenar', soal);
-            console.log('tampil simbol : ' + soal, soalId);
+            console.log('soal => ' + jawabanSamaBenar, 'soal-pecah => ' +soal);
 
-        }
-
-        // untuk acak soal
-        function acakSoal(arr) {
-            arr = shuffle(arr);
-            $('#soalAcak').html(`
-            <tr class="text-center" style="font-size:20px">
-                <td style="width: 20%">` + $("<div/>").html(arr[0]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(arr[1]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(arr[2]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(arr[3]).text() + `</td>
-                <td style="width: 20%">` + $("<div/>").html(arr[4]).text() + `</td>
-                <input type="hidden" name="jb" id="jb" value="` + jawabanSamaBenar + `">
-            </tr>
-            `);
-
+            // tampil radio button abcde
             $('#PilihanJawaban').html(`
             <tr class="">
                 <td style="width: 20%;" class="soal">
@@ -456,14 +436,34 @@
                 </tr>
             `)
 
+        }
+
+        // untuk acak soal
+        function acakSoal(arr) {
+
+
+            arr = shuffle(arr);
+            $('#soalAcak').html(`
+            <tr class="text-center" style="font-size:20px">
+                <td style="width: 20%">` + $("<div/>").html(arr[0]).text() + `</td>
+                <td style="width: 20%">` + $("<div/>").html(arr[1]).text() + `</td>
+                <td style="width: 20%">` + $("<div/>").html(arr[2]).text() + `</td>
+                <td style="width: 20%">` + $("<div/>").html(arr[3]).text() + `</td>
+                <td style="width: 20%">` + $("<div/>").html(arr[4]).text() + `</td>
+                <input type="hidden" name="jb" id="jb" value="` + jawabanSamaBenar + `">
+            </tr>
+            `);
+
+
+
             soalSekarang = [];
             soalSekarang[0] = arr[0];
             soalSekarang[1] = arr[1];
             soalSekarang[2] = arr[2];
             soalSekarang[3] = arr[3];
-            jawabanBenar = arr[4];
+            soalSekarang[4] = arr[4];
+            jawabanBenar = jawabanSamaBenar;
 
-            console.log('tampil jawaban Benar : ' + soalSekarang, jawabanSamaBenar);
         }
 
         function acakPilihan(arr) {

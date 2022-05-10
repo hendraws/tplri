@@ -13,6 +13,7 @@ use App\Models\UjianSiswaJawaban;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use App\Models\UjianSiswaJawabanKecermatan;
+use App\Models\UjianSiswaJawabanKecermatanSama;
 
 class UjianSiswaController extends Controller
 {
@@ -306,6 +307,56 @@ class UjianSiswaController extends Controller
 
     }
 
+    public function simpanJawabanKecermatanSama(Request $request)
+    {
+        if($request->has('status')){
+            $cekUjian =  UjianSiswa::find($request->ujianSiswaId);
+
+            $nilai = UjianNilai::updateOrCreate(
+                ['ujian_siswa_id'=> $cekUjian->id],
+                ['kecermatan'=>$cekUjian->jawabanBenarKecermatanSama->count() * 0.2]);
+
+            $cekUjian->update([
+                'kecermatan' => 1
+            ]);
+
+            $pengaturanUjian = Ujian::find($cekUjian->ujian_id);
+
+            return redirect(action('UjianSiswaController@hasilUjian', $cekUjian->id));
+            return view('ujian.hasil-ujian', compact('pengaturanUjian', 'cekUjian', 'nilai'));
+            // return view('siswa.ruang_ujian.index', compact('pengaturanUjian', 'cekUjian'));
+        }
+
+        if ($request->ajax()) {
+            try {
+
+                UjianSiswaJawabanKecermatanSama::create([
+                    'ujian_siswa_id' => $request->ujianSiswaId,
+                    'soal_id'=>$request->soal_id,
+                    'soal_a'=>$request->soal[0],
+                    'soal_b'=>$request->soal[1],
+                    'soal_c'=>$request->soal[2],
+                    'soal_d'=>$request->soal[3],
+                    'soal_e'=>$request->soal[4],
+                    'jawaban'=>$request->jawaban,
+                    'benar'=>$request->jb,
+                ]);
+
+            } catch (\Exception $e) {
+                $result['code'] = '500';
+                $result['message'] = $e->getMessage();
+                return response()->json($result);
+            } catch (\Throwable $e) {
+                $result['code'] = '500';
+                $result['message'] = $e->getMessage();
+                return response()->json($result);
+            }
+            $result['code'] = '200';
+            return response()->json($result);
+        }
+
+    }
+
     public function hasilUjian(Request $request, $nilai)
     {
         $data = UjianSiswa::find($nilai);
@@ -318,7 +369,8 @@ class UjianSiswaController extends Controller
     {
         $data = UjianSiswa::where('user_id',auth()->user()->id)
                 ->where('kecermatan',1)
-                ->get();
+                ->orderBy('created_at', 'DESC')
+                ->paginate(10);
 
         return view('siswa.riwayat_ujian', compact('data'));
     }

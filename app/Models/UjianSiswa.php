@@ -24,6 +24,10 @@ class UjianSiswa extends Model
     {
         return $this->hasMany(UjianSiswaJawabanKecermatan::class, 'ujian_siswa_id','id')->where('benar', 1);
     }
+    public function jawabanBenarKecermatanSama()
+    {
+        return $this->hasMany(UjianSiswaJawabanKecermatanSama::class, 'ujian_siswa_id','id')->where('benar', 1);
+    }
 
     public function getNilai()
     {
