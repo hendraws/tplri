@@ -56,6 +56,7 @@ class SoalCatSkdController extends Controller
                 $dataJawaban['pilihan'] = $k;
                 $dataJawaban['jawaban'] = $v;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $dataJawaban['skor'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 5 : 0;
                 $soalPilihanGanda = SoalPilihanCatSkd::create($dataJawaban);
 
                 if ($request->jawaban_benar == $k) {
@@ -169,6 +170,7 @@ class SoalCatSkdController extends Controller
                 $dataJawaban['pilihan'] = $k;
                 $dataJawaban['jawaban'] = $v;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $dataJawaban['skor'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 5 : 0;
                 $soalPilihanGanda = SoalPilihanCatSkd::create($dataJawaban);
 
                 if ($request->jawaban_benar == $k) {
@@ -211,6 +213,7 @@ class SoalCatSkdController extends Controller
 
                 $dataJawaban['jawaban'] = $v;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $dataJawaban['skor'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 5 : 0;
                 $soalPilihanGanda = SoalPilihanCatSkd::where('soal_id', $soal->id)->where('pilihan', $k)->first();
                 $soalPilihanGanda->update($dataJawaban);
                 if ($request->jawaban_benar == $k) {
@@ -299,6 +302,7 @@ class SoalCatSkdController extends Controller
                 $dataJawaban['pilihan'] = $k;
                 $dataJawaban['jawaban'] = $v;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $dataJawaban['skor'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 5 : 0;
                 $soalPilihanGanda = SoalPilihanCatSkd::create($dataJawaban);
 
                 if ($request->jawaban_benar == $k) {
@@ -341,6 +345,7 @@ class SoalCatSkdController extends Controller
 
                 $dataJawaban['jawaban'] = $v;
                 $dataJawaban['benar'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 'Y' : 'N';
+                $dataJawaban['skor'] = $request->jawaban_benar == $k || $request->jawaban_benar == 'i' ? 5 : 0;
                 $soalPilihanGanda = SoalPilihanCatSkd::where('soal_id', $soal->id)->where('pilihan', $k)->first();
                 $soalPilihanGanda->update($dataJawaban);
                 if ($request->jawaban_benar == $k) {

@@ -32,64 +32,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="kategori" class="col-sm-2 col-form-label">Kategori CAT</label>
-                    <div class="col-md-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori" id="flexRadioDefault2" checked value="all">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                CAT AKADEMIK KESELURUHAN
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori"  value="bind">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Bahasa Indonesia
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori"  value="bing">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Bahasa Inggris
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori"  value="mtk">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Matematika
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori"  value="pu">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Pengetahuan Umum
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori"  value="wk">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Wawasan Kebangsaan
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="judul" class="col-sm-2 col-form-label">Posisi Jabatan</label>
-                    <div class="col-md-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="posisi" id="flexRadioDefault2" value="akpol">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                AKPOL
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="posisi"  checked value="bintara">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                BINTARA
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="judul" class="col-sm-2 col-form-label">Aktif ?</label>
                     <div class="col-md-10">
                         <div class="form-check">

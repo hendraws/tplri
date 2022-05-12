@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ action('AkademikUjianSiswaController@cekToken') }}">
+                        <form method="POST" action="{{ action('IkdinUjianSiswaController@cekToken') }}">
                             @csrf
                             <div class="input-group mb-3">
                                 <div class="input-group-append">

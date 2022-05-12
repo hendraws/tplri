@@ -42,7 +42,7 @@ class UjianController extends Controller
             return abort(404);
         }
 
-        $data = Ujian::where('source', 'cat-akademik')->orderBy('created_at', 'desc')->get();
+        $data = Ujian::where('source', 'cat-ikdin')->orderBy('created_at', 'desc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 
@@ -78,7 +78,7 @@ class UjianController extends Controller
         DB::beginTransaction();
         try {
             do {
-                $token = "AKA".strtoupper(Str::random(3));
+                $token = "IKD".strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
             $inputUjian['judul'] = $request->judul;
@@ -86,9 +86,9 @@ class UjianController extends Controller
             $inputUjian['is_active'] = $request->is_active;
             $inputUjian['tanggal'] = date('Y-m-d');
             $inputUjian['token'] = $token;
-            $inputUjian['source'] = 'cat-akademik';
+            $inputUjian['source'] = 'cat-ikdin';
             $inputUjian['kategori'] = $request->kategori;
-            $inputUjian['posisi'] = $request->posisi;
+            $inputUjian['posisi'] = 'ikdin';
 
             Ujian::create($inputUjian);
         } catch (\Exception $e) {
@@ -316,7 +316,7 @@ class UjianController extends Controller
             $ujian = Ujian::find($id);
 
             do {
-                $token = "AKA".strtoupper(Str::random(3));
+                $token = "IKD".strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
             $ujian->update([

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\SoalCatSkd;
+use App\Models\SoalPilihanCatSkd;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -96,6 +98,27 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/pengaturan-soal', 'PengaturanSoalController');
         Route::resource('/pengaturan-soal', 'PengaturanSoalController');
 
+        Route::get('generateSkorSiswa', function(){
+            $list = SoalPilihanCatSkd::where('benar', 'Y')->get();
+
+            foreach($list as $jwb)
+            {
+                $jwb->update([
+                    'skor' => 5
+                ]);
+            }
+
+            $list2 = SoalPilihanCatSkd::whereNull('skor')->get();
+
+            foreach($list2 as $jwb2)
+            {
+                $jwb2->update([
+                    'skor' => 0
+                ]);
+            }
+
+        });
+
 
     });
 
@@ -119,6 +142,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('cat-akademik/matematika', 'AkademikUjianSiswaController@halamanUjian');
         Route::post('cat-akademik/simpan-jawaban-cat-akademik', 'AkademikUjianSiswaController@storeJawaban');
         Route::post('cat-akademik/cek-token', 'AkademikUjianSiswaController@cekToken');
+        Route::post('cat-ikdin/cek-token', 'IkdinUjianSiswaController@cekToken');
+        Route::post('cat-ikdin/ujian', 'IkdinUjianSiswaController@halamanUjian');
+        Route::post('cat-ikdin/simpan-jawaban-cat-akademik', 'IkdinUjianSiswaController@storeJawaban');
     });
 });
 Route::get('token', 'HomeController@token');
@@ -132,3 +158,4 @@ Route::get('reboot', function () {
 Route::get('migrate', function () {
     Artisan::call('migrate');
 });
+

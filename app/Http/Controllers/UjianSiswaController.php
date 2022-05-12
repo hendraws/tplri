@@ -118,9 +118,9 @@ class UjianSiswaController extends Controller
 
         $ujian = Ujian::where('token', $request->token)
             ->where('is_active', 1)
-            ->where('source', 'cat-akademik')
+            ->where('source', 'cat-ikdin')
             ->first();
-        
+
         if (empty($ujian)) {
             toastr()->error('Token Salah!, Silahkan periksa kembali atau hubungi Admin', 'Error');
             return back();

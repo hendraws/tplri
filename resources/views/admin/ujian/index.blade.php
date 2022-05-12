@@ -119,8 +119,8 @@
                                 <th scope="col">Token</th>
                                 <th scope="col">Judul</th>
                                 <th scope="col">Aktif?</th>
-                                <th scope="col">Posisi</th>
-                                <th scope="col">mapel</th>
+                                {{-- <th scope="col">Posisi</th> --}}
+                                {{-- <th scope="col">mapel</th> --}}
                                 {{-- <th scope="col">Soal</th> --}}
                                 <th scope="col">Aksi</th>
                             </tr>
@@ -133,8 +133,8 @@
                                     </td>
                                     <td>{{ $item->judul }}</td>
                                     <td class="text-center">{{ $item->is_active == '1' ? 'Aktif' : 'Tidak Aktif' }}</td>
-                                    <td class="text-center">{{ $item->posisi }}</td>
-                                    <td class="text-center">{{ $item->kategori }}</td>
+                                    {{-- <td class="text-center">{{ $item->posisi }}</td> --}}
+                                    {{-- <td class="text-center">{{ $item->kategori }}</td> --}}
                                     <td class="text-center">
                                         {{-- <a class="btn btn-xs btn-primary"
                                             href="{{ action('UjianController@show', $item) }}" data-toggle="tooltip"
@@ -149,13 +149,11 @@
                                         @if ($item->is_active == '0')
                                             <a href="Javascript:void(0)" class="btn btn-xs btn-primary aktifkan bg-purple color-palette"
                                                 data-url="{{ action('UjianController@is_active', $item) }}"
-                                                data-status="{{ $item->is_active }}"
-                                                >Aktifkan</a>
+                                                data-status="{{ $item->is_active }}" >Aktifkan</a>
                                         @else
                                             <a href="Javascript:void(0)" class="btn btn-xs btn-info aktifkan bg-purple color-palette"
                                                 data-url="{{ action('UjianController@is_active', $item) }}"
-                                                data-status="{{ $item->is_active }}" >Non
-                                                Akfitkan</a>
+                                                data-status="{{ $item->is_active }}" >Non Akfitkan</a>
                                         @endif
                                         <a href="Javascript:void(0)" class="btn btn-xs btn-danger hapus"
                                             data-url="{{ action('UjianController@destroy', $item) }}">Hapus</a>
