@@ -26,7 +26,9 @@
         }
 
         p img {
-            /* width: 400px !important; */
+            min-height: 100px !important;
+            max-height: 250px !important;
+            width: 100% !important;
         }
 
         .cover {
@@ -50,7 +52,8 @@
 
 
         .li-pilihan > p img {
-            /* width: 100% !important; */
+            min-height: 100% !important;
+            max-height: 100px !important;
         }
 
         @media (max-width:641px){
