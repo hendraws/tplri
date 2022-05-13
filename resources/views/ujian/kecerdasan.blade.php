@@ -54,6 +54,7 @@
         .li-pilihan > p img {
             min-height: 100% !important;
             max-height: 100px !important;
+            width: 100% !important;
         }
 
         @media (max-width:641px){

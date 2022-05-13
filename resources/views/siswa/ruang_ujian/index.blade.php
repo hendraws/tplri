@@ -111,7 +111,7 @@
                             </h1>
 
                             <h4 class="border text-center p-3">
-                                @if (floor(optional($ujianSiswa->getNilai)->nilai_akhir) >= 58)
+                                @if (floor(optional($ujianSiswa->getNilai)->nilai_akhir) >= 61)
                                     Memenuhi Syarat
                                 @else
                                     Tidak Memenuhi Syarat
