@@ -28,7 +28,7 @@
         p img {
             min-height: 100px !important;
             max-height: 250px !important;
-            width: 100% !important;
+            width: auto !important;
         }
 
         .cover {
