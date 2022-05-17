@@ -56,7 +56,15 @@
                             <th scope="col">#</th>
                             <th scope="col">Tanggal Ujian</th>
                             <th scope="col">Judul Ujian</th>
-                            <th scope="col">Nilai</th>
+                            <th scope="col">Matematika</th>
+                            <th scope="col">Wawasan Kebangsaan</th>
+                            <th scope="col">Pengetahuan Umum</th>
+                            @if(optional(optional(auth()->user())->getProgramAkademik)->nama_program == 'AKPOL')
+                            <th scope="col">B. Indonesia</th>
+                            @else
+                            <th scope="col">B. Inggris</th>
+                            @endif
+                            <th>Nilai Akhir</th>
                             {{-- <th scope="col"></th> --}}
                         </tr>
                     </thead>
@@ -66,6 +74,14 @@
                             <th scope="row">{{ $loop->index + 1 }}</th>
                             <td>{{ date('d M Y h:i:s', strtotime($value->created_at)) }}</td>
                             <td>{{ optional($value->getUjian)->judul  }}</td>
+                            <td>{{ optional($value->getNilai)->mtk }}</td>
+                            <td>{{ optional($value->getNilai)->wk }}</td>
+                            <td>{{ optional($value->getNilai)->pu }}</td>
+                            @if(optional(optional(auth()->user())->getProgramAkademik)->nama_program == 'AKPOL')
+                            <td>{{ optional($value->getNilai)->bind }}</td>
+                            @else
+                            <td>{{ optional($value->getNilai)->bing }}</td>
+                            @endif
                             <td>{{ optional($value->getNilai)->nilai_akhir }}</td>
                             {{-- <td><a href="">Detail</a></td> --}}
                         </tr>

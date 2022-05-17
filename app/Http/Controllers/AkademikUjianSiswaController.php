@@ -141,4 +141,15 @@ class AkademikUjianSiswaController extends Controller
             return response()->json($result);
         }
     }
+
+
+    public function riwayatUjian()
+    {
+        $data = AkademikUjianSiswa::where('user_id', auth()->user()->id)
+                ->orderBy('updated_at', 'DESC' )
+                ->take(10)
+                ->get();
+
+        return view('siswa.riwayat_ujian', compact('data'));
+    }
 }

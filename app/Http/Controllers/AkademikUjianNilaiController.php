@@ -14,7 +14,9 @@ class AkademikUjianNilaiController extends Controller
      */
     public function index()
     {
-        //
+        $data = AkademikUjianNilai::orderBy('id','desc')->get();
+
+        return view('admin.nilai.index', compact('data'));
     }
 
     /**

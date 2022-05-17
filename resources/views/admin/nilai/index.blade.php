@@ -74,26 +74,26 @@
                         <thead>
                         <tr class="bg-dark text-center">
                             <th scope="col" class="align-middle" width="30%">Nama</th>
-                            <th scope="col" class="align-middle" width="10%">Kecerdasan</th>
-                            <th scope="col" class="align-middle" width="10%">Kecermatan</th>
-                            <th scope="col" class="align-middle" width="10%">Kepribadian</th>
+                            <th scope="col" class="align-middle" width="10%">MTK</th>
+                            <th scope="col" class="align-middle" width="10%">WK</th>
+                            <th scope="col" class="align-middle" width="10%">PU</th>
+                            <th scope="col" class="align-middle" width="10%">B. IND</th>
+                            <th scope="col" class="align-middle" width="10%">B. ING</th>
                             <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
                             <th scope="col" class="align-middle" width="">Tanggal</th>
-                            <th scope="col" class="align-middle" width="">Detail Ujian</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $key => $value)
                         <tr >
                             <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</th>
-                            <td class="text-right">{{ $value->kecerdasan }}</td>
-                            <td class="text-right">{{ $value->kecermatan }}</td>
-                            <td class="text-right">{{ $value->kepribadian }}</td>
+                            <td class="text-right">{{ $value->mtk }}</td>
+                            <td class="text-right">{{ $value->wk }}</td>
+                            <td class="text-right">{{ $value->pu }}</td>
+                            <td class="text-right">{{ $value->bind }}</td>
+                            <td class="text-right">{{ $value->bing }}</td>
                             <td class="text-right">{{ $value->nilai_akhir }}</td>
                             <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
-                            <td class="text-center">
-                                <a href="{{ action('UjianNilaiController@detail', $value->ujian_siswa_id) }}" class="btn btn-primary btn-xs">Detail Test</a>
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>
