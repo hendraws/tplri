@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Soal;
 use App\Models\User;
 use App\Models\Kelas;
 use App\Models\Ujian;
 use App\Models\Kecerdasan;
 use App\Models\Kecermatan;
+use App\Models\UjianNilai;
 use App\Models\Kepribadian;
 use Illuminate\Http\Request;
 use App\Models\ProgramAkademik;
-use App\Models\UjianNilai;
 
 class HomeController extends Controller
 {
@@ -31,33 +32,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        $soalKecerdasan = Kecerdasan::with('getKategori')->get();
-        $soalKecermatan = Kecermatan::get();
-        $soalKepribadianSesi1 = Kepribadian::where('sesi','1')->get();
-        $soalKepribadianSesi2 = Kepribadian::where('sesi','2')->get();
 
         $dataUser = User::role('siswa')->get();
 
-        $nilai = UjianNilai::where('nilai_akhir','>', 0)
-                    ->whereHas('getUjianSiswa', function($q){
-                        $q->where('user_id', '!=', 40);
-                    })
-                    ->orderBy('nilai_akhir', 'DESC')
-                    ->take(10)->get();
+        $soal = Soal::selectRaw('count(id) as jumlah, mapel')->groupBy('mapel')->get();
+        // dd($soal->toArray());
 
-        $jumlahSoalKecerdasan = $soalKecerdasan->mapToGroups(function ($item, $key) {
-            return [optional($item->getKategori)->option => $item->id];
-        });
-
-        $jumlahSoalKecermatan = $soalKecermatan->mapToGroups(function ($item, $key) {
-            return [$item->kategori => $item->id];
-        });
-        $jumlahSoalKepribadianSesi1 = $soalKepribadianSesi1->mapToGroups(function ($item, $key) {
-            return [$item->jenis => $item->id];
-        });
-
-        return view('admin.dashboard', compact('soalKecerdasan','jumlahSoalKecerdasan','jumlahSoalKecermatan' ,'dataUser','jumlahSoalKepribadianSesi1','soalKepribadianSesi2','nilai'));
+        return view('admin.dashboard', compact('soal', 'dataUser'));
     }
 
     public function cek(Request $request)

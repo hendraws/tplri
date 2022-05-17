@@ -50,9 +50,91 @@
             </div>
         </div>
         <!-- ./col -->
+
+        <div class="col-md-4">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $soal->sum('jumlah') }}</h3>
+                    <p>Total Soal</p>
+                </div>
+                <div class="icon">
+                    <i class="far fa-file-alt"></i>
+                </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- small box -->
+            <div class="small-box bg-maroon color-palette">
+                <div class="inner">
+                    <h3>{{ $soal->where('mapel', 'mtk')->first()->jumlah }}</h3>
+                    <p>MTK</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-md-4">
+            <!-- small box -->
+            <div class="small-box bg-lightblue">
+                <div class="inner">
+                    <h3>{{ $soal->where('mapel', 'pu')->first()->jumlah }}</h3>
+                    <p>Pengetahuan Umum</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-md-4">
+            <!-- small box -->
+            <div class="small-box bg-navy color-palette">
+                <div class="inner">
+                    <h3>{{ $soal->where('mapel', 'wk')->first()->jumlah }}</h3>
+                    <p>Wawasan Kebangsaan</p>
+                </div>
+                <div class="icon">
+                    <i class="far fa-flag"></i>
+                </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>{{ $soal->where('mapel', 'bing')->first()->jumlah }}</h3>
+                    <p>Bahasa Inggris</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>{{ $soal->where('mapel', 'bind')->first()->jumlah }}</h3>
+                    <p>Bahasa Indonesia</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> --}}
+            </div>
+        </div>
+        <!-- ./col -->
     </div>
     <div class="row">
-        {{-- <div class="col-md-3">
+        {{-- <div class="col-md-4">
             <h4>Kecerdasan</h4>
             <div class="card">
                 <div class="card-body p-1">
@@ -164,78 +246,6 @@
             </div>
         </div> --}}
 
-        <div class="col-md-6">
-            <h4>Top 10 Nilai CAT AKADEMIK AKPOL</h4>
-            <div class="card">
-                <div class="card-body p-1">
-                    <div class="">
-                        <table class="table table-bordered table-sm">
-                            <thead>
-                                <tr class="bg-dark text-center">
-                                    <th scope="col" class="align-middle" width="30%">Nama</th>
-                                    <th scope="col" class="align-middle" width="10%">MTK</th>
-                                    <th scope="col" class="align-middle" width="10%">WK</th>
-                                    <th scope="col" class="align-middle" width="10%">PU</th>
-                                    <th scope="col" class="align-middle" width="10%">B. Ind</th>
-                                    <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
-                                    <th scope="col" class="align-middle" width="30%">Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($nilai as $key => $value)
-                                    <tr>
-                                        <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}
-                                        </th>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <h4>Top 10 Nilai CAT AKADEMIK BINTARA</h4>
-            <div class="card">
-                <div class="card-body p-1">
-                    <div class="">
-                        <table class="table table-bordered table-sm">
-                            <thead>
-                                <tr class="bg-dark text-center">
-                                    <th scope="col" class="align-middle" width="30%">Nama</th>
-                                    <th scope="col" class="align-middle" width="10%">MTK</th>
-                                    <th scope="col" class="align-middle" width="10%">WK</th>
-                                    <th scope="col" class="align-middle" width="10%">PU</th>
-                                    <th scope="col" class="align-middle" width="10%">B. Ing</th>
-                                    <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
-                                    <th scope="col" class="align-middle" width="30%">Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($nilai as $key => $value)
-                                    <tr>
-                                        <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}
-                                        </th>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-right">0</td>
-                                        <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     </div>
 @endsection
