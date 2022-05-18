@@ -54,7 +54,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container">
                 <a href="/" class="h5">
                     {{-- <img src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino" class="logo-app" > --}}
-                    {{-- <img src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino" class="logo-app" > --}}
+                    <img src="{{ asset('images/ssdikdin.png') }}" alt="Rumah Private Kino" class="logo-app" >
                     <img src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino" class="logo-app" >
                 </a>
 

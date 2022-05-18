@@ -72,8 +72,8 @@
     <div class="container-fluid" style="min-height:100vh;">
         <div class="row p-3" style="background: #e43205;">
             <div class="col-md-3 align-self-center text-center">
-                <img class="cover mx-2" src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino">
-                <img class="cover mx-2" src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino">
+                <img class="cover mx-2" src="{{ asset('images/ssdikdin.png') }}" alt="Rumah Private Kino">
+                {{-- <img class="cover mx-2" src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino"> --}}
                 <img class="cover mx-2" src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino">
             </div>
             <div class="col-md-7">
