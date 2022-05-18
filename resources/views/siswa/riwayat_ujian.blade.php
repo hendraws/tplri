@@ -1,5 +1,5 @@
 @extends('layouts.app-siswa')
-@section('title', 'Riwayat Ujian Psikologi')
+@section('title', 'Riwayat Ujian')
 @section('css')
     <link href="{{ asset('vendors/datetimepicker/jquery.datetimepicker.min.css') }}" rel="stylesheet">
     <style>
