@@ -61,6 +61,10 @@
                                             <td>TKP</td>
                                             <td>{{ optional($ujianSiswa->getNilai)->tkp }}</td>
                                         </tr>
+                                        <tr>
+                                            <th>TOTAL </th>
+                                            <th>{{ optional($ujianSiswa->getNilai)->nilai_akhir }}</th>
+                                        </tr>
                                     </table>
                                 </div>
                                     {{-- <button type='button' class="btn btn-success col-12 mt-4">NILAI AKHIR SKD

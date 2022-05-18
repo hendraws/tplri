@@ -59,6 +59,7 @@
                             <th scope="col">TWK</th>
                             <th scope="col">TIU</th>
                             <th scope="col">TKP</th>
+                            <th scope="col">TOTAL</th>
                             {{-- <th scope="col"></th> --}}
                         </tr>
                     </thead>
@@ -71,6 +72,7 @@
                             <td>{{ optional($value->getNilai)->twk }}</td>
                             <td>{{ optional($value->getNilai)->tiu }}</td>
                             <td>{{ optional($value->getNilai)->tkp }}</td>
+                            <td>{{ optional($value->getNilai)->nilai_akhir }}</td>
                             {{-- <td><a href="">Detail</a></td> --}}
                         </tr>
                         @endforeach
