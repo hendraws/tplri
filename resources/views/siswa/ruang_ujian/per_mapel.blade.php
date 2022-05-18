@@ -39,37 +39,43 @@
                         <div class="card-body ">
                             <form method="POST" action="{{ action('IkdinUjianSiswaController@halamanUjian') }}">
                                 @csrf
-                                {{--  <button type='button' class="btn btn-success col-12 mt-4">Test Belum Tersedia</button> --}}
+                                {{-- <button type='button' class="btn btn-success col-12 mt-4">Test Belum Tersedia</button> --}}
                                 @if ($ujianSiswa->skd == 0)
-                                <input type="hidden" name="ujian_id" value="{{ $ujianSiswa->ujian_id }}">
-                                <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
-                                <button type="submit" class="btn btn-primary col-12 mt-4"
-                                onclick="return confirm('Mulai CAT SKD IKDIN ?')">Mulai Ujian</button>
+                                    <input type="hidden" name="ujian_id" value="{{ $ujianSiswa->ujian_id }}">
+                                    <input type="hidden" name="ujian_siswa_id" value="{{ $ujianSiswa->id }}">
+                                    <button type="submit" class="btn btn-primary col-12 mt-4"
+                                        onclick="return confirm('Mulai CAT SKD IKDIN ?')">Mulai Ujian</button>
                                 @elseIf($ujianSiswa->skd == 1)
-                                <div class="table-responsive">
-                                    <h5 class=" text-center">NILAI SKD IKDIN</h5>
-                                    <table class="table  table-striped">
-                                        <tr>
-                                            <td>TWK</td>
-                                            <td>{{ optional($ujianSiswa->getNilai)->twk }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>TIU</td>
-                                            <td>{{ optional($ujianSiswa->getNilai)->tiu }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>TKP</td>
-                                            <td>{{ optional($ujianSiswa->getNilai)->tkp }}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>TOTAL </th>
-                                            <th>{{ optional($ujianSiswa->getNilai)->nilai_akhir }}</th>
-                                        </tr>
-                                    </table>
-                                </div>
-                                    {{-- <button type='button' class="btn btn-success col-12 mt-4">NILAI AKHIR SKD
-                                        <h1>{{ optional($ujianSiswa->getNilai)->nilai_akhir }}</h1>
-                                    </button> --}}
+                                    <div class="table-responsive">
+                                        <h5 class=" text-center">NILAI SKD IKDIN</h5>
+                                        <table class="table  table-striped">
+                                            <tr>
+                                                <td>TWK</td>
+                                                <td>{{ optional($ujianSiswa->getNilai)->twk }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TIU</td>
+                                                <td>{{ optional($ujianSiswa->getNilai)->tiu }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>TKP</td>
+                                                <td>{{ optional($ujianSiswa->getNilai)->tkp }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>TOTAL </th>
+                                                <th>{{ optional($ujianSiswa->getNilai)->nilai_akhir }}</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    @if ((optional($ujianSiswa->getNilai)->twk >= 65) & (optional($ujianSiswa->getNilai)->tiu >= 80) && optional($ujianSiswa->getNilai)->tkp >= 166)
+                                        <button type='button' class="btn btn-success col-12 mt-4">
+                                            <h3>Memenuhi Syarat</h3>
+                                        </button>
+                                    @else
+                                        <button type='button' class="btn btn-danger col-12 mt-4">
+                                            <h3>Tidak Memenuhi Syarat</h3>
+                                        </button>
+                                    @endif
                                     <a href="{{ '/' }}" class="btn btn-warning col-12 mt-2">Kembali Ke
                                         Beranda</a>
                                 @endif
