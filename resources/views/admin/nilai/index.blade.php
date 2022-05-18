@@ -1,5 +1,5 @@
 @extends('layouts.app-admin')
-@section('title', 'Daftar Test Psikologi POLRI')
+@section('title', 'Daftar Riwayat Ujian Siswa')
 @section('css')
     <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -73,27 +73,26 @@
                     <table class="table table-bordered table-sm">
                         <thead>
                         <tr class="bg-dark text-center">
-                            <th scope="col" class="align-middle" width="30%">Nama</th>
-                            <th scope="col" class="align-middle" width="10%">Kecerdasan</th>
-                            <th scope="col" class="align-middle" width="10%">Kecermatan</th>
-                            <th scope="col" class="align-middle" width="10%">Kepribadian</th>
-                            <th scope="col" class="align-middle" width="10%">Nilai Akhir</th>
                             <th scope="col" class="align-middle" width="">Tanggal</th>
-                            <th scope="col" class="align-middle" width="">Detail Ujian</th>
+                            <th scope="col" class="align-middle" width="30%">Nama</th>
+                            <th scope="col" class="align-middle" width="10%">Token</th>
+                            <th scope="col" class="align-middle" width="10%">TWK</th>
+                            <th scope="col" class="align-middle" width="10%">TIU</th>
+                            <th scope="col" class="align-middle" width="10%">TKP</th>
+                            <th scope="col" class="align-middle" width="10%">Total</th>
+                            {{-- <th scope="col" class="align-middle" width="">Detail Ujian</th> --}}
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $key => $value)
                         <tr >
+                            <td class="text-center">{{ $value->updated_at }}</td>
                             <th scope="row">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</th>
-                            <td class="text-right">{{ $value->kecerdasan }}</td>
-                            <td class="text-right">{{ $value->kecermatan }}</td>
-                            <td class="text-right">{{ $value->kepribadian }}</td>
+                            <td class="text-right">{{ optional($value->getUjianSiswa)->token }}</td>
+                            <td class="text-right">{{ $value->twk }}</td>
+                            <td class="text-right">{{ $value->tiu }}</td>
+                            <td class="text-right">{{ $value->tkp }}</td>
                             <td class="text-right">{{ $value->nilai_akhir }}</td>
-                            <td class="text-center">{{ optional($value->getUjianSiswa)->created_at }}</td>
-                            <td class="text-center">
-                                <a href="{{ action('UjianNilaiController@detail', $value->ujian_siswa_id) }}" class="btn btn-primary btn-xs">Detail Test</a>
-                            </td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -89,8 +89,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/banksoal/kepribadian/sesi-2/{kepribadian}/update', 'KepribadianController@update_sesi2');
         Route::delete('/banksoal/kepribadian/sesi-2/{id}/destroy', 'KepribadianController@destroy_sesi2');
 
-        Route::get('/list-ujian', 'UjianNilaiController@index');
-        Route::get('/list-ujian/{id}/detail', 'UjianNilaiController@detail');
+        Route::get('/list-ujian', 'IkdinUjianNilaiController@index');
+        Route::get('/list-ujian/{id}/detail', 'IkdinUjianNilaiController@detail');
 
         Route::get('/import-soal', 'KecermatanController@import');
         Route::post('/import-soal/save', 'KecermatanController@saveImport');
@@ -137,7 +137,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/ujian/ujian-kepribadian', 'UjianSiswaController@ujianKepribadian');
         // Route::post('/ujian/ujian-kepribadian-sesi-2', 'UjianSiswaController@ujianKepribadian2');
         Route::get('/hasil-Ujian/{nilai}', 'UjianSiswaController@hasilUjian');
-        Route::get('/riwayat-test-psikologi', 'UjianSiswaController@riwayatUjian');
+        Route::get('/riwayat-ujian-siswa', 'IkdinUjianSiswaController@riwayatUjian');
 
         Route::post('cat-akademik/matematika', 'AkademikUjianSiswaController@halamanUjian');
         Route::post('cat-akademik/simpan-jawaban-cat-akademik', 'AkademikUjianSiswaController@storeJawaban');

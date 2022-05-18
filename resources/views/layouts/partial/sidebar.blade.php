@@ -103,14 +103,14 @@
                 </p>
             </a>
         </li> --}}
-        {{-- <li class="nav-item">
-            <a href="{{ action('UjianNilaiController@index') }}" class="nav-link">
+        <li class="nav-item">
+            <a href="{{ action('IkdinUjianNilaiController@index') }}" class="nav-link">
                 <i class="fas fa-book nav-icon"></i>
                 <p>
                     Riwayat Ujian
                 </p>
             </a>
-        </li> --}}
+        </li>
         {{-- <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-database"></i>

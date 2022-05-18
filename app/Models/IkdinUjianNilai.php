@@ -11,4 +11,10 @@ class IkdinUjianNilai extends Model
 
     protected $fillable =
     [ 'ikdin_ujian_siswa_id','twk','tiu','tkp','nilai_akhir',    ];
+
+
+    public function getUjianSiswa() {
+        return $this->belongsTo(IkdinUjianSiswa::class, 'ikdin_ujian_siswa_id','id');
+    }
+
 }

@@ -103,10 +103,10 @@
                         <div class="row  justify-content-center">
                             <a href="/">
                                 <div class="col-12 text-center">
-                                    <img src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino"
-                                        class="cover p-2">
-                                    <img src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino"
-                                        class="cover p-2">
+                                    {{-- <img src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino"
+                                        class="cover p-2"> --}}
+                                    {{-- <img src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino"
+                                        class="cover p-2"> --}}
                                     <img src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino"
                                         class="cover p-2">
                                 </div>

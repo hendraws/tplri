@@ -16,4 +16,15 @@ class IkdinUjianSiswa extends Model
         return $this->belongsTo(IkdinUjianNilai::class, 'id', 'ikdin_ujian_siswa_id');
     }
 
+    public function getSiswa()
+    {
+        return $this->belongsTo(User::class, 'user_id','id');
+    }
+
+
+    public function getUjian()
+    {
+        return $this->belongsTo(Ujian::class, 'ujian_id', 'id');
+    }
+
 }

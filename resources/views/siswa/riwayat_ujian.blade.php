@@ -56,7 +56,9 @@
                             <th scope="col">#</th>
                             <th scope="col">Tanggal Ujian</th>
                             <th scope="col">Judul Ujian</th>
-                            <th scope="col">Nilai</th>
+                            <th scope="col">TWK</th>
+                            <th scope="col">TIU</th>
+                            <th scope="col">TKP</th>
                             {{-- <th scope="col"></th> --}}
                         </tr>
                     </thead>
@@ -66,7 +68,9 @@
                             <th scope="row">{{ $loop->index + 1 }}</th>
                             <td>{{ date('d M Y h:i:s', strtotime($value->created_at)) }}</td>
                             <td>{{ optional($value->getUjian)->judul  }}</td>
-                            <td>{{ optional($value->getNilai)->nilai_akhir }}</td>
+                            <td>{{ optional($value->getNilai)->twk }}</td>
+                            <td>{{ optional($value->getNilai)->tiu }}</td>
+                            <td>{{ optional($value->getNilai)->tkp }}</td>
                             {{-- <td><a href="">Detail</a></td> --}}
                         </tr>
                         @endforeach

@@ -148,4 +148,14 @@ class IkdinUjianSiswaController extends Controller
             return response()->json($result);
         }
     }
+
+    public function riwayatUjian()
+    {
+        $data = IkdinUjianSiswa::where('user_id',auth()->user()->id)
+                ->orderBy('updated_at', 'DESC' )
+                ->take(10)->get();
+        // dd($data);
+        return view('siswa.riwayat_ujian', compact('data'));
+    }
+
 }

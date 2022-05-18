@@ -14,8 +14,11 @@ class IkdinUjianNilaiController extends Controller
      */
     public function index()
     {
-        //
+        $data = IkdinUjianNilai::with('getUjianSiswa', 'getUjianSiswa.getSiswa')->orderBy('id','desc')->get();
+
+        return view('admin.nilai.index', compact('data'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -46,7 +49,9 @@ class IkdinUjianNilaiController extends Controller
      */
     public function show(IkdinUjianNilai $ikdinUjianNilai)
     {
-        //
+        $data = UjianSiswa::findOrFail($id);
+        dd($data);
+        return view('admin.nilai.detail', compact('data'));
     }
 
     /**

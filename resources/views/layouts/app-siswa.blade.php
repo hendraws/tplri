@@ -9,7 +9,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title') | CAT AKADEMIK </title>
+    <title>@yield('title') | CAT SKD </title>
 
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
@@ -53,8 +53,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-white" style="background: #e43205; font-colour:white" >
             <div class="container">
                 <a href="/" class="h5">
-                    <img src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino" class="logo-app" >
-                    <img src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino" class="logo-app" >
+                    {{-- <img src="{{ asset('images/polri.png') }}" alt="Rumah Private Kino" class="logo-app" > --}}
+                    {{-- <img src="{{ asset('images/polda.png') }}" alt="Rumah Private Kino" class="logo-app" > --}}
                     <img src="{{ asset('images/bg.png') }}" alt="Rumah Private Kino" class="logo-app" >
                 </a>
 
