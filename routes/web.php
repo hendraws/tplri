@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/import-soal/save', 'KecermatanController@saveImport');
 
         Route::resource('/pengaturan-soal', 'PengaturanSoalController');
+        Route::get('/generate-nilai-kepribadian', 'UjianSiswaController@generateNilaiKepribadian');
 
     });
 
