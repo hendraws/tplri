@@ -159,6 +159,7 @@ Tambah Pengguna
 {{-- <button class="btn btn-success float-right btn-sm mx-2" type="button" id="btnExport">
 	Export Xlsx
 </button> --}}
+<a href="{{ action('UserController@nonakfitAll') }}" class="btn btn-sm btn-danger float-right" onclick="return confirm('Yakin dinonaktifkan?');">Non Akfitkan Semua Akun</a>
 @endsection
 @section('content')
 <div class="card card-accent-primary border-primary shadow-sm table-responsive">

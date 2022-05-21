@@ -17,6 +17,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+
         $data = User::role('siswa')->orderBy('created_at', 'DESC')->get();
         return view('admin.user.index', compact('data'));
     }
@@ -221,10 +222,7 @@ class UserController extends Controller
         }
 
         DB::commit();
-        $result['code'] = '200';
-        $result['message'] = 'berhasil';
-
-        
-    	return response()->json($result);
+        toastr()->success('Data telah dinonaktifkan', 'Berhasil');
+        return redirect(action('UserController@index'));
     }
 }
