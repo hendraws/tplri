@@ -25,24 +25,8 @@ class UjianController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('ujian')) {
 
-            $dataUjian = Ujian::where('id', $request->ujian)->first();
-
-            if ($request->kategori == 'kecerdasan') {
-                $data = Kecerdasan::get();
-            }
-            if ($request->kategori == 'kecermatan') {
-            }
-            if ($request->kategori == 'kepribadian-sesi-1') {
-            }
-            if ($request->kategori == 'kepribadian-sesi-2') {
-            }
-
-            return abort(404);
-        }
-
-        $data = Ujian::where('source','cat-psikologi')->orderBy('created_at', 'desc')->get();
+        $data = Ujian::orderBy('source', 'asc')->orderBy('created_at', 'desc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 

@@ -76,6 +76,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/pengaturan-soal', 'PengaturanSoalController');
         Route::get('/generate-nilai-kepribadian', 'UjianSiswaController@generateNilaiKepribadian');
 
+        Route::get('/request-ujian', 'UjianSiswaController@requestUjian');
+        Route::put('/request-ujian/{id}/store', 'UjianSiswaController@approvalUjian');
+
     });
 
     Route::group(['middleware' => ['role:siswa']], function () {

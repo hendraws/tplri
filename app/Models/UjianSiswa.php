@@ -9,7 +9,7 @@ class UjianSiswa extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'user_id', 'ujian_id', 'kecerdasan', 'kepribadian', 'kecermatan', 'status_ujian',  'token'    ];
+    protected $fillable = [ 'user_id', 'ujian_id', 'kecerdasan', 'kepribadian', 'kecermatan', 'status_ujian',  'token' , 'status_akses'   ];
 
     public function getSiswa()
     {
@@ -29,7 +29,6 @@ class UjianSiswa extends Model
     {
         return $this->hasMany(UjianSiswaJawabanKecerdasan::class, 'ujian_siswa_id','id');
     }
-
 
 
     public function getNilai()

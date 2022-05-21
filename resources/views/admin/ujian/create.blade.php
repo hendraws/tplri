@@ -21,67 +21,65 @@
 @endsection
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm table-responsive">
-        <form method="POST" action="{{ action('UjianController@store') }}" enctype='multipart/form-data' b>
-            @csrf
-            <div class="card-body">
-                <div class="form-group row">
-                    <label for="judul" class="col-sm-2 col-form-label">Judul</label>
-                    <div class="col-md-10">
-                        <input id="judul" type="text" class="form-control @error('judul') is-invalid @enderror" name="judul"
-                            value="{{ old('judul') }}" required autocomplete="judul" autofocus placeholder="Judul">
-                    </div>
+
+    </div>
+    <div class="card card-primary card-outline card-outline-tabs">
+        <div class="card-header p-0 border-bottom-0">
+            <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill"
+                        href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home"
+                        aria-selected="true">CAT PSIKOLOGI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill"
+                        href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile"
+                        aria-selected="false">CAT AKADEMIK</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill"
+                        href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings"
+                        aria-selected="false">CAT KECERMATAN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill"
+                        href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages"
+                        aria-selected="false">CAT KECERMATAN SAMA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-kepribadian-tab" data-toggle="pill"
+                        href="#custom-tabs-four-kepribadian" role="tab" aria-controls="custom-tabs-four-kepribadian"
+                        aria-selected="false">CAT KEPRIBADIAN</a>
+                </li>
+
+            </ul>
+        </div>
+        <div class="card-body">
+            <div class="tab-content" id="custom-tabs-four-tabContent">
+                <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel"
+                    aria-labelledby="custom-tabs-four-home-tab">
+                    @includeIf('admin.ujian.kategori.cat_psikologi')
                 </div>
-                <div class="form-group row">
-                    <label for="kategori" class="col-sm-2 col-form-label">Kategori Kecermatan</label>
-                    <div class="col-md-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault2" checked value="angka">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Angka
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault1"  value="huruf">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Huruf
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault1" value="simbol">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Simbol
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault1" value="campuran">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Campuran
-                            </label>
-                        </div>
-                    </div>
+                <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel"
+                    aria-labelledby="custom-tabs-four-profile-tab">
+                    @includeIf('admin.ujian.kategori.cat_akademik')
                 </div>
-                <div class="form-group row">
-                    <label for="judul" class="col-sm-2 col-form-label">Aktif ?</label>
-                    <div class="col-md-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_active" id="flexRadioDefault2" value="1">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Aktif
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="is_active" id="flexRadioDefault1" checked value="0">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Tidak Aktif
-                            </label>
-                        </div>
-                    </div>
+                <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel"
+                aria-labelledby="custom-tabs-four-settings-tab">
+                @includeIf('admin.ujian.kategori.cat_kecermatan')
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel"
+                    aria-labelledby="custom-tabs-four-messages-tab">
+                    @includeIf('admin.ujian.kategori.cat_kecermatan_sama')
+                </div>
+                <div class="tab-pane fade" id="custom-tabs-four-kepribadian" role="tabpanel"
+                    aria-labelledby="custom-tabs-four-kepribadian-tab">
+                    @includeIf('admin.ujian.kategori.cat_kepribadian')
                 </div>
 
-                <div class="modal-footer">
-                    <button class="btn btn-brand btn-square btn-primary col">Simpan</button>
-                </div>
             </div>
-        </form>
+        </div>
+        <!-- /.card -->
     </div>
+
 @endsection

@@ -441,4 +441,26 @@ class UjianSiswaController extends Controller
 
         return 'true';
     }
+
+    public function requestUjian(){
+
+        $data = UjianSiswa::where('status_akses', 0)->orderby('created_at', 'DESC')->get();
+
+        return view('admin.request_ujian.index', compact('data'));
+    }
+
+    public function approvalUjian(Request $request, $id){
+
+        $data = UjianSiswa::find($id);
+        $data->update([
+            'status_akses' => $request->status_akses
+        ]);
+
+        $result['code'] = '200';
+        return response()->json($result);
+
+
+    }
+
+
 }
