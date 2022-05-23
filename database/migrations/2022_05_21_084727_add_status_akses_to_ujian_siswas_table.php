@@ -14,7 +14,7 @@ class AddStatusAksesToUjianSiswasTable extends Migration
     public function up()
     {
         Schema::table('ujian_siswas', function (Blueprint $table) {
-            $table->string('status_akses')->nullable()->default(0)->after('token')->comment('0 untuk meminta akses, 1 di ijinkan, 2 di tolak');
+            $table->string('status_akses')->nullable()->after('token')->comment('0 untuk meminta akses, 1 di ijinkan, 2 di tolak');
         });
     }
 

@@ -122,7 +122,7 @@ class UjianSiswaController extends Controller
             return back();
         }
 
-        $ujianSiswa = UjianSiswa::firstOrCreate(['token' => $request->token, 'ujian_id' => $ujian->id, 'user_id' => auth()->user()->id], []);
+        $ujianSiswa = UjianSiswa::firstOrCreate(['token' => $request->token, 'ujian_id' => $ujian->id, 'user_id' => auth()->user()->id], ['status_akses'=> 0]);
 
         return view('siswa.ruang_ujian.index', compact('ujianSiswa', 'ujian'));
 
