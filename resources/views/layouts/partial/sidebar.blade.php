@@ -28,7 +28,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ action('UjianSiswaController@requestUjian') }}" class="nav-link">
+            <a href="{{ action('UjianSiswaController@historyUjian') }}" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                     Riwayat Verifikasi

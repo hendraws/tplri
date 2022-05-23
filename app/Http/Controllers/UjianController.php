@@ -14,6 +14,7 @@ use App\Models\ProgramAkademik;
 use App\Models\UjianKecerdasan;
 use App\Models\UjianKecermatan;
 use App\Models\UjianKepribadian;
+use App\Models\UjianSiswa;
 use Illuminate\Support\Facades\DB;
 
 class UjianController extends Controller
@@ -357,4 +358,6 @@ class UjianController extends Controller
         $result['code'] = '200';
         return response()->json($result);
     }
+
+
 }

@@ -462,5 +462,11 @@ class UjianSiswaController extends Controller
 
     }
 
+    public function historyUjian(){
+        $data = UjianSiswa::whereNotNull('status_akses')->get();
+
+        return view('admin.request_ujian.history', compact('data'));
+    }
+
 
 }
