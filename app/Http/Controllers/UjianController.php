@@ -26,7 +26,7 @@ class UjianController extends Controller
     public function index(Request $request)
     {
 
-        $data = Ujian::orderBy('source', 'asc')->orderBy('created_at', 'desc')->get();
+        $data = Ujian::orderBy('created_at', 'desc')->orderBy('source', 'asc')->get();
         return view('admin.ujian.index', compact('data'));
     }
 
@@ -61,8 +61,28 @@ class UjianController extends Controller
 
         DB::beginTransaction();
         try {
+            $kode = '';
+            if($request->source == 'cat-akademik'){
+                $kode = 'AKA';
+            }
+            if($request->source == 'cat-psikologi'){
+                $kode = 'PSI';
+            }
+            if($request->source == 'cat-kecermatan'){
+                $kode = 'KEC';
+            }
+            if($request->source == 'cat-kecermatan-sama'){
+                $kode = 'KES';
+            }
+            if($request->source == 'cat-kepribadian'){
+                $kode = 'KEP';
+            }
+            if($request->source == 'cat-ikdin'){
+                $kode = 'IKD';
+            }
+
             do {
-                $token = 'PSI'.strtoupper(Str::random(3));
+                $token = $kode.strtoupper(Str::random(3));
             } while (Ujian::where('token', $token)->exists());
 
 
@@ -71,7 +91,9 @@ class UjianController extends Controller
             $inputUjian['is_active'] = $request->is_active;
             $inputUjian['tanggal'] = date('Y-m-d');
             $inputUjian['token'] = $token;
-            $inputUjian['source'] = 'cat-psikologi';
+            $inputUjian['source'] = $request->source;
+            $inputUjian['kategori'] = $request->kategori;
+            $inputUjian['posisi'] = $request->posisi;
 
 
             Ujian::create($inputUjian);

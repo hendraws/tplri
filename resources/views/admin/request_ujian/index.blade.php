@@ -1,5 +1,5 @@
 @extends('layouts.app-admin')
-@section('title', 'Request Pengguna Ujian')
+@section('title', 'Verifikasi Pengguna Ujian')
 @section('css')
     <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -105,8 +105,10 @@
     </script>
 @endsection
 @section('button-title')
-    <a class="btn btn-sm btn-primary ml-2 float-right" href="{{ action('UjianController@create') }}" data-toggle="tooltip"
-        data-placement="top" title="Tambah">Buat Ujian Baru</a>
+    <a class="btn btn-sm btn-danger ml-2 float-right" href="{{ action('UjianController@create') }}" data-toggle="tooltip"
+        data-placement="top" title="Tambah">TOLAK SEMUA</a>
+    <a class="btn btn-sm btn-success ml-2 float-right" href="{{ action('UjianController@create') }}" data-toggle="tooltip"
+        data-placement="top" title="Tambah">IJINKAN SEMUA</a>
 @endsection
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm table-responsive">

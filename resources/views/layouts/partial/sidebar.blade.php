@@ -23,12 +23,20 @@
             <a href="{{ action('UjianSiswaController@requestUjian') }}" class="nav-link">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
-                    Konfirmasi Ujian
+                    Verifikasi Pengguna
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ action('UjianSiswaController@requestUjian') }}" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Riwayat Verifikasi
                 </p>
             </a>
         </li>
         @endrole
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-file"></i>
                 <p>
@@ -73,7 +81,7 @@
                     </ul>
                 </li>
             </ul>
-        </li>
+        </li> --}}
         @role('super-admin')
         <li class="nav-item">
             <a href="{{ action('UjianController@index') }}" class="nav-link">
@@ -91,14 +99,14 @@
                 </p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ action('UjianNilaiController@index') }}" class="nav-link">
                 <i class="fas fa-book nav-icon"></i>
                 <p>
                     Riwayat Ujian
                 </p>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-database"></i>
