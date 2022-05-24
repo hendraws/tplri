@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+
         $soalKecerdasan = Kecerdasan::with('getKategori')->get();
         $soalKecermatan = Kecermatan::get();
         $soalKepribadianSesi1 = Kepribadian::where('sesi','1')->get();
@@ -76,8 +76,11 @@ class HomeController extends Controller
         if($user->hasRole('siswa')){
             $user  = auth()->user();
             $programAkademik = ProgramAkademik::pluck('nama_program', 'id');
-            return view('siswa.home', compact('programAkademik', 'user'));
+            $kelas = Kelas::pluck('nama_kelas','id');
+
+            return view('siswa.home', compact('programAkademik', 'user','kelas'));
         }
+
 
         return redirect()->action([HomeController::class, 'index']);
     }
