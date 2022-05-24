@@ -13,4 +13,10 @@ class IkdinUjianSiswaJawaban extends Model
         'ikdin_ujian_siswa_id', 'soal_id', 'jawaban_id', 'kategori','benar', 'skor',
     ];
 
+    protected $with = ['getSoal'];
+
+    public function getSoal()
+    {
+        return $this->belongsTo(SoalCatSkd::class, 'soal_id', 'id');
+    }
 }

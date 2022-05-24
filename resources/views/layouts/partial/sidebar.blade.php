@@ -111,7 +111,7 @@
                 </p>
             </a>
         </li>
-        {{-- <li class="nav-item">
+        <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-database"></i>
                 <p>
@@ -120,7 +120,7 @@
                 </p>
             </a>
             <ul class="nav nav-treeview">
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ action('ProgramAkademikController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Program Akademik</p>
@@ -131,21 +131,21 @@
                         <i class="far fa-circle nav-icon"></i>
                         <p>Ref Option</p>
                     </a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="{{ action('KelasController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Kelas</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ action('MataPelajaranController@index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mata Pelajaran</p>
                     </a>
-                </li>
+                </li> --}}
             </ul>
-        </li> --}}
+        </li>
         @endrole
         {{-- <li class="nav-item menu-open">
             <a href="#" class="nav-link active">

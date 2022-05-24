@@ -35,7 +35,7 @@ class IkdinUjianSiswaController extends Controller
         }
 
 
-        $ujianSiswa = IkdinUjianSiswa::firstOrCreate(['token' => $request->token, 'ujian_id' => $ujian->id, 'user_id' => auth()->user()->id], []);
+        $ujianSiswa = IkdinUjianSiswa::firstOrCreate(['token' => $request->token, 'ujian_id' => $ujian->id, 'user_id' => auth()->user()->id], ['sisa_waktu'=>100]);
 
 
 
@@ -47,31 +47,50 @@ class IkdinUjianSiswaController extends Controller
 
         $ujian = Ujian::find($request->ujian_id);
         $ujianSiswa =  IkdinUjianSiswa::find($request->ujian_siswa_id);
+        $soal = IkdinUjianSiswaJawaban::where('ikdin_ujian_siswa_id', $request->ujian_siswa_id)->get();
 
-        $jawabanSiswa = IkdinUjianSiswaJawaban::where('ikdin_ujian_siswa_id', $request->ujian_siswa_id)->get();
+        if ($soal->count() == 0) {
 
-        if ($jawabanSiswa->count() > 0) {
-            $jawabanSiswa->each->delete();
+
+            // $jawabanSiswa = IkdinUjianSiswaJawaban::where('ikdin_ujian_siswa_id', $request->ujian_siswa_id)->get();
+
+            // if ($jawabanSiswa->count() > 0) {
+            //     $jawabanSiswa->each->delete();
+            // }
+            $soalColl =  new Collection();
+
+            $twk = SoalCatSkd::where('mapel', 'twk')->orderByRaw('RAND()')->take(30)->get();
+            $soalColl = $soalColl->merge($twk);
+
+            $tiuMtk = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'matematika')->orderByRaw('RAND()')->take(11)->get();
+            $soalColl = $soalColl->merge($tiuMtk);
+
+            $tiuSilogisme = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'silogisme')->orderByRaw('RAND()')->take(8)->get();
+            $soalColl = $soalColl->merge($tiuSilogisme);
+
+            $tiuSpasial = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'spasial')->orderByRaw('RAND()')->take(8)->get();
+            $soalColl = $soalColl->merge($tiuSpasial);
+
+            $tiuVerbal = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'verbal')->orderByRaw('RAND()')->take(8)->get();
+            $soalColl = $soalColl->merge($tiuVerbal);
+
+            $tkp = SoalCatSkd::where('mapel', 'tkp')->orderByRaw('RAND()')->take(45)->get();
+            $soalColl = $soalColl->merge($tkp);
+
+            foreach ($soalColl as $item) {
+                IkdinUjianSiswaJawaban::create([
+                    'ikdin_ujian_siswa_id' => $request->ujian_siswa_id,
+                    'soal_id' => $item->id,
+                    'kategori' => $item->mapel,
+                ]);
+            }
+
+            $soal = IkdinUjianSiswaJawaban::where('ikdin_ujian_siswa_id', $request->ujian_siswa_id)->get();
+
+            return view('ujian.ikdin.halaman-ujian', compact('ujian', 'ujianSiswa', 'soal'));
         }
-        $soal =  new Collection();
 
-        $twk = SoalCatSkd::where('mapel', 'twk')->orderByRaw('RAND()')->take(30)->get();
-        $soal = $soal->merge($twk);
 
-        $tiuMtk = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'matematika')->orderByRaw('RAND()')->take(11)->get();
-        $soal = $soal->merge($tiuMtk);
-
-        $tiuSilogisme = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'silogisme')->orderByRaw('RAND()')->take(8)->get();
-        $soal = $soal->merge($tiuSilogisme);
-
-        $tiuSpasial = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'spasial')->orderByRaw('RAND()')->take(8)->get();
-        $soal = $soal->merge($tiuSpasial);
-
-        $tiuVerbal = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'verbal')->orderByRaw('RAND()')->take(8)->get();
-        $soal = $soal->merge($tiuVerbal);
-
-        $tkp = SoalCatSkd::where('mapel', 'tkp')->orderByRaw('RAND()')->take(45)->get();
-        $soal = $soal->merge($tkp);
 
         return view('ujian.ikdin.halaman-ujian', compact('ujian', 'ujianSiswa', 'soal'));
     }
@@ -83,15 +102,15 @@ class IkdinUjianSiswaController extends Controller
             $ujianSiswa =  IkdinUjianSiswa::find($request->ujianSiswaId);
 
             $skor = IkdinUjianSiswaJawaban::where('ikdin_ujian_siswa_id', $request->ujianSiswaId)
-                    ->selectRaw('sum(skor) as total_skor, kategori')
-                    ->groupBy('kategori')
-                    ->pluck('total_skor','kategori');
+                ->selectRaw('sum(skor) as total_skor, kategori')
+                ->groupBy('kategori')
+                ->pluck('total_skor', 'kategori');
 
 
 
-            $tiu = array_key_exists("tiu",$skor->toArray()) ?  $skor['tiu'] : 0;
-            $twk = array_key_exists("twk",$skor->toArray()) ?  $skor['twk'] : 0;
-            $tkp = array_key_exists("tkp",$skor->toArray()) ?  $skor['tkp'] : 0;
+            $tiu = array_key_exists("tiu", $skor->toArray()) ?  $skor['tiu'] : 0;
+            $twk = array_key_exists("twk", $skor->toArray()) ?  $skor['twk'] : 0;
+            $tkp = array_key_exists("tkp", $skor->toArray()) ?  $skor['tkp'] : 0;
 
             $nilai = IkdinUjianNilai::updateOrCreate(
                 ['ikdin_ujian_siswa_id' => $ujianSiswa->id],
@@ -101,7 +120,7 @@ class IkdinUjianSiswaController extends Controller
                     'tkp' =>  $tkp,
                     'nilai_akhir' =>  $skor->sum(),
 
-                    ]
+                ]
             );
 
             $ujianSiswa->update([
@@ -115,6 +134,11 @@ class IkdinUjianSiswaController extends Controller
 
         if ($request->ajax()) {
             try {
+                $ujianSiswa =  IkdinUjianSiswa::find($request->ujianSiswaId);
+                $ujianSiswa->update([
+                    'sisa_waktu' => $request->sisa_waktu,
+                ]);
+
                 // dd($request->all());
                 if ($request->jb == $request->jawaban) {
                     $benar = 1;
@@ -151,11 +175,11 @@ class IkdinUjianSiswaController extends Controller
 
     public function riwayatUjian()
     {
-        $data = IkdinUjianSiswa::where('user_id',auth()->user()->id)
-                ->orderBy('updated_at', 'DESC' )
-                ->take(10)->get();
-        // dd($data);
+        $data = IkdinUjianSiswa::where('user_id', auth()->user()->id)
+            ->where('skd',1)
+            ->orderBy('updated_at', 'DESC')
+            ->take(10)->get();
+
         return view('siswa.riwayat_ujian', compact('data'));
     }
-
 }

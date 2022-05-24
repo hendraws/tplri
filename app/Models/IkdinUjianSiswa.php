@@ -9,7 +9,7 @@ class IkdinUjianSiswa extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'token', 'user_id', 'ujian_id', 'skd',     ];
+    protected $fillable = [ 'token', 'user_id', 'ujian_id', 'skd',  'sisa_waktu'   ];
 
     public function getNilai()
     {

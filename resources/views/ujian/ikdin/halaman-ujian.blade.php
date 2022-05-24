@@ -93,13 +93,14 @@
 
             <div class="col-md-3 border bagianBody">
                 <div class="row p-2">
-                    @for ($i = 1; $i <= count($soal); $i++)
-                        <div class="col-md-3 col-3">
-                            <a href="javascript:void(0)" class="badge badge-danger w-100 p-1 nomor-urutan"
-                                data-no="{{ $i }}">
-                                {{ $i }}</a>
-                        </div>
-                    @endfor
+                    @foreach ($soal as $item)
+                    <div class="col-md-3 col-3">
+                        <a href="javascript:void(0)" class="badge {{ !empty($item->jawaban_id) ? 'badge-success' : 'badge-danger' }}  w-100 p-1 nomor-urutan"
+                            data-no="{{ $loop->iteration }}">
+                            {{ $loop->iteration }}</a>
+                    </div>
+
+                    @endforeach
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
@@ -122,6 +123,7 @@
             </div>
         </div>
 
+
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -130,7 +132,7 @@
     <script src="{{ asset('vendors/bootstrap-4/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/countdowntimer/jquery.countdownTimer.min.js') }}"></script>
     <script>
-        let waktuBerjalan = 100;
+        let waktuBerjalan = "{{ $ujianSiswa->sisa_waktu }}";
         // var jumlahSeluruhSoal = "{{ $ujian->getSoalKecerdasan->count() }}";
         var ujianSiswaId = "{{ $ujianSiswa->id }}";
 
@@ -141,7 +143,7 @@
         });
 
 
-        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb, urutan,skor, mapel) {
+        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb, urutan,skor, mapel,sisaWaktu) {
             console.log(jawaban, jb);
             var url = $('#formStoreUjian').attr('action');
 
@@ -157,14 +159,17 @@
                     "jb": jb,
                     "skor" : skor,
                     "mapel" : mapel,
+                    "sisa_waktu" : sisaWaktu,
                 },
                 success: function(data) {
                     if (data.code == '200') {
                         if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
                             $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');
                         }
+                        $('#tombol-'+noSoal).removeClass('disabled');
                         console.log('berhasil');
                     } else {
+                        $('#tombol-'+noSoal).removeClass('disabled');
                         console.log('gagal');
                     }
                 },

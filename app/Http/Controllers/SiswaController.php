@@ -22,6 +22,7 @@ class SiswaController extends Controller
             "alamat" => 'required',
             "telepon" => 'required',
             "program_id" => 'required',
+            "kelas_id" => 'required',
         ]);
 
 

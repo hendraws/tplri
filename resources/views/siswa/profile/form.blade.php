@@ -52,6 +52,19 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="kelas" class="col-sm-2 col-form-label">Kelas</label>
+                <div class="col-md-10">
+                    <select class="form-control select" name="kelas_id" id="kelas" required>
+
+                        <option readonly selected value="">Pilih Kelas</option>
+                        @foreach ($kelas as $key => $val)
+                            <option value="{{ $key }}" {{ $user->kelas_id == $key ? 'selected' : '' }}>{{ $val }}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button class="btn btn-brand btn-square btn-primary col">Simpan</button>
             </div>

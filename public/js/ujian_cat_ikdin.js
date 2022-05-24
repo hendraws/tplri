@@ -18,7 +18,7 @@ $(document).on('click', '.nomor-urutan', function () {
 
 // klik tombol simpan & lanjutkan ke lokalstorage
 $('.simpan').click(function () {
-
+    $(this).addClass('disabled');
     var noSoal = $(this).data('soal');
     var urutan = $(this).data('urutan');
     var mapel = $(this).data('mapel');
@@ -26,6 +26,8 @@ $('.simpan').click(function () {
     var pilih = $("input[type='radio'][name='pilihan[" + noSoal + "]']:checked");
     var skor = pilih.data('skor');
     var jawaban = $("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").val();
+    var sisaWaktu = $('#timer').html().split(":")[0];
+
     let urutanSelanjutnya = urutan + 1;
     urutanTerkahir = urutanSelanjutnya;
     semuaJawaban[urutan] = {
@@ -34,7 +36,7 @@ $('.simpan').click(function () {
     };
     // console.log(jb, $(this));
     // console.log(ujianSiswaId, noSoal,jawaban,jb,urutan);
-    simpanJawaban(ujianSiswaId, noSoal,jawaban,jb,urutan,skor,mapel);
+    simpanJawaban(ujianSiswaId, noSoal,jawaban,jb,urutan,skor,mapel,sisaWaktu);
 
     // if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
     //     $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');

@@ -36,6 +36,12 @@
                             <div class="col-8">
                                 : {{ optional($user->getProgramAkademik)->nama_program }}
                             </div>
+                            <div class="col-4">
+                                Kelas
+                            </div>
+                            <div class="col-8">
+                                : {{ optional($user->getKelas)->nama_kelas }}
+                            </div>
                         </div>
                     </div>
                 </div>
