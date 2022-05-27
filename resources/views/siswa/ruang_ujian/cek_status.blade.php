@@ -8,6 +8,6 @@
             <br>
             Jika sudah di verifikasi, Silahkan tekan tombol refresh halaman untuk melanjutkan ke halaman ujian
         </p>
-        <div class="btn btn-primary">Refresh Halaman</div>
+        <div class="btn btn-primary" onclick="location.reload();">Refresh Halaman</div>
     </div>
 </div>
