@@ -11,4 +11,5 @@ class UjianSiswaJawabanKecermatan extends Model
 
     protected $fillable = [ 'ujian_siswa_id', 'soal_id', 'soal_a', 'soal_b', 'soal_c', 'soal_d', 'jawaban', 'benar',     ];
 
+
 }

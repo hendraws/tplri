@@ -9,4 +9,11 @@ class UjianSiswaJawabanKecerdasan extends Model
 {
     use HasFactory;
     protected $fillable = [ 'ujian_siswa_id', 'soal_id','kategori', 'jawaban_id','benar' ];
+
+    protected $with = ['getSoal'];
+
+    public function getSoal()
+    {
+        return $this->belongsTo(Kecerdasan::class, 'soal_id', 'id');
+    }
 }

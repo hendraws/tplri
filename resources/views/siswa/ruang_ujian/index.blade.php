@@ -30,11 +30,11 @@
 <body class="hold-transition login-page" style="background-color: #FFEAAD;">
     <div class="container ">
         {{-- <h1 class="text-center">CAT Psikologi Polri Rumah Private Kino</h1> --}}
-        @if($ujianSiswa->status_akses == 0)
+        {{-- @if($ujianSiswa->status_akses == 0)
         @includeIf('siswa.ruang_ujian.cek_status')
-        @else
+        @else --}}
         @includeIf('siswa.ruang_ujian.list')
-        @endif
+        {{-- @endif --}}
     </div>
     <!-- /.login-box -->
 

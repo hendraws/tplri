@@ -30,6 +30,7 @@ $(document).on('click', '.nomor-urutan', function () {
 
 // klik tombol simpan & lanjutkan ke lokalstorage
 $('.simpan').click(function () {
+    $(this).addClass('disabled');
 
     var noSoal = $(this).data('soal');
     var urutan = $(this).data('urutan');
@@ -41,8 +42,10 @@ $('.simpan').click(function () {
         'soal': noSoal,
         'jawaban': jawaban
     };
+    var waktu = $('#timer').html().split(":")[0];
+
     console.log(jb, $(this));
-    simpanJawaban(ujianSiswaId, noSoal,jawaban,jb,urutan);
+    simpanJawaban(ujianSiswaId, noSoal,jawaban,jb,urutan, waktu);
 
     if($("input[type='radio'][name='pilihan[" + noSoal + "]']:checked").length > 0){
         $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');

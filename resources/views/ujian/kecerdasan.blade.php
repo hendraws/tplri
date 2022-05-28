@@ -12,6 +12,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap-4/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/countdowntimer/jquery.countdownTimer.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/toastr/toastr.min.css') }}">
+    @toastr_css
     <style>
         body {
             background: #f6e8c6;
@@ -100,13 +103,20 @@
 
             <div class="col-md-3 border bagianBody">
                 <div class="row p-2">
-                    @for ($i = 1; $i <= count($soalKecerdasan); $i++)
+                    @foreach ($soals as $key => $val)
+                    <div class="col-md-3 col-3">
+                        <a href="javascript:void(0)" class="badge {{ !empty($val->jawaban_id) ? 'badge-success' : 'badge-danger' }} w-100 p-1 nomor-urutan"
+                            data-no="{{ $loop->iteration }}">
+                            {{ $loop->iteration }}</a>
+                    </div>
+                    @endforeach
+                    {{-- @for ($i = 1; $i <= count($soalKecerdasan); $i++)
                         <div class="col-md-3 col-3">
                             <a href="javascript:void(0)" class="badge badge-danger w-100 p-1 nomor-urutan"
                                 data-no="{{ $i }}">
                                 {{ $i }}</a>
                         </div>
-                    @endfor
+                    @endfor --}}
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
@@ -137,7 +147,7 @@
     <script src="{{ asset('vendors/bootstrap-4/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/countdowntimer/jquery.countdownTimer.min.js') }}"></script>
     <script>
-        let waktuBerjalan = 90;
+        let waktuBerjalan = "{{ $ujianSiswa->waktu_kecerdasan }}";
         var jumlahSeluruhSoal = "{{ $ujian->getSoalKecerdasan->count() }}";
         var ujianSiswaId = "{{ $ujianSiswa->id }}";
 
@@ -148,8 +158,8 @@
         });
 
 
-        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb, urutan) {
-            console.log(jawaban, jb);
+        function simpanJawaban(ujianSiswaId, noSoal, jawaban, jb, urutan, waktu) {
+            console.log(jawaban, jb, ujianSiswaId);
             var url = "{{ action('UjianSiswaController@simpanJawabanKecerdasan') }}";
             $.ajax({
                 type: 'POST',
@@ -160,6 +170,7 @@
                     "noSoal": noSoal,
                     "jawaban": jawaban,
                     "jb": jb,
+                    "waktu": waktu,
                 },
                 success: function(data) {
                     if (data.code == '200') {
@@ -167,9 +178,11 @@
                             $("a[data-no=" + urutan + "]").removeClass().addClass('badge badge-success w-100 p-1 nomor-urutan');
                         }
                         console.log('berhasil');
+                        $('#tombol-'+noSoal).removeClass('disabled');
                     } else {
                         // alert('jawaban tidak boleh kosong');
-                        console.log('gagal');
+
+                        $('#tombol-'+noSoal).removeClass('disabled');
                     }
                 },
                 error: function(data) {
@@ -221,7 +234,10 @@
 
     </script>
     <script src="{{ asset('js/ujian_kecerdasan.js') }}"></script>
-
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('vendors/toastr/toastr.min.js') }}"></script>
+    @toastr_js
+    @toastr_render
 
 </body>
 

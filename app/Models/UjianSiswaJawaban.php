@@ -9,5 +9,5 @@ class UjianSiswaJawaban extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'ujian_siswa_id', 'soal_id','kategori', 'jawaban_id','benar' ];
+    protected $fillable = [ 'ujian_siswa_id', 'soal_id','kategori', 'jawaban_id','benar', ];
 }
