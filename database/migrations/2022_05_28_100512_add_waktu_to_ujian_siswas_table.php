@@ -14,8 +14,7 @@ class AddWaktuToUjianSiswasTable extends Migration
     public function up()
     {
         Schema::table('ujian_siswas', function (Blueprint $table) {
-            $table->string('waktu_kecerdasan')->nullable()->after('status_akses
-            ');
+            $table->string('waktu_kecerdasan')->nullable()->after('status_akses');
         });
     }
 
