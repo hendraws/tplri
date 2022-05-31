@@ -55,6 +55,13 @@
                                 Simbol
                             </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="kategori_kecermatan" id="flexRadioDefault1"
+                                value="campuran">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Campuran
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group row">
