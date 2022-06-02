@@ -112,6 +112,14 @@
             </a>
         </li>
         <li class="nav-item">
+            <a href="{{ action('ReportController@index') }}" class="nav-link">
+                <i class="fas fa-book nav-icon"></i>
+                <p>
+                    Report
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-database"></i>
                 <p>

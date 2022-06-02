@@ -1,12 +1,26 @@
 @extends('layouts.app-admin')
-@section('title', 'Ujian Psikologi POLRI')
+@section('title', 'Report CAT SKD')
 @section('css')
-    <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
 @endsection
 @section('js')
-    <script src="{{ asset('vendors/DataTables/datatables.min.js') }}"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript"
+        src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -17,7 +31,10 @@
             });
             $('.table').DataTable({
                 "order": [],
-                
+                dom: 'Blfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
             });
 
             $(document).on('click', '.hapus', function(e) {
@@ -96,17 +113,12 @@
                                 }
                             }
                         });
-
                     }
                 })
             }) //tutup
 
         });
     </script>
-@endsection
-@section('button-title')
-    <a class="btn btn-sm btn-primary ml-2 float-right" href="{{ action('UjianController@create') }}" data-toggle="tooltip"
-        data-placement="top" title="Tambah">Buat Ujian Baru</a>
 @endsection
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm table-responsive">
@@ -117,49 +129,27 @@
                     <table class="table" style="font-size: 13px;">
                         <thead class="thead-dark">
                             <tr class="text-center">
+                                <th scope="col">Nama</th>
+                                <th scope="col">Kelas</th>
                                 <th scope="col">Token</th>
                                 <th scope="col">Judul</th>
-                                <th scope="col">Aktif?</th>
-                                {{-- <th scope="col">Posisi</th> --}}
-                                {{-- <th scope="col">mapel</th> --}}
-                                {{-- <th scope="col">Soal</th> --}}
-                                <th scope="col">Aksi</th>
+                                <th scope="col">TWK</th>
+                                <th scope="col">TIU</th>
+                                <th scope="col">TKP</th>
+                                <th scope="col">Nilai Akhir</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td class="text-center">
-                                        <h5>{{ $item->token }}</h5>
-                                    </td>
-                                    <td>{{ $item->judul }}</td>
-                                    <td class="text-center">{{ $item->is_active == '1' ? 'Aktif' : 'Tidak Aktif' }}</td>
-                                    {{-- <td class="text-center">{{ $item->posisi }}</td> --}}
-                                    {{-- <td class="text-center">{{ $item->kategori }}</td> --}}
-                                    <td class="text-center">
-                                        {{-- <a class="btn btn-xs btn-primary"
-                                            href="{{ action('UjianController@show', $item) }}" data-toggle="tooltip"
-                                            data-placement="top" title="Detail" data-id="{{ $item->id }}">Detail</a> --}}
-                                        <a class="btn btn-xs btn-warning"
-                                            href="{{ action('UjianController@edit', $item) }}" data-toggle="tooltip"
-                                            data-placement="top" title="Edit" data-id="{{ $item->id }}">Edit</a>
-                                        <a class="btn btn-xs btn-info"
-                                            href="{{ action('UjianController@generate', $item->id) }}"
-                                            data-toggle="tooltip" data-placement="top" title="Generate"
-                                            data-id="{{ $item->id }}">Generate</a>
-                                        @if ($item->is_active == '0')
-                                            <a href="Javascript:void(0)" class="btn btn-xs btn-primary aktifkan bg-purple color-palette"
-                                                data-url="{{ action('UjianController@is_active', $item) }}"
-                                                data-status="{{ $item->is_active }}" >Aktifkan</a>
-                                        @else
-                                            <a href="Javascript:void(0)" class="btn btn-xs btn-info aktifkan bg-purple color-palette"
-                                                data-url="{{ action('UjianController@is_active', $item) }}"
-                                                data-status="{{ $item->is_active }}" >Non Akfitkan</a>
-                                        @endif
-                                        <a href="Javascript:void(0)" class="btn btn-xs btn-danger hapus"
-                                            data-url="{{ action('UjianController@destroy', $item) }}">Hapus</a>
-
-                                    </td>
+                                    <td>{{ optional($item->getSiswa)->name }}</td>
+                                    <td>{{ optional(optional($item->getSiswa)->getKelas)->nama_kelas }}</td>
+                                    <td>{{ $item->token }}</td>
+                                    <td>{{ optional($item->getUjian)->judul }}</td>
+                                    <td>{{ optional($item->getNilai)->twk }}</td>
+                                    <td>{{ optional($item->getNilai)->tiu }}</td>
+                                    <td>{{ optional($item->getNilai)->tkp }}</td>
+                                    <td>{{ optional($item->getNilai)->nilai_akhir }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

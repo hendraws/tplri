@@ -317,11 +317,19 @@ class UjianController extends Controller
 
             do {
                 $token = "IKD".strtoupper(Str::random(3));
-            } while (Ujian::where('token', $token)->exists());
+            } while (Ujian::withTrashed()->where('token', $token)->exists());
 
-            $ujian->update([
-                'token' => $token
-            ]);
+            $inputUjian['judul'] = $ujian->judul;
+            $inputUjian['kategori_kecermatan'] = $ujian->kategori_kecermatan;
+            $inputUjian['is_active'] = $ujian->is_active;
+            $inputUjian['tanggal'] = date('Y-m-d');
+            $inputUjian['token'] = $token;
+            $inputUjian['source'] = $ujian->source;
+            $inputUjian['kategori'] = $ujian->kategori;
+            $inputUjian['posisi'] = 'ikdin';
+            Ujian::create($inputUjian);
+
+            $ujian->delete();
         } catch (\Exception $e) {
             DB::rollback();
             toastr()->warning($e->getMessage(), '?');

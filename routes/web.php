@@ -119,6 +119,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         });
 
+        Route::get('report', 'ReportController@index');
 
     });
 

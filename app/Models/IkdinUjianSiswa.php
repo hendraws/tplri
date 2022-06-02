@@ -24,7 +24,7 @@ class IkdinUjianSiswa extends Model
 
     public function getUjian()
     {
-        return $this->belongsTo(Ujian::class, 'ujian_id', 'id');
+        return $this->belongsTo(Ujian::class, 'ujian_id', 'id')->withTrashed();
     }
 
 }
