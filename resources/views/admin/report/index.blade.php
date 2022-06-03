@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <link href="{{ asset('vendors/datetimepicker/jquery.datetimepicker.min.css') }}" rel="stylesheet">
 @endsection
 @section('js')
     <script type="text/javascript" language="javascript"
@@ -22,6 +23,7 @@
     <script type="text/javascript" language="javascript"
         src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('vendors/datetimepicker/jquery.datetimepicker.full.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             $.ajaxSetup({
@@ -35,6 +37,11 @@
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
                 ]
+            });
+
+            $('.datetime').datetimepicker({
+                timepicker: false,
+                format: 'Y-m-d',
             });
 
             $(document).on('click', '.hapus', function(e) {
@@ -117,10 +124,110 @@
                 })
             }) //tutup
 
+            $('#judul_cat').select2({
+                multiple: true,
+                theme: "bootstrap4",
+                ajax: {
+                url: "{{ action('ReportController@index') }}?data=judul",
+                method: 'GET',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (d) {
+                            return {
+                                id: d.id,
+                                text: d.judul +' ( '+ d.token + ' )',
+                                // children: $.map(d.jurusan, function (j) {
+                                //     return {
+                                //         id: j.id,
+                                //         text: j.kode_jurusan+' - '+j.name,
+                                //     }
+                                // })
+                            }
+                        })
+                    };
+                },
+                cache: true,
+                },
+            })
+            $('#kelas').select2({
+                multiple: true,
+                theme: "bootstrap4",
+                ajax: {
+                url: "{{ action('ReportController@index') }}?data=kelas",
+                method: 'GET',
+                dataType: 'json',
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results:  $.map(data, function (d) {
+                            return {
+                                id: d.id,
+                                text: d.nama_kelas ,
+                                // children: $.map(d.jurusan, function (j) {
+                                //     return {
+                                //         id: j.id,
+                                //         text: j.kode_jurusan+' - '+j.name,
+                                //     }
+                                // })
+                            }
+                        })
+                    };
+                },
+                cache: true,
+                },
+            })
         });
     </script>
 @endsection
 @section('content')
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-primary float-right" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                aria-controls="collapseExample">
+                <i class="fa fa-filter"></i> Filter
+            </a>
+            <a class="btn btn-warning float-right mx-2" href="{{ action('ReportController@index') }}" >
+                <i class="fa fa-recycle"></i> Reset Filter
+            </a>
+        </div>
+        <div class="collapse" id="collapseExample">
+            <div class="card-body">
+                <form action="" method="GET">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Dari Tanggal</label>
+                            <input type="text" class="form-control datetime" autocomplete="off" id="from" name="from">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Sampai Tanggal</label>
+                            <input type="text" class="form-control datetime" autocomplete="off" id="until" name="until">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Judul CAT</label>
+                            <select class="form-control" id="judul_cat" name="judul_cat">
+                              </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">Kelas</label>
+                            <select class="form-control" id="kelas" name="kelas">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-success col-12">Filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
     <div class="card card-accent-primary border-primary shadow-sm table-responsive">
         <div id="showTable">
             <div class="card-body">
