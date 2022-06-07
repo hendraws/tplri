@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('soal-tkp/{id}/update', 'SoalCatSkdController@updateTkp');
         Route::delete('soal-tkp/{id}/delete', 'SoalCatSkdController@deleteTkp');
 
+        Route::delete('delete-all','SoalCatSkdController@deleteAll');
         Route::post('/soal/upload', 'SoalCatSkdController@upload')->name('upload');
         // Route::get('/pengaturan-ujian/asd', 'UjianController@soalUjian');
 

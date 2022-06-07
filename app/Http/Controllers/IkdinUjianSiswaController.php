@@ -62,16 +62,16 @@ class IkdinUjianSiswaController extends Controller
             $twk = SoalCatSkd::where('mapel', 'twk')->whereNull('kategori')->orderByRaw('RAND()')->take(30)->get();
             $soalColl = $soalColl->merge($twk);
 
-            $tiuMtk = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'matematika')->orderByRaw('RAND()')->take(11)->get();
+            $tiuMtk = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'matematika')->orderByRaw('RAND()')->take(22)->get();
             $soalColl = $soalColl->merge($tiuMtk);
 
-            $tiuSilogisme = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'silogisme')->orderByRaw('RAND()')->take(8)->get();
+            $tiuSilogisme = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'silogisme')->orderByRaw('RAND()')->take(4)->get();
             $soalColl = $soalColl->merge($tiuSilogisme);
 
-            $tiuSpasial = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'spasial')->orderByRaw('RAND()')->take(8)->get();
+            $tiuSpasial = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'spasial')->orderByRaw('RAND()')->take(4)->get();
             $soalColl = $soalColl->merge($tiuSpasial);
 
-            $tiuVerbal = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'verbal')->orderByRaw('RAND()')->take(8)->get();
+            $tiuVerbal = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'verbal')->orderByRaw('RAND()')->take(5)->get();
             $soalColl = $soalColl->merge($tiuVerbal);
 
             $tkp = SoalCatSkd::where('mapel', 'tkp')->orderByRaw('RAND()')->take(45)->get();

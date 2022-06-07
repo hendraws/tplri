@@ -610,4 +610,14 @@ class SoalCatSkdController extends Controller
         return response()->json($result);
     }
 
+    public function deleteAll(Request $request)
+    {
+
+        SoalCatSkd::whereIn('id', $request->ids)->delete();
+        SoalPilihanCatSkd::whereIn('soal_id', $request->ids)->delete();
+        $result['code'] = '200';
+        return response()->json($result);
+
+    }
+
 }

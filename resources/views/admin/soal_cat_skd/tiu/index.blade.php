@@ -51,7 +51,7 @@
                                     );
                                     setTimeout(function() {
                                         window.location =
-                                        "{{ action('SoalCatSkdController@tiu', $kategori) }}";
+                                            "{{ action('SoalCatSkdController@tiu', $kategori) }}";
                                     }, 1500);
 
                                 }
@@ -62,6 +62,52 @@
                 })
             }) //tutup
 
+            $('#deleteAllSelectedRecord').click(function(e) {
+                e.preventDefault();
+                var allids = [];
+
+                $("input:checkbox[name=ids]:checked").each(function() {
+                    allids.push($(this).val());
+                });
+
+                Swal.fire({
+                    title: 'Apakah Anda Yakin ?',
+                    text: "Data akan terhapus tidak dapat dikembalikan lagi !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value == true) {
+                        $.ajax({
+                            url: "{{ action('SoalCatSkdController@deleteAll') }}",
+                            type: "DELETE",
+                            data: {
+                                "_token": "{{ csrf_token() }}",
+                                ids: allids,
+                            },
+                            success: function(data) {
+                                if (data.code == '200') {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    );
+                                    setTimeout(function() {
+                                        window.location =
+                                            "{{ action('SoalCatSkdController@tiu', $kategori) }}";
+                                    }, 1500);
+
+                                }
+                            }
+                        });
+
+                    }
+                })
+
+
+            });
 
         });
     </script>
@@ -72,6 +118,7 @@
 @section('button-title')
     <a class="btn btn-sm btn-primary  ml-2 float-right" href="{{ action('SoalCatSkdController@createTiu', [$kategori]) }}"
         data-toggle="tooltip" data-placement="top" title="Tambah">Tambah Soal</a>
+    <a href="#" class="btn btn-sm btn-danger float-right" id="deleteAllSelectedRecord">Delete Selected</a>
 @endsection
 @section('content')
     <div class="card card-accent-primary border-primary shadow-sm">
@@ -79,6 +126,7 @@
             <table class="table table-bordered display nowrap table-sm" width="100%" id="table-main">
                 <thead>
                     <tr class="text-center">
+                        <th scope="col"></th>
                         <th scope="col">No</th>
                         <th scope="col">Soal</th>
                         <th scope="col">A</th>
@@ -92,6 +140,7 @@
                 <tbody>
                     @foreach ($data as $item)
                         <tr>
+                            <th><input type="checkbox" name="ids" class="checkBoxClass" value="{{ $item->id }}"></th>
                             <th>{{ $loop->index + 1 }}</th>
                             <td>
                                 {!! $item->pertanyaan !!}
