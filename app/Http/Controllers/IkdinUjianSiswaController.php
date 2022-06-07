@@ -59,7 +59,7 @@ class IkdinUjianSiswaController extends Controller
             // }
             $soalColl =  new Collection();
 
-            $twk = SoalCatSkd::where('mapel', 'twk')->orderByRaw('RAND()')->take(30)->get();
+            $twk = SoalCatSkd::where('mapel', 'twk')->whereNull('kategori')->orderByRaw('RAND()')->take(30)->get();
             $soalColl = $soalColl->merge($twk);
 
             $tiuMtk = SoalCatSkd::where('mapel', 'tiu')->where('kategori', 'matematika')->orderByRaw('RAND()')->take(11)->get();

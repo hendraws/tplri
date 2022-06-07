@@ -65,10 +65,27 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ action('SoalCatSkdController@twk') }}" class="nav-link">
+                    <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>TWK</p>
+                        <p>
+                            TWK
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ action('SoalCatSkdController@twk') }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>TWK</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ action('SoalCatSkdController@twkBind') }}" class="nav-link">
+                                <i class="far fa-dot-circle nav-icon"></i>
+                                <p>Bahasa Indonesia</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{ action('SoalCatSkdController@tkp') }}" class="nav-link">

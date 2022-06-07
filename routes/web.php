@@ -50,6 +50,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('soal-twk/{id}/update', 'SoalCatSkdController@updateTwk');
         Route::delete('soal-twk/{id}/delete', 'SoalCatSkdController@deleteTwk');
 
+        Route::get('soal-twk/bahasa-indonesia', 'SoalCatSkdController@twkBind');
+        Route::get('soal-twk/bahasa-indonesia/create', 'SoalCatSkdController@createTwkBind');
+        Route::post('soal-twk/bahasa-indonesia/store', 'SoalCatSkdController@storeTwkBind');
+        Route::get('soal-twk/bahasa-indonesia/{id}/edit', 'SoalCatSkdController@editTwkBind');
+        Route::put('soal-twk/bahasa-indonesia/{id}/update', 'SoalCatSkdController@updateTwkBind');
+        Route::delete('soal-twk/bahasa-indonesia/{id}/delete', 'SoalCatSkdController@deleteTwkBind');
+
         Route::get('soal-tkp', 'SoalCatSkdController@tkp');
         Route::get('soal-tkp/crate', 'SoalCatSkdController@createTkp');
         Route::post('soal-tkp/store', 'SoalCatSkdController@storeTkp');
