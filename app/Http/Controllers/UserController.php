@@ -193,4 +193,35 @@ class UserController extends Controller
     	return response()->json($result);
 
     }
+
+    public function nonakfitAll()
+    {
+
+        DB::beginTransaction();
+        try {
+
+            $data = User::whereNotIn('email',['super-admin@mail.com','administrator@mail.com'])->get();
+
+            foreach($data as $key => $val){
+                $val->update([
+                    'is_active' => 'N'
+                ]);
+
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            $result['code'] = '500';
+            $result['message'] = $e->getMessage();
+            return response()->json($result);
+        } catch (\Throwable $e) {
+            DB::rollback();
+            $result['code'] = '500';
+            $result['message'] = $e->getMessage();
+            return response()->json($result);
+        }
+
+        DB::commit();
+        toastr()->success('Data telah dinonaktifkan', 'Berhasil');
+        return redirect(action('UserController@index'));
+    }
 }
