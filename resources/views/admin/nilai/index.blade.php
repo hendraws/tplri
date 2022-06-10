@@ -87,12 +87,12 @@
                         @foreach ($data as $key => $value)
                         <tr >
                             <td class="text-center">{{ $value->updated_at }}</td>
-                            <th scope="row"><a href="{{ action('IkdinUjianNilaiController@show', $value->ikdin_ujian_siswa_id) }}">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</a></th>
-                            <td class="text-right">{{ optional($value->getUjianSiswa)->token }}</td>
-                            <td class="text-right">{{ $value->twk }}</td>
-                            <td class="text-right">{{ $value->tiu }}</td>
-                            <td class="text-right">{{ $value->tkp }}</td>
-                            <td class="text-right">{{ $value->nilai_akhir }}</td>
+                            <th scope="row"><a href="{{ action('IkdinUjianNilaiController@show', $value->id) }}">{{ optional($value->getSiswa)->name }}</a></th>
+                            <td class="text-right">{{ $value->token }}</td>
+                            <td class="text-right">{{ optional($value->getNilai)->twk }}</td>
+                            <td class="text-right">{{ optional($value->getNilai)->tiu }}</td>
+                            <td class="text-right">{{ optional($value->getNilai)->tkp }}</td>
+                            <td class="text-right">{{ optional($value->getNilai)->nilai_akhir }}</td>
                         </tr>
                         @endforeach
                     </tbody>

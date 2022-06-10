@@ -1,5 +1,5 @@
 @extends('layouts.app-admin')
-@section('title', 'Daftar Riwayat Ujian Siswa')
+@section('title', 'Detail Jawaban Siswa')
 @section('css')
     <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -16,7 +16,10 @@
                 }
             });
             $('.table').DataTable({
-                "order": []
+                "order": [],
+                "columnDefs": [
+                    { "width": "5%", "targets": 3 }
+                ]
             });
 
             $(document).on('click', '.hapus', function(e) {
