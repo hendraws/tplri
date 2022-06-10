@@ -172,6 +172,10 @@
                         $('#tombol-'+noSoal).removeClass('disabled');
                         console.log('gagal');
                     }
+
+                    setTimeout(function() {
+                        $('#tombol-'+noSoal).removeClass('disabled');
+                    }, 1000);
                 },
                 error: function(data) {
                     console.log(data);

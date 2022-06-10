@@ -27,4 +27,9 @@ class IkdinUjianSiswa extends Model
         return $this->belongsTo(Ujian::class, 'ujian_id', 'id')->withTrashed();
     }
 
+    public function getJawaban()
+    {
+        return $this->hasMany(IkdinUjianSiswaJawaban::class,'ikdin_ujian_siswa_id', 'id');
+    }
+
 }

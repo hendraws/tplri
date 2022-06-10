@@ -99,7 +99,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/banksoal/kepribadian/sesi-2/{id}/destroy', 'KepribadianController@destroy_sesi2');
 
         Route::get('/list-ujian', 'IkdinUjianNilaiController@index');
-        Route::get('/list-ujian/{id}/detail', 'IkdinUjianNilaiController@detail');
+        Route::get('/list-ujian/{id}/detail', 'IkdinUjianNilaiController@show');
 
         Route::get('/import-soal', 'KecermatanController@import');
         Route::post('/import-soal/save', 'KecermatanController@saveImport');

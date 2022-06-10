@@ -19,4 +19,9 @@ class IkdinUjianSiswaJawaban extends Model
     {
         return $this->belongsTo(SoalCatSkd::class, 'soal_id', 'id');
     }
+
+    public function getJawaban()
+    {
+        return $this->belongsTo(SoalPilihanCatSkd::class, 'jawaban_id', 'id');
+    }
 }

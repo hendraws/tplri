@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\IkdinUjianNilai;
+use App\Models\IkdinUjianSiswa;
 use Illuminate\Http\Request;
 
 class IkdinUjianNilaiController extends Controller
@@ -47,10 +48,9 @@ class IkdinUjianNilaiController extends Controller
      * @param  \App\Models\IkdinUjianNilai  $ikdinUjianNilai
      * @return \Illuminate\Http\Response
      */
-    public function show(IkdinUjianNilai $ikdinUjianNilai)
+    public function show($id)
     {
-        $data = UjianSiswa::findOrFail($id);
-        dd($data);
+        $data = IkdinUjianSiswa::with('getJawaban')->findOrFail($id);
         return view('admin.nilai.detail', compact('data'));
     }
 

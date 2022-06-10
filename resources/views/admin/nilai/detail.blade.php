@@ -73,26 +73,20 @@
                     <table class="table table-bordered table-sm">
                         <thead>
                         <tr class="bg-dark text-center">
-                            <th scope="col" class="align-middle" width="">Tanggal</th>
-                            <th scope="col" class="align-middle" width="30%">Nama</th>
-                            <th scope="col" class="align-middle" width="10%">Token</th>
-                            <th scope="col" class="align-middle" width="10%">TWK</th>
-                            <th scope="col" class="align-middle" width="10%">TIU</th>
-                            <th scope="col" class="align-middle" width="10%">TKP</th>
-                            <th scope="col" class="align-middle" width="10%">Total</th>
+                            <th scope="col" class="align-middle" width="">No.</th>
+                            <th scope="col" class="align-middle" width="">Soal</th>
+                            <th scope="col" class="align-middle" width="30%">Jawaban</th>
+                            <th scope="col" class="align-middle" width="30%">Nilai</th>
                             {{-- <th scope="col" class="align-middle" width="">Detail Ujian</th> --}}
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($data as $key => $value)
-                        <tr >
-                            <td class="text-center">{{ $value->updated_at }}</td>
-                            <th scope="row"><a href="{{ action('IkdinUjianNilaiController@show', $value->ikdin_ujian_siswa_id) }}">{{ optional(optional($value->getUjianSiswa)->getSiswa)->name }}</a></th>
-                            <td class="text-right">{{ optional($value->getUjianSiswa)->token }}</td>
-                            <td class="text-right">{{ $value->twk }}</td>
-                            <td class="text-right">{{ $value->tiu }}</td>
-                            <td class="text-right">{{ $value->tkp }}</td>
-                            <td class="text-right">{{ $value->nilai_akhir }}</td>
+                        @foreach ($data->getJawaban as $key => $value)
+                        <tr>
+                            <td>{{ $loop->index + 1 }}</td>
+                            <td>{!! optional($value->getSoal)->pertanyaan !!}</td>
+                            <td>{!! optional($value->getJawaban)->jawaban !!}</td>
+                            <td>{{ $value->skor }}</td>
                         </tr>
                         @endforeach
                     </tbody>

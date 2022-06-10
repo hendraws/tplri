@@ -4,6 +4,7 @@
 			<tr class="text-center">
 				<th scope="col">Nama</th>
 				<th scope="col">Email</th>
+				<th scope="col">Tanggal lahir</th>
 				<th scope="col">Aktif?</th>
 				{{-- <th scope="col">Kelas</th> --}}
 				<th scope="col">Program</th>
@@ -15,6 +16,7 @@
             <tr>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
+                <td>{{ $item->tanggal_lahir }}</td>
                 <td>{{ $item->is_active }}</td>
                 {{-- <td>{{ $item->kelas_id ?? '-' }}</td> --}}
                 <td>{{ optional($item->getProgramAkademik)->nama_program ?? '-' }}</td>
