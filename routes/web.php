@@ -155,6 +155,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('cat-ikdin/cek-token', 'IkdinUjianSiswaController@cekToken');
         Route::post('cat-ikdin/ujian', 'IkdinUjianSiswaController@halamanUjian');
         Route::post('cat-ikdin/simpan-jawaban-cat-akademik', 'IkdinUjianSiswaController@storeJawaban');
+        Route::get('cat-ikdin/result/{token}/{user_id}', 'IkdinUjianSiswaController@result');
     });
 });
 Route::get('token', 'HomeController@token');

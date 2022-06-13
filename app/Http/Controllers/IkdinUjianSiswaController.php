@@ -182,4 +182,12 @@ class IkdinUjianSiswaController extends Controller
 
         return view('siswa.riwayat_ujian', compact('data'));
     }
+
+    public function result($token, $user_id)
+    {
+        // dd($token,$user_id);
+        $data = IkdinUjianSiswa::with('getJawaban')->where('token', $token)->where('user_id', $user_id)->firstOrFail();
+
+        return view('siswa.ruang_ujian.result', compact('data'));
+    }
 }

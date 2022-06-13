@@ -76,6 +76,7 @@
                                             <h3>Tidak Memenuhi Syarat</h3>
                                         </button>
                                     @endif
+                                    <a href="{{ action('IkdinUjianSiswaController@result', [$ujianSiswa->token, $ujianSiswa->user_id]) }}" class="btn btn-info col-12 mt-2"><h5>Result</h5></a>
                                     <a href="{{ '/' }}" class="btn btn-warning col-12 mt-2">Kembali Ke
                                         Beranda</a>
                                 @endif
