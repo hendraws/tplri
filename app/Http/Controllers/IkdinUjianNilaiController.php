@@ -17,7 +17,6 @@ class IkdinUjianNilaiController extends Controller
     {
         // $data = IkdinUjianNilai::with('getUjianSiswa', 'getUjianSiswa.getSiswa')->orderBy('id','desc')->get();
         $data = IkdinUjianSiswa::with('getSiswa','getNilai')->orderBy('id','desc')->get();
-        dd($data->take(10));
         return view('admin.nilai.index', compact('data'));
     }
 

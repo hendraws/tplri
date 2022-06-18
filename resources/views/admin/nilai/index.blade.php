@@ -83,8 +83,7 @@
                             {{-- <th scope="col" class="align-middle" width="">Detail Ujian</th> --}}
                         </tr>
                     </thead>
-                    <tbody>
-                        {{ dd($data->take(20)) }}
+                <tbody>
                         @foreach ($data as $key => $value)
                         <tr >
                             <td class="text-center">{{ $value->updated_at }}</td>
