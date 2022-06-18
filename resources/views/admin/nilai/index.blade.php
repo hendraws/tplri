@@ -84,6 +84,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{ dd($data->take(20)) }}
                         @foreach ($data as $key => $value)
                         <tr >
                             <td class="text-center">{{ $value->updated_at }}</td>
