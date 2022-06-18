@@ -13,14 +13,13 @@ class IkdinUjianSiswa extends Model
 
     public function getNilai()
     {
-        return $this->belongsTo(IkdinUjianNilai::class, 'id', 'ikdin_ujian_siswa_id');
+        return $this->hasOne(IkdinUjianNilai::class,  'ikdin_ujian_siswa_id', 'id');
     }
 
     public function getSiswa()
     {
         return $this->belongsTo(User::class, 'user_id','id');
     }
-
 
     public function getUjian()
     {
