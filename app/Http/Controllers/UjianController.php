@@ -326,6 +326,8 @@ class UjianController extends Controller
             $inputUjian['tanggal'] = date('Y-m-d');
             $inputUjian['token'] = $token;
             $inputUjian['source'] = $ujian->source;
+            $inputUjian['kategori'] = $ujian->kategori;
+            $inputUjian['posisi'] = $ujian->posisi;
 
             Ujian::create($inputUjian);
 
