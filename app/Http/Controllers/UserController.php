@@ -222,7 +222,7 @@ class UserController extends Controller
         }
 
         DB::commit();
-        toastr()->success('Data telah dinonaktifkan', 'Berhasil');
+        toastr()->success('Users telah dinonaktifkan', 'Berhasil');
         return redirect(action('UserController@index'));
     }
 }

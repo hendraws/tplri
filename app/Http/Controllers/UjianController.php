@@ -317,13 +317,20 @@ class UjianController extends Controller
             $ujian = Ujian::find($id);
 
             do {
-                $token = 'PSI'.strtoupper(Str::random(3));
-            } while (Ujian::where('token', $token)->exists());
+                $token = "PSI".strtoupper(Str::random(3));
+            } while (Ujian::withTrashed()->where('token', $token)->exists());
 
-            $ujian->update([
-                'token' => $token
-            ]);
+            $inputUjian['judul'] = $ujian->judul;
+            $inputUjian['kategori_kecermatan'] = $ujian->kategori_kecermatan;
+            $inputUjian['is_active'] = $ujian->is_active;
+            $inputUjian['tanggal'] = date('Y-m-d');
+            $inputUjian['token'] = $token;
+            $inputUjian['source'] = $ujian->source;
 
+            Ujian::create($inputUjian);
+
+            $ujian->delete();
+            
 
         } catch (\Exception $e) {
             DB::rollback();
@@ -336,7 +343,7 @@ class UjianController extends Controller
         }
 
         DB::commit();
-        toastr()->success('Data telah diubah', 'Berhasil');
+        toastr()->success('Data telah diGenertae', 'Berhasil');
         return back();
     }
 

@@ -141,10 +141,10 @@
                                         <a class="btn btn-xs btn-warning"
                                             href="{{ action('UjianController@edit', $item) }}" data-toggle="tooltip"
                                             data-placement="top" title="Edit" data-id="{{ $item->id }}">Edit</a>
-                                        {{-- <a class="btn btn-xs btn-info"
+                                        <a class="btn btn-xs btn-info"
                                             href="{{ action('UjianController@generate', $item->id) }}"
                                             data-toggle="tooltip" data-placement="top" title="Generate"
-                                            data-id="{{ $item->id }}">Generate</a> --}}
+                                            data-id="{{ $item->id }}">Generate</a>
                                         @if ($item->is_active == '0')
                                             <a href="Javascript:void(0)" class="btn btn-xs btn-primary aktifkan bg-purple color-palette"
                                                 data-url="{{ action('UjianController@is_active', $item) }}"
